@@ -8,7 +8,7 @@ import useColorScheme from "../hooks/useColorScheme";
 import HomeStackNavigator from "./HomeStackNavigator";
 import SearchStackNavigator from "./SearchStackNavigator";
 
-import { BottomTabParamList } from "../types";
+import { BottomTabParamList } from "../../types";
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
