@@ -12,7 +12,7 @@ export default function HomeStackNavigator() {
       <HomeStack.Screen
         name="HomeScreen"
         component={HomeScreen}
-        options={{ headerTitle: "Tab One Title" }}
+        options={{ headerShown: false }}
       />
     </HomeStack.Navigator>
   );
