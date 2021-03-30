@@ -6,7 +6,7 @@ import { HomeParamList } from "../../types";
 
 const HomeStack = createStackNavigator<HomeParamList>();
 
-export default function HomeStackNavigator() {
+const HomeStackNavigator = () => {
   return (
     <HomeStack.Navigator>
       <HomeStack.Screen
@@ -16,4 +16,6 @@ export default function HomeStackNavigator() {
       />
     </HomeStack.Navigator>
   );
-}
+};
+
+export default HomeStackNavigator;

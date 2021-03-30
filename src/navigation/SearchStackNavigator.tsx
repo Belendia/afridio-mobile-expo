@@ -6,7 +6,7 @@ import { SearchParamList } from "../../types";
 
 const SearchStack = createStackNavigator<SearchParamList>();
 
-export default function SearchStackNavigator() {
+const SearchStackNavigator = () => {
   return (
     <SearchStack.Navigator>
       <SearchStack.Screen
@@ -16,4 +16,6 @@ export default function SearchStackNavigator() {
       />
     </SearchStack.Navigator>
   );
-}
+};
+
+export default SearchStackNavigator;

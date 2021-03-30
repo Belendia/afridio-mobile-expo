@@ -4,7 +4,7 @@ import { StyleSheet } from "react-native";
 import EditScreenInfo from "../components/EditScreenInfo";
 import { Text, View } from "../components/Themed";
 
-export default function SearchScreen() {
+const SearchScreen = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Tab Two</Text>
@@ -16,7 +16,9 @@ export default function SearchScreen() {
       <EditScreenInfo path="/screens/TabTwoScreen.tsx" />
     </View>
   );
-}
+};
+
+export default SearchScreen;
 
 const styles = StyleSheet.create({
   container: {
