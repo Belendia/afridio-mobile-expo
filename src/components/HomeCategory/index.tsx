@@ -31,6 +31,7 @@ const HomeCategory = (props: HomeCategoryProps) => {
           />
         )}
         horizontal
+        showsHorizontalScrollIndicator={false}
       />
     </>
   );
