@@ -1,11 +1,9 @@
 import * as React from "react";
-import { StyleSheet, Image, FlatList } from "react-native";
+import { StyleSheet, FlatList } from "react-native";
 
-import { Text, View } from "../components/Themed";
+import { View } from "../components/Themed";
 import HomeCategory from "../components/HomeCategory";
 import categories from "../../assets/data/categories";
-
-const firstCategory = categories.items[0];
 
 const HomeScreen = () => {
   return (
