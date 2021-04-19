@@ -2,6 +2,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import * as React from "react";
 
 import HomeScreen from "../screens/HomeScreen";
+import MediaDetailScreen from "../screens/MediaDetailScreen";
 import { HomeParamList } from "../../types";
 
 const HomeStack = createStackNavigator<HomeParamList>();
@@ -11,7 +12,12 @@ const HomeStackNavigator = () => {
     <HomeStack.Navigator>
       <HomeStack.Screen
         name="HomeScreen"
-        component={HomeScreen}
+        component={MediaDetailScreen} //HomeScreen
+        options={{ title: "Media detail" }}
+      />
+      <HomeStack.Screen
+        name="MediaDetailScreen"
+        component={MediaDetailScreen}
         options={{ headerShown: false }}
       />
     </HomeStack.Navigator>
