@@ -54,7 +54,7 @@ const info = {
     ],
   },
 };
-const MediaDetailScreen1 = (props) => {
+const MediaDetailScreen = (props) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isRefreshing, setIsRefreshing] = useState(false);
 
@@ -84,7 +84,7 @@ const MediaDetailScreen1 = (props) => {
       <View>
         <View style={styles.bannerContainer}>
           <View style={styles.buttonPlay}>
-            <TouchableWithoutFeedback onPress={() => console.log("Hi")}>
+            <TouchableWithoutFeedback onPress={() => console.log("Play")}>
               <Ionicons
                 style={styles.iconPlay}
                 name="play-circle-outline"
@@ -128,8 +128,8 @@ const MediaDetailScreen1 = (props) => {
             <Text style={styles.cardTitle}>{info.original_title}</Text>
             <Text style={styles.cardTagline}>{info.tagline}</Text>
             <View style={styles.cardGenre}>
-              {info.genres.map((item) => (
-                <View style={{ marginRight: 3 }}>
+              {info.genres.map((item, index) => (
+                <View style={{ marginRight: 3 }} key={index}>
                   <Chip title={item.name} type="outline" disabled />
                 </View>
               ))}
@@ -147,7 +147,8 @@ const MediaDetailScreen1 = (props) => {
           <View
             style={{
               alignSelf: "center",
-              width: Dimensions.get("window").width * 0.9,
+              width: Dimensions.get("window").width - 32,
+              marginBottom: 2,
             }}
           >
             <Button
@@ -160,6 +161,7 @@ const MediaDetailScreen1 = (props) => {
                 />
               }
               buttonStyle={{ backgroundColor: "#ed0400" }}
+              onPress={() => console.log("Add to cart")}
             />
           </View>
           <Tab.Navigator
@@ -195,7 +197,7 @@ const MediaDetailScreen1 = (props) => {
   );
 };
 
-export default MediaDetailScreen1;
+export default MediaDetailScreen;
 
 const styles = StyleSheet.create({
   mainContainer: {
