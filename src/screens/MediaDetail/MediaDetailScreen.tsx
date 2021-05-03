@@ -252,7 +252,7 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
   },
   iconPlay: {
-    opacity: 0.5,
+    opacity: 0.8,
     backgroundColor: "transparent",
   },
 });
