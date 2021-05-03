@@ -7,7 +7,7 @@ import movie from "../../../assets/data/movie";
 
 const TrackScreen = () => {
   return movie.seasons.items[0].episodes.items.map((item, index) => (
-    <ListItem key={index} bottomDivider>
+    <ListItem key={index}>
       <Avatar
         size="small"
         rounded
@@ -29,7 +29,7 @@ const TrackScreen = () => {
         <ListItem.Title>{item.title}</ListItem.Title>
         <ListItem.Subtitle>{item.duration}</ListItem.Subtitle>
       </ListItem.Content>
-      <AntDesign name="clouddownloado" size={24} color={"#b75463"} />
+      <AntDesign name="clouddownloado" size={24} color={"gray"} />
     </ListItem>
   ));
 };
