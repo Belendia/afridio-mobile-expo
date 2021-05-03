@@ -1,14 +1,9 @@
 import React, { useState } from "react";
-import {
-  StyleSheet,
-  RefreshControl,
-  ScrollView,
-  Text,
-  View,
-} from "react-native";
+import { StyleSheet, RefreshControl, ScrollView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Chip, Image, Icon } from "react-native-elements";
 
+import { View, Text } from "../../components/Themed";
 import Swiper from "react-native-swiper";
 import { Ionicons } from "@expo/vector-icons";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
@@ -17,7 +12,6 @@ import InfoScreen from "./InfoScreen";
 
 const Tab = createMaterialTopTabNavigator();
 
-// import DefaultTabBar from "../components/ScrollableTabView/DefaultTabBar";
 const info = {
   poster_path:
     "https://www.themoviedb.org/t/p/w1280/AoWY1gkcNzabh229Icboa1Ff0BM.jpg",
