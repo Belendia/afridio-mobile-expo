@@ -12,7 +12,6 @@ import { LinearGradient } from "expo-linear-gradient";
 import Swiper from "react-native-swiper";
 import { Ionicons } from "@expo/vector-icons";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import HomeScreen from "../HomeScreen";
 import TrackScreen from "./TrackScreen";
 import InfoScreen from "./InfoScreen";
 
@@ -56,64 +55,20 @@ const info = {
   },
 };
 const MediaDetailScreen1 = (props) => {
-  const [castsTabHeight, setCastsTabHeight] = useState(null);
-  const [heightAnim, setHeightAnim] = useState(null);
-  const [infoTabHeight, setInfoTabHeight] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isRefreshing, setIsRefreshing] = useState(false);
-  const [showSimilarMovies, setShowSimilarMovies] = useState(true);
-  const [trailersTabHeight, setTrailersTabHeight] = useState(null);
-  const [tab, setTab] = useState(0);
 
-  let height;
-  if (tab === 0) height = infoTabHeight;
-  if (tab === 1) height = castsTabHeight;
-  if (tab === 2) height = trailersTabHeight;
-
-  const _toggleNavbar = (status) => {
-    // props.navigator.toggleNavBar({
-    //   to: status,
-    //   animated: true,
-    // });
-  };
-
-  const _onScroll = (event) => {
-    // const contentOffsetY = event.nativeEvent.contentOffset.y.toFixed();
-    // if (contentOffsetY > 150) {
-    //   _toggleNavbar("hidden");
-    // } else {
-    //   _toggleNavbar("shown");
-    // }
-  };
-
-  // ScrollView onContentSizeChange prop
-  const _onContentSizeChange = (width, height) => {
-    // if (tab === 0 && infoTabHeight === castsTabHeight) {
-    //   setInfoTabHeight(height);
-    // }
-  };
-
-  const _retrieveDetails = (isRefreshed) => {
-    // props.actions.retrieveMovieDetails(this.props.movieId)
-    //     .then(() => {
-    //         this._retrieveYoutubeDetails();
-    //     });
-    // if (isRefreshed && this.setState({ isRefreshing: false }));
-  };
-
-  const _onChangeTab = () => {};
+  const retrieveDetails = (isRefreshed) => {};
 
   const _onRefresh = () => {
     // setIsRefreshing(true);
-    // _retrieveDetails("isRefreshed");
+    // retrieveDetails("isRefreshed");
   };
 
   return (
     <ScrollView
       style={styles.container}
-      onScroll={_onScroll}
       scrollEventThrottle={100}
-      onContentSizeChange={_onContentSizeChange}
       refreshControl={
         <RefreshControl
           refreshing={isRefreshing}
@@ -200,9 +155,9 @@ const MediaDetailScreen1 = (props) => {
               options={{ tabBarLabel: "Chapters" }}
             />
             <Tab.Screen
-              name="Comment"
+              name="Review"
               component={TrackScreen}
-              options={{ tabBarLabel: "Comments" }}
+              options={{ tabBarLabel: "Reviews" }}
             />
           </Tab.Navigator>
         </View>
