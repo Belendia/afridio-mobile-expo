@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import {
   StyleSheet,
-  Image,
   RefreshControl,
   ScrollView,
   Text,
   View,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { Chip, Icon } from "react-native-elements";
+import { Chip, Image, Icon } from "react-native-elements";
 
 import Swiper from "react-native-swiper";
 import { Ionicons } from "@expo/vector-icons";
@@ -210,7 +209,7 @@ const styles = StyleSheet.create({
   imageBackdrop: {
     // flex: 1,
     height: 248,
-    backgroundColor: "black",
+    // backgroundColor: "black",
   },
   cardContainer: {
     flex: 1,
