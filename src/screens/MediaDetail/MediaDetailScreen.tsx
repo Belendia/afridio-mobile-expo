@@ -8,6 +8,7 @@ import {
   View,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import { Chip } from "react-native-elements";
 
 import Swiper from "react-native-swiper";
 import { Ionicons } from "@expo/vector-icons";
@@ -118,9 +119,9 @@ const MediaDetailScreen1 = (props) => {
             <Text style={styles.cardTagline}>{info.tagline}</Text>
             <View style={styles.cardGenre}>
               {info.genres.map((item) => (
-                <Text key={item.id} style={styles.cardGenreItem}>
-                  {item.name}
-                </Text>
+                <View style={{ marginRight: 3 }}>
+                  <Chip title={item.name} type="outline" disabled />
+                </View>
               ))}
             </View>
             <View style={styles.cardNumbers}>
@@ -240,12 +241,7 @@ const styles = StyleSheet.create({
   },
   cardGenre: {
     flexDirection: "row",
-  },
-  cardGenreItem: {
-    textAlign: "left",
-    fontSize: 11,
-    marginRight: 5,
-    color: "white",
+    marginTop: 5,
   },
   cardNumbers: {
     flexDirection: "row",

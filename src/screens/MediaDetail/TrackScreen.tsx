@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, FlatList } from "react-native";
+import { StyleSheet } from "react-native";
 import { View } from "../../components/Themed";
 
 import movie from "../../../assets/data/movie";
