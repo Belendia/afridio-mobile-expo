@@ -135,7 +135,7 @@ const MediaDetailScreen1 = (props) => {
             </View>
             <View style={styles.cardNumbers}>
               <View style={styles.ratingContainer}>
-                <Ionicons name="heart" size={20} color="#59D467" />
+                <Ionicons name="heart" size={20} color="#ed0400" />
                 <Text style={styles.ratingText}>1.2K</Text>
               </View>
             </View>
