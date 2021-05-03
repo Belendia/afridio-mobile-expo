@@ -1,5 +1,7 @@
 import React from "react";
 import { StyleSheet, FlatList, Image } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { useNavigation } from "@react-navigation/native";
 
 import { Text } from "../Themed";
 
@@ -16,6 +18,7 @@ interface HomeCategoryProps {
 
 const HomeCategory = (props: HomeCategoryProps) => {
   const { category } = props;
+  const navigation = useNavigation();
 
   return (
     <>
@@ -23,12 +26,18 @@ const HomeCategory = (props: HomeCategoryProps) => {
       <FlatList
         data={category.movies}
         renderItem={({ item }) => (
-          <Image
-            style={styles.image}
-            source={{
-              uri: item.poster,
-            }}
-          />
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate("Home", { screen: "MediaDetailScreen" })
+            }
+          >
+            <Image
+              style={styles.image}
+              source={{
+                uri: item.poster,
+              }}
+            />
+          </TouchableOpacity>
         )}
         horizontal
         showsHorizontalScrollIndicator={false}

@@ -1,5 +1,6 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import * as React from "react";
+import { Button } from "react-native";
 
 import HomeScreen from "../screens/HomeScreen";
 import MediaDetailScreen from "../screens/MediaDetail/MediaDetailScreen";
@@ -12,13 +13,22 @@ const HomeStackNavigator = () => {
     <HomeStack.Navigator>
       <HomeStack.Screen
         name="HomeScreen"
-        component={MediaDetailScreen} //HomeScreen
-        options={{ title: "Media detail" }}
+        component={HomeScreen} //HomeScreen
+        options={{ title: "" }}
       />
       <HomeStack.Screen
         name="MediaDetailScreen"
         component={MediaDetailScreen}
-        options={{ headerShown: false }}
+        options={{
+          title: "Media detail",
+          headerRight: () => (
+            <Button
+              onPress={() => alert("This is a button!")}
+              title="Info"
+              color="#fff"
+            />
+          ),
+        }}
       />
     </HomeStack.Navigator>
   );
