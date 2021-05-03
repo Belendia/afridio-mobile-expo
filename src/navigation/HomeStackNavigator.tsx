@@ -1,6 +1,6 @@
-import { createStackNavigator } from "@react-navigation/stack";
 import * as React from "react";
-import { Button } from "react-native";
+import { Icon } from "react-native-elements";
+import { createStackNavigator } from "@react-navigation/stack";
 
 import HomeScreen from "../screens/HomeScreen";
 import MediaDetailScreen from "../screens/MediaDetail/MediaDetailScreen";
@@ -22,10 +22,11 @@ const HomeStackNavigator = () => {
         options={{
           title: "Media detail",
           headerRight: () => (
-            <Button
-              onPress={() => alert("This is a button!")}
-              title="Info"
-              color="#fff"
+            <Icon
+              name="cart-outline"
+              type="material-community"
+              color="white"
+              onPress={() => console.log("cart detail")}
             />
           ),
         }}
