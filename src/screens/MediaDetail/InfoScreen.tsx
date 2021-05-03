@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, Image } from "react-native";
+import { Avatar } from "react-native-elements";
 
 import { View, Text } from "../../components/Themed";
 import movie from "../../../assets/data/movie";
@@ -41,9 +42,12 @@ const InfoScreen = () => {
       <View style={styles.authorsContainer}>
         {authors.map((item) => (
           <View key={item.id} style={styles.castContainer}>
-            <Image
-              source={{ uri: `${item.profile_photo}` }}
-              style={styles.castImage}
+            <Avatar
+              rounded
+              source={{
+                uri: `${item.profile_photo}`,
+              }}
+              size="large"
             />
             <View style={styles.characterContainer}>
               <Text style={styles.characterName}>{item.name}</Text>
@@ -92,11 +96,6 @@ const styles = StyleSheet.create({
   castContainer: {
     flexDirection: "row",
     marginBottom: 15,
-  },
-  castImage: {
-    width: 80,
-    height: 80,
-    borderRadius: 80 / 2,
   },
   characterContainer: {
     flex: 1,
