@@ -2,7 +2,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import * as React from "react";
 
 import HomeScreen from "../screens/HomeScreen";
-import MediaDetailScreen from "../screens/MediaDetailScreen";
+import MediaDetailScreen from "../screens/MediaDetail/MediaDetailScreen";
 import { HomeParamList } from "../../types";
 
 const HomeStack = createStackNavigator<HomeParamList>();
