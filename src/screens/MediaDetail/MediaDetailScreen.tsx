@@ -8,7 +8,7 @@ import {
   View,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { Chip } from "react-native-elements";
+import { Chip, Icon } from "react-native-elements";
 
 import Swiper from "react-native-swiper";
 import { Ionicons } from "@expo/vector-icons";
@@ -133,6 +133,7 @@ const MediaDetailScreen1 = (props) => {
             </View>
           </View>
         </View>
+
         <View style={styles.contentContainer}>
           <Tab.Navigator
             initialRouteName="Chapter"
