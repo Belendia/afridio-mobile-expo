@@ -32,7 +32,7 @@ const TrackScreen = () => {
         <ListItem.Title>{item.title}</ListItem.Title>
         <ListItem.Subtitle>{item.duration}</ListItem.Subtitle>
       </ListItem.Content>
-      <AntDesign name="clouddownloado" size={24} color={"white"} />
+      <AntDesign name="clouddownloado" size={24} color={"#b75463"} />
     </ListItem>
   ));
 };
