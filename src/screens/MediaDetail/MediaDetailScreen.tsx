@@ -1,5 +1,10 @@
 import React, { useState } from "react";
-import { StyleSheet, RefreshControl, ScrollView } from "react-native";
+import {
+  StyleSheet,
+  RefreshControl,
+  ScrollView,
+  TouchableWithoutFeedback,
+} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Chip, Image, Icon } from "react-native-elements";
 
@@ -16,7 +21,7 @@ const info = {
   poster_path:
     "https://www.themoviedb.org/t/p/w1280/AoWY1gkcNzabh229Icboa1Ff0BM.jpg",
   original_title: "Vanquish",
-  tagline: "Selam",
+  tagline: "She's got one night to same her life.",
   genres: [
     {
       id: 1,
@@ -61,7 +66,7 @@ const MediaDetailScreen1 = (props) => {
 
   return (
     <ScrollView
-      style={styles.container}
+      style={styles.mainContainer}
       scrollEventThrottle={100}
       refreshControl={
         <RefreshControl
@@ -76,32 +81,43 @@ const MediaDetailScreen1 = (props) => {
       }
     >
       <View>
-        <Swiper
-          style={styles.swiper}
-          autoplay
-          autoplayTimeout={4}
-          showsPagination={false}
-          height={248}
-          loop
-          index={5}
-        >
-          {info.images.backdrops.map((item, index) => (
-            <View key={index}>
-              <Image
-                source={{ uri: `${item.file_path}` }}
-                style={styles.imageBackdrop}
+        <View style={styles.bannerContainer}>
+          <View style={styles.buttonPlay}>
+            <TouchableWithoutFeedback onPress={() => console.log("Hi")}>
+              <Ionicons
+                style={styles.iconPlay}
+                name="play-circle-outline"
+                size={90}
+                color="white"
               />
-              <LinearGradient
-                colors={[
-                  "rgba(0, 0, 0, 0.2)",
-                  "rgba(0,0,0, 0.2)",
-                  "rgba(0,0,0, 0.7)",
-                ]}
-                style={styles.linearGradient}
-              />
-            </View>
-          ))}
-        </Swiper>
+            </TouchableWithoutFeedback>
+          </View>
+          <Swiper
+            autoplay
+            autoplayTimeout={4}
+            showsPagination={false}
+            height={248}
+            loop
+            index={5}
+          >
+            {info.images.backdrops.map((item, index) => (
+              <View key={index}>
+                <Image
+                  source={{ uri: `${item.file_path}` }}
+                  style={styles.imageBackdrop}
+                />
+                <LinearGradient
+                  colors={[
+                    "rgba(0, 0, 0, 0.2)",
+                    "rgba(0,0,0, 0.2)",
+                    "rgba(0,0,0, 0.7)",
+                  ]}
+                  style={styles.linearGradient}
+                />
+              </View>
+            ))}
+          </Swiper>
+        </View>
         <View style={styles.cardContainer}>
           <Image
             source={{ uri: `${info.poster_path}` }}
@@ -118,11 +134,10 @@ const MediaDetailScreen1 = (props) => {
               ))}
             </View>
             <View style={styles.cardNumbers}>
-              <View style={styles.cardStar}>
+              <View style={styles.ratingContainer}>
                 <Ionicons name="heart" size={20} color="#59D467" />
-                <Text style={styles.cardStarRatings}>1.2K</Text>
+                <Text style={styles.ratingText}>1.2K</Text>
               </View>
-              <Text style={styles.cardRunningHours} />
             </View>
           </View>
         </View>
@@ -164,34 +179,12 @@ const MediaDetailScreen1 = (props) => {
 export default MediaDetailScreen1;
 
 const styles = StyleSheet.create({
-  textStyle: {
-    color: "white",
-    paddingTop: 10,
-    fontSize: 12,
-    fontWeight: "bold",
-  },
-  underlineStyle: {
-    backgroundColor: "#EA0000",
-  },
-  tabBar: {
-    backgroundColor: "#131313",
+  mainContainer: {
+    backgroundColor: "#0a0a0a",
   },
   contentContainer: {
     flex: 1,
     marginTop: 157,
-  },
-  progressBar: {
-    backgroundColor: "#0a0a0a",
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  container: {
-    backgroundColor: "#0a0a0a",
-  },
-  swiper: {
-    // position: 'absolute',
-    // flex: 1
   },
   linearGradient: {
     top: 0,
@@ -201,9 +194,7 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   imageBackdrop: {
-    // flex: 1,
     height: 248,
-    // backgroundColor: "black",
   },
   cardContainer: {
     flex: 1,
@@ -225,7 +216,7 @@ const styles = StyleSheet.create({
   },
   cardTitle: {
     color: "white",
-    fontSize: 19,
+    fontSize: 20,
     fontWeight: "500",
     paddingTop: 10,
   },
@@ -241,18 +232,27 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginTop: 5,
   },
-  cardStar: {
+  ratingContainer: {
     flexDirection: "row",
     alignItems: "center",
   },
-  cardStarRatings: {
+  ratingText: {
     marginLeft: 2,
     fontSize: 12,
     fontWeight: "bold",
     color: "white",
   },
-  cardRunningHours: {
-    marginLeft: 5,
-    fontSize: 12,
+  bannerContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  buttonPlay: {
+    position: "absolute",
+    zIndex: 2,
+    backgroundColor: "transparent",
+  },
+  iconPlay: {
+    opacity: 0.5,
+    backgroundColor: "transparent",
   },
 });
