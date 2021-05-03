@@ -7,9 +7,6 @@ import movie from "../../../assets/data/movie";
 
 const TrackScreen = () => {
   return movie.seasons.items[0].episodes.items.map((item, index) => (
-    // <View style={styles.container} key={index}>
-    //   <TrackItem episode={item} index={(index + 1).toString()} />
-    // </View>
     <ListItem key={index} bottomDivider>
       <Avatar
         size="small"
