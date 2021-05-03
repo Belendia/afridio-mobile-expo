@@ -4,9 +4,10 @@ import {
   RefreshControl,
   ScrollView,
   TouchableWithoutFeedback,
+  Dimensions,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { Chip, Image, Icon } from "react-native-elements";
+import { Chip, Image, Icon, Button } from "react-native-elements";
 
 import { View, Text } from "../../components/Themed";
 import Swiper from "react-native-swiper";
@@ -143,6 +144,24 @@ const MediaDetailScreen1 = (props) => {
         </View>
 
         <View style={styles.contentContainer}>
+          <View
+            style={{
+              alignSelf: "center",
+              width: Dimensions.get("window").width * 0.9,
+            }}
+          >
+            <Button
+              icon={
+                <Icon
+                  name="cart-plus"
+                  type="font-awesome-5"
+                  size={24}
+                  color="white"
+                />
+              }
+              buttonStyle={{ backgroundColor: "#ed0400" }}
+            />
+          </View>
           <Tab.Navigator
             initialRouteName="Chapter"
             tabBarOptions={{
