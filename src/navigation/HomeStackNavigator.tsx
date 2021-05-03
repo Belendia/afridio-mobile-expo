@@ -20,7 +20,7 @@ const HomeStackNavigator = () => {
         name="MediaDetailScreen"
         component={MediaDetailScreen}
         options={{
-          title: "Media detail",
+          title: "Media",
           headerRight: () => (
             <Icon
               name="cart-outline"
