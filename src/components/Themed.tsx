@@ -42,3 +42,9 @@ export const View = (props: ViewProps) => {
 
   return <DefaultView style={[{ backgroundColor }, style]} {...otherProps} />;
 };
+
+export const theme = {
+  Button: {
+    raised: true,
+  },
+};
