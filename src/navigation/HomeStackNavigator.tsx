@@ -3,7 +3,7 @@ import { Icon } from "react-native-elements";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import HomeScreen from "../screens/HomeScreen";
-import MediaDetailScreen from "../screens/MediaDetail/MediaDetailScreen";
+import MediaScreen from "../screens/Media/MediaScreen";
 import { HomeParamList } from "../../types";
 
 const HomeStack = createStackNavigator<HomeParamList>();
@@ -14,11 +14,11 @@ const HomeStackNavigator = () => {
       <HomeStack.Screen
         name="HomeScreen"
         component={HomeScreen} //HomeScreen
-        options={{ title: "" }}
+        options={{ title: "Home" }}
       />
       <HomeStack.Screen
         name="MediaDetailScreen"
-        component={MediaDetailScreen}
+        component={MediaScreen}
         options={{
           title: "Media",
           headerRight: () => (

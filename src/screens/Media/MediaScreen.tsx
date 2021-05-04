@@ -54,7 +54,7 @@ const info = {
     ],
   },
 };
-const MediaDetailScreen = (props) => {
+const MediaScreen = (props) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isRefreshing, setIsRefreshing] = useState(false);
 
@@ -197,7 +197,7 @@ const MediaDetailScreen = (props) => {
   );
 };
 
-export default MediaDetailScreen;
+export default MediaScreen;
 
 const styles = StyleSheet.create({
   mainContainer: {
