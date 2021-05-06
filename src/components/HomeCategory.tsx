@@ -1,9 +1,9 @@
 import React from "react";
-import { StyleSheet, FlatList, Image } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { StyleSheet, FlatList } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-import { Text } from "../Themed";
+import { View, Text } from "./Themed";
+import { SimpleMediaCard } from "./Cards/SimpleMediaCard";
 
 interface HomeCategoryProps {
   category: {
@@ -11,6 +11,7 @@ interface HomeCategoryProps {
     title: string;
     movies: {
       id: string;
+      title: string;
       poster: string;
     }[];
   };
@@ -21,34 +22,24 @@ const HomeCategory = (props: HomeCategoryProps) => {
   const navigation = useNavigation();
 
   return (
-    <>
+    <View style={styles.container}>
       <Text style={styles.title}>{category.title}</Text>
       <FlatList
         data={category.movies}
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            onPress={() =>
-              navigation.navigate("Home", { screen: "MediaScreen" })
-            }
-          >
-            <Image
-              style={styles.image}
-              source={{
-                uri: item.poster,
-              }}
-            />
-          </TouchableOpacity>
-        )}
+        renderItem={({ item }) => <SimpleMediaCard movie={item} />}
         horizontal
         showsHorizontalScrollIndicator={false}
       />
-    </>
+    </View>
   );
 };
 
 export default HomeCategory;
 
 const styles = StyleSheet.create({
+  container: {
+    marginBottom: 20,
+  },
   image: {
     width: 100,
     height: 170,
@@ -59,5 +50,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: "bold",
+    marginBottom: 5,
   },
 });
