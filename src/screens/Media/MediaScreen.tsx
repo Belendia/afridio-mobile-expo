@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Chip, Image, Icon, Button } from "react-native-elements";
+import { ActivityIndicator } from "react-native";
 
 import { View, Text } from "../../components/Themed";
 import Swiper from "react-native-swiper";
@@ -106,6 +107,7 @@ const MediaScreen = (props) => {
                 <Image
                   source={{ uri: `${item.file_path}` }}
                   style={styles.imageBackdrop}
+                  PlaceholderContent={<ActivityIndicator />}
                 />
                 <LinearGradient
                   colors={[
@@ -123,6 +125,7 @@ const MediaScreen = (props) => {
           <Image
             source={{ uri: `${info.poster_path}` }}
             style={styles.cardImage}
+            PlaceholderContent={<ActivityIndicator />}
           />
           <View style={styles.cardDetails}>
             <Text style={styles.cardTitle}>{info.original_title}</Text>
