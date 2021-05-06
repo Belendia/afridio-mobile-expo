@@ -28,7 +28,7 @@ const HomeCategory = (props: HomeCategoryProps) => {
         renderItem={({ item }) => (
           <TouchableOpacity
             onPress={() =>
-              navigation.navigate("Home", { screen: "MediaDetailScreen" })
+              navigation.navigate("Home", { screen: "MediaScreen" })
             }
           >
             <Image

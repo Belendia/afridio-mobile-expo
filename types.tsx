@@ -12,7 +12,7 @@ export type BottomTabParamList = {
 
 export type HomeParamList = {
   HomeScreen: undefined;
-  MediaDetailScreen: undefined;
+  MediaScreen: undefined;
 };
 
 export type SearchParamList = {

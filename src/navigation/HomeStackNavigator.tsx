@@ -17,7 +17,7 @@ const HomeStackNavigator = () => {
         options={{ title: "Home" }}
       />
       <HomeStack.Screen
-        name="MediaDetailScreen"
+        name="MediaScreen"
         component={MediaScreen}
         options={{
           title: "Media",
