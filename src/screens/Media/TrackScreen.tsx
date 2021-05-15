@@ -3,6 +3,7 @@ import { StyleSheet, Platform } from "react-native";
 import { ListItem, Avatar } from "react-native-elements";
 import { AntDesign } from "@expo/vector-icons";
 
+import { Text } from "../../components/Themed";
 import movie from "../../../assets/data/movie";
 
 const TrackScreen = () => {

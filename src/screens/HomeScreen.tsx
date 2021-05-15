@@ -1,5 +1,7 @@
 import * as React from "react";
 import { StyleSheet, FlatList } from "react-native";
+import Swiper from "react-native-swiper";
+import { FeaturedMediaCard } from "../components/Cards/FeaturedMediaCard";
 
 import { View } from "../components/Themed";
 import HomeCategory from "../components/HomeCategory";
@@ -12,6 +14,18 @@ const HomeScreen = () => {
         data={categories.items}
         renderItem={({ item }) => <HomeCategory category={item} />}
         showsVerticalScrollIndicator={false}
+        ListHeaderComponent={
+          <Swiper
+            autoplay
+            autoplayTimeout={4}
+            showsPagination={false}
+            height={248}
+          >
+            {categories.items[0].movies.map((movie) => (
+              <FeaturedMediaCard key={movie.id} movie={movie} />
+            ))}
+          </Swiper>
+        }
       />
     </View>
   );
