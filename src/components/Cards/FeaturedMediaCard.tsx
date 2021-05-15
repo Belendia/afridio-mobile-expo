@@ -53,7 +53,9 @@ const FeaturedMediaCard = ({ movie }: FeaturedMediaCardProps) => {
           </Text>
           <TouchableOpacity
             activeOpacity={0.9}
-            onPress={navigation.navigate("Home", { screen: "MediaScreen" })}
+            onPress={() =>
+              navigation.navigate("Home", { screen: "MediaScreen" })
+            }
           >
             <View style={styles.viewButton}>
               <Text style={styles.viewButtonText}>View Details</Text>
