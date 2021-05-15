@@ -215,6 +215,8 @@ export default {
           description: "The quick brown fox jumps over the lazy dog.",
           cover:
             "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/netflix/movie4.jpg",
+          poster:
+            "https://www.themoviedb.org/t/p/w780/mYM8x2Atv4MaLulaV0KVJWI1Djv.jpg",
         },
         {
           id: "movie2",
@@ -222,6 +224,8 @@ export default {
           description: "The quick brown fox jumps over the lazy dog.",
           cover:
             "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/netflix/movie3.jpg",
+          poster:
+            "https://www.themoviedb.org/t/p/w780/mR7FQnu5gmTsSEKpT6qEI7WSZmX.jpg",
         },
         {
           id: "movie3",
@@ -229,6 +233,8 @@ export default {
           description: "The quick brown fox jumps over the lazy dog.",
           cover:
             "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/netflix/movie4.jpg",
+          poster:
+            "https://www.themoviedb.org/t/p/w780/sSOH6sctEaQ0ifAIv1a8qF7AKCn.jpg",
         },
         {
           id: "movie4",
@@ -236,6 +242,8 @@ export default {
           description: "The quick brown fox jumps over the lazy dog.",
           cover:
             "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/netflix/movie5.jpg",
+          poster:
+            "https://www.themoviedb.org/t/p/w780/qV7HOOZvBLYnjQpSWIVl7mQiAjx.jpg",
         },
         {
           id: "movie5",
@@ -243,6 +251,8 @@ export default {
           description: "The quick brown fox jumps over the lazy dog.",
           cover:
             "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/netflix/movie1.jpg",
+          poster:
+            "https://www.themoviedb.org/t/p/w780/a8s5B4sNuNNCLnla6xTFPEn9jl0.jpg",
         },
       ],
     },

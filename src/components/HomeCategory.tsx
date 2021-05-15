@@ -40,6 +40,7 @@ export default HomeCategory;
 const styles = StyleSheet.create({
   container: {
     marginBottom: 20,
+    marginHorizontal: 30,
   },
   image: {
     width: 100,

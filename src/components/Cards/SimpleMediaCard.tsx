@@ -10,7 +10,7 @@ interface SimpleMediaCardProps {
   movie: {
     id: string;
     title: string;
-    poster: string;
+    cover: string;
   };
 }
 
@@ -23,7 +23,7 @@ const SimpleMediaCard = ({ movie }: SimpleMediaCardProps) => {
     >
       <View style={styles.cardContainer}>
         <Image
-          source={{ uri: movie.poster }}
+          source={{ uri: movie.cover }}
           style={styles.cardImage}
           PlaceholderContent={<ActivityIndicator />}
         />

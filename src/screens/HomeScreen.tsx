@@ -8,23 +8,33 @@ import HomeCategory from "../components/HomeCategory";
 import categories from "../../assets/data/categories";
 
 const HomeScreen = () => {
+  const featuredMovies = categories.items.filter(
+    (item) => item.title === "Featured"
+  );
+  const allExceptFeaturedMovies = categories.items.filter(
+    (item) => item.title !== "Featured"
+  );
   return (
     <View style={styles.container}>
       <FlatList
-        data={categories.items}
+        data={allExceptFeaturedMovies}
         renderItem={({ item }) => <HomeCategory category={item} />}
         showsVerticalScrollIndicator={false}
         ListHeaderComponent={
-          <Swiper
-            autoplay
-            autoplayTimeout={4}
-            showsPagination={false}
-            height={248}
-          >
-            {categories.items[0].movies.map((movie) => (
-              <FeaturedMediaCard key={movie.id} movie={movie} />
-            ))}
-          </Swiper>
+          featuredMovies !== null && featuredMovies.length > 0 ? (
+            <Swiper
+              autoplay
+              autoplayTimeout={4}
+              showsPagination={false}
+              height={248}
+            >
+              {featuredMovies[0].movies.map((movie) => (
+                <FeaturedMediaCard key={movie.id} movie={movie} />
+              ))}
+            </Swiper>
+          ) : (
+            <></>
+          )
         }
       />
     </View>
@@ -36,6 +46,5 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 30,
   },
 });
