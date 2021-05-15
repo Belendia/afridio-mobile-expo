@@ -28,7 +28,9 @@ const TrackScreen = () => {
       />
       <ListItem.Content>
         <ListItem.Title>{item.title}</ListItem.Title>
-        <ListItem.Subtitle>{item.duration}</ListItem.Subtitle>
+        <ListItem.Subtitle>
+          <Text style={styles.text}>{item.duration}</Text>
+        </ListItem.Subtitle>
       </ListItem.Content>
       <AntDesign name="clouddownloado" size={24} color={"gray"} />
     </ListItem>
@@ -41,5 +43,9 @@ const styles = StyleSheet.create({
   container: {
     marginTop: 20,
     marginHorizontal: 16,
+  },
+  text: {
+    color: "gray",
+    fontSize: 14,
   },
 });
