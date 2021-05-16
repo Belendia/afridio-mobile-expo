@@ -1,5 +1,5 @@
 import * as React from "react";
-import { StyleSheet, FlatList } from "react-native";
+import { StyleSheet, FlatList, RefreshControl } from "react-native";
 import Swiper from "react-native-swiper";
 import { FeaturedMediaCard } from "../components/Cards/FeaturedMediaCard";
 
@@ -20,6 +20,17 @@ const HomeScreen = () => {
         data={allExceptFeaturedMovies}
         renderItem={({ item }) => <HomeCategory category={item} />}
         showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl
+            refreshing={false}
+            // onRefresh={this._onRefresh}
+            colors={["#EA0000"]}
+            tintColor="white"
+            title="loading..."
+            titleColor="white"
+            progressBackgroundColor="white"
+          />
+        }
         ListHeaderComponent={
           featuredMovies !== null && featuredMovies.length > 0 ? (
             <Swiper
