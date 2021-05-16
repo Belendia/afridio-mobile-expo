@@ -1,14 +1,18 @@
 import * as React from "react";
 import { Icon } from "react-native-elements";
 import { createStackNavigator } from "@react-navigation/stack";
+import { useNavigation } from "@react-navigation/native";
 
 import HomeScreen from "../screens/HomeScreen";
 import MediaScreen from "../screens/Media/MediaScreen";
+import MediaListScreen from "../screens/MediaListScreen";
 import { HomeParamList } from "../../types";
 
 const HomeStack = createStackNavigator<HomeParamList>();
 
 const HomeStackNavigator = () => {
+  const navigation = useNavigation();
+
   return (
     <HomeStack.Navigator>
       <HomeStack.Screen
@@ -30,6 +34,11 @@ const HomeStackNavigator = () => {
             />
           ),
         }}
+      />
+      <HomeStack.Screen
+        name="MediaListScreen"
+        component={MediaListScreen}
+        options={{ title: "Media List" }}
       />
     </HomeStack.Navigator>
   );

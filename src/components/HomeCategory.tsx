@@ -27,7 +27,12 @@ const HomeCategory = (props: HomeCategoryProps) => {
       <View style={styles.listHeading}>
         <Text style={styles.listHeadingLeft}>{category.title}</Text>
         <TouchableOpacity>
-          <Text style={styles.listHeadingRight} onPress={() => true}>
+          <Text
+            style={styles.listHeadingRight}
+            onPress={() =>
+              navigation.navigate("Home", { screen: "MediaListScreen" })
+            }
+          >
             See all
           </Text>
         </TouchableOpacity>

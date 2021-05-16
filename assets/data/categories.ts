@@ -10,6 +10,16 @@ export default {
           description: "The quick brown fox jumps over the lazy dog.",
           cover:
             "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/netflix/movie1.jpg",
+          genres: [
+            {
+              id: 1,
+              name: "Novel",
+            },
+            {
+              id: 2,
+              name: "Fiction",
+            },
+          ],
         },
         {
           id: "movie2",
@@ -17,6 +27,16 @@ export default {
           description: "The quick brown fox jumps over the lazy dog.",
           cover:
             "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/netflix/movie2.jpg",
+          genres: [
+            {
+              id: 1,
+              name: "Novel",
+            },
+            {
+              id: 2,
+              name: "Fiction",
+            },
+          ],
         },
         {
           id: "movie3",
@@ -24,6 +44,16 @@ export default {
           description: "The quick brown fox jumps over the lazy dog.",
           cover:
             "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/netflix/movie3.jpg",
+          genres: [
+            {
+              id: 1,
+              name: "Novel",
+            },
+            {
+              id: 2,
+              name: "Fiction",
+            },
+          ],
         },
         {
           id: "movie4",
@@ -31,6 +61,16 @@ export default {
           description: "The quick brown fox jumps over the lazy dog.",
           cover:
             "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/netflix/movie4.jpg",
+          genres: [
+            {
+              id: 1,
+              name: "Novel",
+            },
+            {
+              id: 2,
+              name: "Fiction",
+            },
+          ],
         },
         {
           id: "movie5",
@@ -38,6 +78,16 @@ export default {
           description: "The quick brown fox jumps over the lazy dog.",
           cover:
             "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/netflix/movie5.jpg",
+          genres: [
+            {
+              id: 1,
+              name: "Novel",
+            },
+            {
+              id: 2,
+              name: "Fiction",
+            },
+          ],
         },
       ],
     },
@@ -51,6 +101,16 @@ export default {
           description: "The quick brown fox jumps over the lazy dog.",
           cover:
             "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/netflix/movie5.jpg",
+          genres: [
+            {
+              id: 1,
+              name: "Novel",
+            },
+            {
+              id: 2,
+              name: "Fiction",
+            },
+          ],
         },
         {
           id: "movie2",
@@ -58,6 +118,16 @@ export default {
           description: "The quick brown fox jumps over the lazy dog.",
           cover:
             "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/netflix/movie4.jpg",
+          genres: [
+            {
+              id: 1,
+              name: "Novel",
+            },
+            {
+              id: 2,
+              name: "Fiction",
+            },
+          ],
         },
         {
           id: "movie3",
@@ -65,6 +135,16 @@ export default {
           description: "The quick brown fox jumps over the lazy dog.",
           cover:
             "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/netflix/movie3.jpg",
+          genres: [
+            {
+              id: 1,
+              name: "Novel",
+            },
+            {
+              id: 2,
+              name: "Fiction",
+            },
+          ],
         },
         {
           id: "movie4",
@@ -72,6 +152,16 @@ export default {
           description: "The quick brown fox jumps over the lazy dog.",
           cover:
             "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/netflix/movie2.jpg",
+          genres: [
+            {
+              id: 1,
+              name: "Novel",
+            },
+            {
+              id: 2,
+              name: "Fiction",
+            },
+          ],
         },
         {
           id: "movie5",
@@ -79,6 +169,16 @@ export default {
           description: "The quick brown fox jumps over the lazy dog.",
           cover:
             "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/netflix/movie1.jpg",
+          genres: [
+            {
+              id: 1,
+              name: "Novel",
+            },
+            {
+              id: 2,
+              name: "Fiction",
+            },
+          ],
         },
       ],
     },
@@ -92,6 +192,16 @@ export default {
           description: "The quick brown fox jumps over the lazy dog.",
           cover:
             "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/netflix/movie3.jpg",
+          genres: [
+            {
+              id: 1,
+              name: "Novel",
+            },
+            {
+              id: 2,
+              name: "Fiction",
+            },
+          ],
         },
         {
           id: "movie2",
@@ -99,6 +209,16 @@ export default {
           description: "The quick brown fox jumps over the lazy dog.",
           cover:
             "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/netflix/movie2.jpg",
+          genres: [
+            {
+              id: 1,
+              name: "Novel",
+            },
+            {
+              id: 2,
+              name: "Fiction",
+            },
+          ],
         },
         {
           id: "movie3",
@@ -106,6 +226,16 @@ export default {
           description: "The quick brown fox jumps over the lazy dog.",
           cover:
             "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/netflix/movie4.jpg",
+          genres: [
+            {
+              id: 1,
+              name: "Novel",
+            },
+            {
+              id: 2,
+              name: "Fiction",
+            },
+          ],
         },
         {
           id: "movie4",
@@ -113,6 +243,16 @@ export default {
           description: "The quick brown fox jumps over the lazy dog.",
           cover:
             "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/netflix/movie5.jpg",
+          genres: [
+            {
+              id: 1,
+              name: "Novel",
+            },
+            {
+              id: 2,
+              name: "Fiction",
+            },
+          ],
         },
         {
           id: "movie5",
@@ -120,6 +260,16 @@ export default {
           description: "The quick brown fox jumps over the lazy dog.",
           cover:
             "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/netflix/movie1.jpg",
+          genres: [
+            {
+              id: 1,
+              name: "Novel",
+            },
+            {
+              id: 2,
+              name: "Fiction",
+            },
+          ],
         },
       ],
     },
@@ -133,6 +283,16 @@ export default {
           description: "The quick brown fox jumps over the lazy dog.",
           cover:
             "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/netflix/movie5.jpg",
+          genres: [
+            {
+              id: 1,
+              name: "Novel",
+            },
+            {
+              id: 2,
+              name: "Fiction",
+            },
+          ],
         },
         {
           id: "movie2",
@@ -140,6 +300,16 @@ export default {
           description: "The quick brown fox jumps over the lazy dog.",
           cover:
             "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/netflix/movie1.jpg",
+          genres: [
+            {
+              id: 1,
+              name: "Novel",
+            },
+            {
+              id: 2,
+              name: "Fiction",
+            },
+          ],
         },
         {
           id: "movie3",
@@ -147,6 +317,16 @@ export default {
           description: "The quick brown fox jumps over the lazy dog.",
           cover:
             "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/netflix/movie4.jpg",
+          genres: [
+            {
+              id: 1,
+              name: "Novel",
+            },
+            {
+              id: 2,
+              name: "Fiction",
+            },
+          ],
         },
         {
           id: "movie4",
@@ -154,6 +334,16 @@ export default {
           description: "The quick brown fox jumps over the lazy dog.",
           cover:
             "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/netflix/movie5.jpg",
+          genres: [
+            {
+              id: 1,
+              name: "Novel",
+            },
+            {
+              id: 2,
+              name: "Fiction",
+            },
+          ],
         },
         {
           id: "movie5",
@@ -161,6 +351,16 @@ export default {
           description: "The quick brown fox jumps over the lazy dog.",
           cover:
             "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/netflix/movie1.jpg",
+          genres: [
+            {
+              id: 1,
+              name: "Novel",
+            },
+            {
+              id: 2,
+              name: "Fiction",
+            },
+          ],
         },
       ],
     },
@@ -174,6 +374,16 @@ export default {
           description: "The quick brown fox jumps over the lazy dog.",
           cover:
             "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/netflix/movie4.jpg",
+          genres: [
+            {
+              id: 1,
+              name: "Novel",
+            },
+            {
+              id: 2,
+              name: "Fiction",
+            },
+          ],
         },
         {
           id: "movie2",
@@ -181,6 +391,16 @@ export default {
           description: "The quick brown fox jumps over the lazy dog.",
           cover:
             "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/netflix/movie3.jpg",
+          genres: [
+            {
+              id: 1,
+              name: "Novel",
+            },
+            {
+              id: 2,
+              name: "Fiction",
+            },
+          ],
         },
         {
           id: "movie3",
@@ -188,6 +408,16 @@ export default {
           description: "The quick brown fox jumps over the lazy dog.",
           cover:
             "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/netflix/movie4.jpg",
+          genres: [
+            {
+              id: 1,
+              name: "Novel",
+            },
+            {
+              id: 2,
+              name: "Fiction",
+            },
+          ],
         },
         {
           id: "movie4",
@@ -195,6 +425,16 @@ export default {
           description: "The quick brown fox jumps over the lazy dog.",
           cover:
             "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/netflix/movie5.jpg",
+          genres: [
+            {
+              id: 1,
+              name: "Novel",
+            },
+            {
+              id: 2,
+              name: "Fiction",
+            },
+          ],
         },
         {
           id: "movie5",
@@ -202,6 +442,16 @@ export default {
           description: "The quick brown fox jumps over the lazy dog.",
           cover:
             "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/netflix/movie1.jpg",
+          genres: [
+            {
+              id: 1,
+              name: "Novel",
+            },
+            {
+              id: 2,
+              name: "Fiction",
+            },
+          ],
         },
       ],
     },
@@ -217,6 +467,16 @@ export default {
             "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/netflix/movie4.jpg",
           poster:
             "https://www.themoviedb.org/t/p/w780/mYM8x2Atv4MaLulaV0KVJWI1Djv.jpg",
+          genres: [
+            {
+              id: 1,
+              name: "Novel",
+            },
+            {
+              id: 2,
+              name: "Fiction",
+            },
+          ],
         },
         {
           id: "movie2",
@@ -226,6 +486,16 @@ export default {
             "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/netflix/movie3.jpg",
           poster:
             "https://www.themoviedb.org/t/p/w780/mR7FQnu5gmTsSEKpT6qEI7WSZmX.jpg",
+          genres: [
+            {
+              id: 1,
+              name: "Novel",
+            },
+            {
+              id: 2,
+              name: "Fiction",
+            },
+          ],
         },
         {
           id: "movie3",
@@ -235,6 +505,16 @@ export default {
             "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/netflix/movie4.jpg",
           poster:
             "https://www.themoviedb.org/t/p/w780/sSOH6sctEaQ0ifAIv1a8qF7AKCn.jpg",
+          genres: [
+            {
+              id: 1,
+              name: "Novel",
+            },
+            {
+              id: 2,
+              name: "Fiction",
+            },
+          ],
         },
         {
           id: "movie4",
@@ -244,6 +524,16 @@ export default {
             "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/netflix/movie5.jpg",
           poster:
             "https://www.themoviedb.org/t/p/w780/qV7HOOZvBLYnjQpSWIVl7mQiAjx.jpg",
+          genres: [
+            {
+              id: 1,
+              name: "Novel",
+            },
+            {
+              id: 2,
+              name: "Fiction",
+            },
+          ],
         },
         {
           id: "movie5",
@@ -253,6 +543,16 @@ export default {
             "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/netflix/movie1.jpg",
           poster:
             "https://www.themoviedb.org/t/p/w780/a8s5B4sNuNNCLnla6xTFPEn9jl0.jpg",
+          genres: [
+            {
+              id: 1,
+              name: "Novel",
+            },
+            {
+              id: 2,
+              name: "Fiction",
+            },
+          ],
         },
       ],
     },
