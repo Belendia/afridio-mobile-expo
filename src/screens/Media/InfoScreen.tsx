@@ -25,7 +25,7 @@ const InfoScreen = () => {
     <View style={styles.container}>
       <View style={styles.overview}>
         <Text style={styles.label}>Overview</Text>
-        <Text style={styles.overviewText}>{info.plot}</Text>
+        <Text style={styles.overviewText}>{info.description}</Text>
       </View>
       <View style={styles.labelRow}>
         <Text style={styles.label}>Release Date</Text>
