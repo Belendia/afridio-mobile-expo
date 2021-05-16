@@ -133,7 +133,13 @@ const MediaScreen = (props) => {
             <View style={styles.cardGenre}>
               {info.genres.map((item, index) => (
                 <View style={{ marginRight: 3 }} key={index}>
-                  <Chip title={item.name} type="outline" disabled />
+                  <Chip
+                    title={item.name}
+                    type="outline"
+                    titleStyle={{ fontSize: 12 }}
+                    buttonStyle={{ padding: 5 }}
+                    disabled
+                  />
                 </View>
               ))}
             </View>
