@@ -12,7 +12,7 @@ const SearchStackNavigator = () => {
       <SearchStack.Screen
         name="SearchScreen"
         component={SearchScreen}
-        options={{ headerTitle: "Tab Two Title" }}
+        options={{ headerTitle: "Search" }}
       />
     </SearchStack.Navigator>
   );
