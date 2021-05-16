@@ -2,7 +2,7 @@ export default {
   items: [
     {
       id: "category1",
-      title: "Popular on Afridio",
+      title: "Popular",
       movies: [
         {
           id: "movie1",
@@ -84,7 +84,7 @@ export default {
     },
     {
       id: "category3",
-      title: "Latin American Movies & TV",
+      title: "Latin",
       movies: [
         {
           id: "movie1",

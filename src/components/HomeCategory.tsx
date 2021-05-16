@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, FlatList } from "react-native";
+import { StyleSheet, FlatList, TouchableOpacity, Platform } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import { View, Text } from "./Themed";
@@ -24,7 +24,14 @@ const HomeCategory = (props: HomeCategoryProps) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{category.title}</Text>
+      <View style={styles.listHeading}>
+        <Text style={styles.listHeadingLeft}>{category.title}</Text>
+        <TouchableOpacity>
+          <Text style={styles.listHeadingRight} onPress={() => true}>
+            See all
+          </Text>
+        </TouchableOpacity>
+      </View>
       <FlatList
         data={category.movies}
         renderItem={({ item }) => <SimpleMediaCard movie={item} />}
@@ -39,8 +46,8 @@ export default HomeCategory;
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: 20,
-    marginHorizontal: 30,
+    marginBottom: 5,
+    marginHorizontal: 10,
   },
   image: {
     width: 100,
@@ -49,9 +56,28 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     margin: 5,
   },
-  title: {
-    fontSize: 20,
+  listHeading: {
+    paddingHorizontal: 16,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 15,
+    marginTop: 30,
+  },
+  listHeadingLeft: {
+    color: "white",
     fontWeight: "bold",
-    marginBottom: 5,
+    fontSize: 18,
+  },
+  listHeadingRight: {
+    color: "white",
+    ...Platform.select({
+      ios: {
+        fontSize: 15,
+      },
+      android: {
+        fontSize: 16,
+      },
+    }),
   },
 });
