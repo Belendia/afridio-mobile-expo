@@ -157,7 +157,7 @@ const MediaScreen = (props) => {
             style={{
               alignSelf: "center",
               width: Dimensions.get("window").width - 32,
-              marginBottom: 2,
+              marginBottom: 10,
             }}
           >
             <Button
