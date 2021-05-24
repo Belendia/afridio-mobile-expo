@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Platform, FlatList, RefreshControl } from "react-native";
-import { View, Text } from "../components/Themed";
+import { View } from "../components/Themed";
 
 import categories from "../../assets/data/categories";
 import { ProgressBar, MediaListCard } from "../components";
