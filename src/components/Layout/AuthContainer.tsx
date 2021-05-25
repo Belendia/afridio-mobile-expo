@@ -6,6 +6,7 @@ import {
   Platform,
   ScrollView,
 } from "react-native";
+import { Divider } from "react-native-elements";
 
 import { View, Text } from "../../components/Themed";
 
@@ -25,10 +26,16 @@ const AuthContainer: React.FC<AuthContainerProps> = ({
         <ScrollView keyboardShouldPersistTaps="always" bounces={false}>
           <View style={styles.card}>
             {showLogo && (
-              <Image
-                source={require("../../../assets/images/icon.png")}
-                style={styles.logo}
-              />
+              <>
+                <Image
+                  source={require("../../../assets/images/icon.png")}
+                  style={styles.logo}
+                />
+
+                <Divider
+                  style={{ backgroundColor: "#363333", marginBottom: 20 }}
+                />
+              </>
             )}
 
             <Text style={styles.title}>{title}</Text>
@@ -59,7 +66,7 @@ const styles = StyleSheet.create({
     height: 100,
     width: 200,
     marginTop: 12,
-    marginBottom: 20,
+    marginBottom: 8,
   },
   title: {
     fontWeight: "bold",
