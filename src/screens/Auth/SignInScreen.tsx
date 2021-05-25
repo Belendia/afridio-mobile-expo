@@ -17,16 +17,18 @@ const SignInScreen = () => {
       <Input
         placeholder="Phone number"
         leftIconContainerStyle={{ marginRight: 6 }}
-        leftIcon={<FontAwesome name="phone" size={24} color="white" />}
+        leftIcon={<FontAwesome name="phone" size={20} color="white" />}
         onChangeText={(text) => setPhoneNumber(text)}
         keyboardType="phone-pad"
+        returnKeyType="next"
       />
       <Input
         placeholder="Password"
         leftIconContainerStyle={{ marginRight: 6 }}
-        leftIcon={<FontAwesome name="lock" size={24} color="white" />}
+        leftIcon={<FontAwesome name="lock" size={20} color="white" />}
         onChangeText={(text) => setPassword(text)}
         secureTextEntry
+        returnKeyType="go"
       />
       <Button
         title="Sign In"

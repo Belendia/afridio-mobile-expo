@@ -16,30 +16,34 @@ const SignUpScreen = () => {
       <Input
         placeholder="Name"
         leftIconContainerStyle={{ marginRight: 6 }}
-        leftIcon={<FontAwesome name="user" size={24} color="white" />}
+        leftIcon={<FontAwesome name="user" size={20} color="white" />}
         onChangeText={(text) => setName(text)}
+        returnKeyType="next"
       />
       <Input
         placeholder="Phone number"
         leftIconContainerStyle={{ marginRight: 6 }}
-        leftIcon={<FontAwesome name="phone" size={24} color="white" />}
+        leftIcon={<FontAwesome name="phone" size={20} color="white" />}
         onChangeText={(text) => setPhoneNumber(text)}
         keyboardType="phone-pad"
+        returnKeyType="next"
       />
 
       <Input
         placeholder="Password"
         leftIconContainerStyle={{ marginRight: 6 }}
-        leftIcon={<FontAwesome name="lock" size={24} color="white" />}
+        leftIcon={<FontAwesome name="lock" size={20} color="white" />}
         onChangeText={(text) => setPassword(text)}
         secureTextEntry
+        returnKeyType="next"
       />
       <Input
         placeholder="Confirm Password"
         leftIconContainerStyle={{ marginRight: 6 }}
-        leftIcon={<FontAwesome name="lock" size={24} color="white" />}
+        leftIcon={<FontAwesome name="lock" size={20} color="white" />}
         onChangeText={(text) => setSecondPassword(text)}
         secureTextEntry
+        returnKeyType="go"
       />
       <Button
         title="Register"
