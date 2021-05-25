@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
-import { Input, Button } from "react-native-elements";
+import { Input, Button, Divider } from "react-native-elements";
 import { FontAwesome } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
@@ -34,18 +34,19 @@ const SignInScreen = () => {
           backgroundColor: "#ed0400",
           paddingVertical: 12,
         }}
-        titleStyle={{ fontSize: 18, fontWeight: "bold" }}
+        titleStyle={{ fontSize: 16, fontWeight: "600" }}
         containerStyle={{ marginTop: 10 }}
         onPress={() => console.log("Handle Sign In")}
       />
 
+      <Divider style={{ backgroundColor: "#363333", marginTop: 20 }} />
       <TouchableOpacity
         style={styles.footerTextWrapper}
         onPress={() => navigation.navigate("SignUpScreen")}
       >
-        <Text style={styles.footer2Text}>New to </Text>
-        <Text style={styles.footerText}>Afridio?</Text>
-        <Text style={styles.footer2Text}> Sign up now.</Text>
+        <Text style={styles.footerWhiteText}>New to </Text>
+        <Text style={styles.footerRedText}>Afridio?</Text>
+        <Text style={styles.footerWhiteText}> Sign up now.</Text>
       </TouchableOpacity>
     </AuthContainer>
   );
@@ -60,15 +61,15 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
   },
-  footerText: {
-    color: "#ed0400",
-    fontSize: 16,
+  footerRedText: {
+    color: "#f74440",
+    fontSize: 14,
     alignSelf: "center",
     fontWeight: "bold",
   },
-  footer2Text: {
+  footerWhiteText: {
     color: "#fff",
-    fontSize: 16,
+    fontSize: 14,
     alignSelf: "center",
   },
 });

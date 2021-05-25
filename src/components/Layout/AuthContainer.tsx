@@ -63,14 +63,14 @@ const styles = StyleSheet.create({
   logo: {
     resizeMode: "contain",
     alignSelf: "center",
-    height: 100,
-    width: 200,
+    height: 80,
+    width: 150,
     marginTop: 12,
     marginBottom: 8,
   },
   title: {
     fontWeight: "bold",
-    fontSize: 30,
+    fontSize: 24,
     color: "#fff",
     marginBottom: 20,
     marginHorizontal: 16,

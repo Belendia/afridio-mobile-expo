@@ -47,7 +47,7 @@ const SignUpScreen = () => {
           backgroundColor: "#ed0400",
           paddingVertical: 12,
         }}
-        titleStyle={{ fontSize: 18, fontWeight: "bold" }}
+        titleStyle={{ fontSize: 16, fontWeight: "600" }}
         containerStyle={{ marginTop: 10, marginBottom: 20 }}
         onPress={() => console.log("Handle Sign Up")}
       />
