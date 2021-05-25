@@ -1,19 +1,24 @@
 import React, { useState } from "react";
-import { StyleSheet, TouchableOpacity } from "react-native";
+import { StyleSheet } from "react-native";
 import { Input, Button } from "react-native-elements";
 import { FontAwesome } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
 
-import { Text } from "../../components/Themed";
 import { AuthContainer } from "../../components";
 
-const SignInScreen = () => {
-  const navigation = useNavigation();
+const SignUpScreen = () => {
+  const [name, setName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
+  const [secondPassword, setSecondPassword] = useState("");
 
   return (
-    <AuthContainer showLogo={true} title={"Sign In"}>
+    <AuthContainer showLogo={true} title={"Sign Up"}>
+      <Input
+        placeholder="Name"
+        leftIconContainerStyle={{ marginRight: 6 }}
+        leftIcon={<FontAwesome name="user" size={24} color="white" />}
+        onChangeText={(text) => setName(text)}
+      />
       <Input
         placeholder="Phone number"
         leftIconContainerStyle={{ marginRight: 6 }}
@@ -21,6 +26,7 @@ const SignInScreen = () => {
         onChangeText={(text) => setPhoneNumber(text)}
         keyboardType="phone-pad"
       />
+
       <Input
         placeholder="Password"
         leftIconContainerStyle={{ marginRight: 6 }}
@@ -28,28 +34,28 @@ const SignInScreen = () => {
         onChangeText={(text) => setPassword(text)}
         secureTextEntry
       />
+      <Input
+        placeholder="Confirm Password"
+        leftIconContainerStyle={{ marginRight: 6 }}
+        leftIcon={<FontAwesome name="lock" size={24} color="white" />}
+        onChangeText={(text) => setSecondPassword(text)}
+        secureTextEntry
+      />
       <Button
-        title="Sign In"
+        title="Register"
         buttonStyle={{
           backgroundColor: "#ed0400",
           paddingVertical: 12,
         }}
         titleStyle={{ fontSize: 18, fontWeight: "bold" }}
-        containerStyle={{ marginTop: 10 }}
-        onPress={() => console.log("Handle Sign In")}
+        containerStyle={{ marginTop: 10, marginBottom: 20 }}
+        onPress={() => console.log("Handle Sign Up")}
       />
-
-      <TouchableOpacity
-        style={styles.footerTextWrapper}
-        onPress={() => navigation.navigate("SignUpScreen")}
-      >
-        <Text style={styles.footerText}>New to Afridio? Sign up now.</Text>
-      </TouchableOpacity>
     </AuthContainer>
   );
 };
 
-export default SignInScreen;
+export default SignUpScreen;
 
 const styles = StyleSheet.create({
   footerTextWrapper: {

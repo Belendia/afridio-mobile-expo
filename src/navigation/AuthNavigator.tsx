@@ -2,6 +2,7 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import SignInScreen from "../screens/Auth/SignInScreen";
+import SignUpScreen from "../screens/Auth/SignUpScreen";
 
 import { AuthParamList } from "../../types";
 
@@ -9,12 +10,18 @@ const AuthStack = createStackNavigator<AuthParamList>();
 
 const AuthNavigator = () => {
   return (
-    <AuthStack.Navigator headerMode="none" initialRouteName="LogInScreen">
-      <AuthStack.Screen name="LogInScreen" component={SignInScreen} />
-
-      {/* <AuthStack.Screen name="SignInScreen" component={SignInScreen} />
-      <AuthStack.Screen name="SignUpScreen" component={SignUpScreen} />
+    <AuthStack.Navigator initialRouteName="SignInScreen">
       <AuthStack.Screen
+        name="SignInScreen"
+        component={SignInScreen}
+        options={{ headerTransparent: true, title: "" }}
+      />
+      <AuthStack.Screen
+        name="SignUpScreen"
+        component={SignUpScreen}
+        options={{ headerTransparent: true, title: "" }}
+      />
+      {/* <AuthStack.Screen
         name="VerificationScreen"
         component={VerificationScreen}
       />
