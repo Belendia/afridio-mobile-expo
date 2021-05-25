@@ -43,7 +43,9 @@ const SignInScreen = () => {
         style={styles.footerTextWrapper}
         onPress={() => navigation.navigate("SignUpScreen")}
       >
-        <Text style={styles.footerText}>New to Afridio? Sign up now.</Text>
+        <Text style={styles.footer2Text}>New to </Text>
+        <Text style={styles.footerText}>Afridio?</Text>
+        <Text style={styles.footer2Text}> Sign up now.</Text>
       </TouchableOpacity>
     </AuthContainer>
   );
@@ -55,8 +57,16 @@ const styles = StyleSheet.create({
   footerTextWrapper: {
     marginVertical: 25,
     marginHorizontal: 0,
+    flexDirection: "row",
+    justifyContent: "center",
   },
   footerText: {
+    color: "#ed0400",
+    fontSize: 16,
+    alignSelf: "center",
+    fontWeight: "bold",
+  },
+  footer2Text: {
     color: "#fff",
     fontSize: 16,
     alignSelf: "center",
