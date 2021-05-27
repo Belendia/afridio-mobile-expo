@@ -13,11 +13,13 @@ import { View, Text } from "../../components/Themed";
 type AuthContainerProps = {
   showLogo: boolean;
   title: string;
+  titleAlignCenter: boolean;
 };
 
 const AuthContainer: React.FC<AuthContainerProps> = ({
   showLogo,
   title,
+  titleAlignCenter,
   children,
 }) => {
   return (
@@ -38,7 +40,14 @@ const AuthContainer: React.FC<AuthContainerProps> = ({
               </>
             )}
 
-            <Text style={styles.title}>{title}</Text>
+            <Text
+              style={[
+                styles.title,
+                titleAlignCenter && styles.titleAlignCenter,
+              ]}
+            >
+              {title}
+            </Text>
             <View style={styles.formWrapper}>{children}</View>
           </View>
         </ScrollView>
@@ -79,5 +88,8 @@ const styles = StyleSheet.create({
     marginVertical: 0,
     marginHorizontal: 12,
     backgroundColor: "#211f1f",
+  },
+  titleAlignCenter: {
+    alignSelf: "center",
   },
 });

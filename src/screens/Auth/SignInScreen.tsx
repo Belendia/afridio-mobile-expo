@@ -13,7 +13,7 @@ const SignInScreen = () => {
   const [password, setPassword] = useState("");
 
   return (
-    <AuthContainer showLogo={true} title={"Sign In"}>
+    <AuthContainer showLogo={true} title={"Sign In"} titleAlignCenter={false}>
       <Input
         placeholder="Phone number"
         leftIconContainerStyle={{ marginRight: 6 }}
@@ -38,7 +38,7 @@ const SignInScreen = () => {
         }}
         titleStyle={{ fontSize: 16, fontWeight: "600" }}
         containerStyle={{ marginTop: 10 }}
-        onPress={() => console.log("Handle Sign In")}
+        onPress={() => navigation.navigate("VerifyScreen")}
       />
 
       <Divider style={{ backgroundColor: "#363333", marginTop: 20 }} />
