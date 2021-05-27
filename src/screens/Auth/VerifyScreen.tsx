@@ -44,15 +44,15 @@ const VerifyScreen = () => {
       />
 
       <Divider style={{ backgroundColor: "#363333", marginTop: 20 }} />
-      <TouchableOpacity
-        style={styles.resendTextWrapper}
-        onPress={() => console.log("Resend code")}
-      >
+
+      <View style={styles.resendTextWrapper}>
         <Text style={styles.resendWhiteText}>
           Didn't receive the verification code?{" "}
         </Text>
-        <Text style={styles.resendRedText}>Resend again</Text>
-      </TouchableOpacity>
+        <TouchableOpacity onPress={() => console.log("Resend code")}>
+          <Text style={styles.resendRedText}>Resend again</Text>
+        </TouchableOpacity>
+      </View>
     </AuthContainer>
   );
 };
