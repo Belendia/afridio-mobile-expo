@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^12.0.0",
+    "@react-native-clipboard/clipboard": "^1.7.0",
     "@react-native-community/masked-view": "0.1.10",
     "@react-navigation/bottom-tabs": "5.11.2",
     "@react-navigation/material-top-tabs": "^5.3.15",
@@ -32,6 +33,7 @@
     "react-native": "https://github.com/expo/react-native/archive/sdk-40.0.1.tar.gz",
     "react-native-elements": "3.4.1",
     "react-native-gesture-handler": "^1.10.3",
+    "react-native-otp-inputs": "^7.0.3",
     "react-native-pager-view": "^5.1.7",
     "react-native-reanimated": "^2.1.0",
     "react-native-safe-area-context": "3.1.9",

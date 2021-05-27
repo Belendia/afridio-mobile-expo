@@ -23,4 +23,5 @@ export type SearchParamList = {
 export type AuthParamList = {
   SignInScreen: undefined;
   SignUpScreen: undefined;
+  VerifyScreen: undefined;
 };
