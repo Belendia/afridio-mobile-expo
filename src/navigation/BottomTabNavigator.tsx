@@ -5,8 +5,8 @@ import * as React from "react";
 import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
 
-import HomeStackNavigator from "./HomeStackNavigator";
-import SearchStackNavigator from "./SearchStackNavigator";
+import HomeNavigator from "./HomeNavigator";
+import SearchNavigator from "./SearchNavigator";
 
 import { BottomTabParamList } from "../../types";
 
@@ -24,7 +24,7 @@ const BottomTabNavigator = () => {
     >
       <BottomTab.Screen
         name="Home"
-        component={HomeStackNavigator}
+        component={HomeNavigator}
         options={{
           tabBarIcon: ({ color, focused }) =>
             focused ? (
@@ -36,7 +36,7 @@ const BottomTabNavigator = () => {
       />
       <BottomTab.Screen
         name="Search"
-        component={SearchStackNavigator}
+        component={SearchNavigator}
         options={{
           tabBarIcon: ({ color, focused }) =>
             focused ? (
@@ -48,7 +48,7 @@ const BottomTabNavigator = () => {
       />
       <BottomTab.Screen
         name="Library"
-        component={SearchStackNavigator}
+        component={SearchNavigator}
         options={{
           tabBarIcon: ({ color, focused }) =>
             focused ? (
@@ -60,7 +60,7 @@ const BottomTabNavigator = () => {
       />
       <BottomTab.Screen
         name="Settings"
-        component={SearchStackNavigator}
+        component={SearchNavigator}
         options={{
           tabBarIcon: ({ color, focused }) =>
             focused ? (

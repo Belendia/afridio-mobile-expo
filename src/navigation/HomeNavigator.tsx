@@ -10,7 +10,7 @@ import { HomeParamList } from "../../types";
 
 const HomeStack = createStackNavigator<HomeParamList>();
 
-const HomeStackNavigator = () => {
+const HomeNavigator = () => {
   const navigation = useNavigation();
 
   return (
@@ -44,4 +44,4 @@ const HomeStackNavigator = () => {
   );
 };
 
-export default HomeStackNavigator;
+export default HomeNavigator;
