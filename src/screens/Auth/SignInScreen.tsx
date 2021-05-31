@@ -65,13 +65,13 @@ const styles = StyleSheet.create({
   },
   footerRedText: {
     color: "#f74440",
-    fontSize: 14,
+    fontSize: 16,
     alignSelf: "center",
     fontWeight: "bold",
   },
   footerWhiteText: {
     color: "#fff",
-    fontSize: 14,
+    fontSize: 16,
     alignSelf: "center",
   },
 });
