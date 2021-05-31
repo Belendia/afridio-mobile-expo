@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import {
   StyleSheet,
   KeyboardAvoidingView,
@@ -13,15 +13,16 @@ import { View, Text } from "../../components/Themed";
 type AuthContainerProps = {
   showLogo: boolean;
   title: string;
-  titleAlignCenter?: boolean;
+  titleAlignCenter: boolean;
+  children: ReactNode;
 };
 
-const AuthContainer: React.FC<AuthContainerProps> = ({
+const AuthContainer = ({
   showLogo,
   title,
-  titleAlignCenter = false,
+  titleAlignCenter,
   children,
-}) => {
+}: AuthContainerProps) => {
   return (
     <View style={styles.container}>
       <KeyboardAvoidingView enabled={Platform.OS === "ios"} behavior="padding">
@@ -54,6 +55,10 @@ const AuthContainer: React.FC<AuthContainerProps> = ({
       </KeyboardAvoidingView>
     </View>
   );
+};
+
+AuthContainer.defaultProps = {
+  titleAlignCenter: false,
 };
 
 export { AuthContainer };
