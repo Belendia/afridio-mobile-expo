@@ -13,7 +13,7 @@ const SignInScreen = () => {
   const [password, setPassword] = useState("");
 
   return (
-    <AuthContainer showLogo={true} title={"Sign In"} titleAlignCenter={false}>
+    <AuthContainer showLogo={true} title={"Sign In"}>
       <Input
         placeholder="Phone number"
         leftIconContainerStyle={{ marginRight: 6 }}

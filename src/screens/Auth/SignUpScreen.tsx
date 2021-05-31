@@ -12,7 +12,7 @@ const SignUpScreen = () => {
   const [secondPassword, setSecondPassword] = useState("");
 
   return (
-    <AuthContainer showLogo={true} title={"Sign Up"} titleAlignCenter={false}>
+    <AuthContainer showLogo={true} title={"Sign Up"}>
       <Input
         placeholder="Name"
         leftIconContainerStyle={{ marginRight: 6 }}

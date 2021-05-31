@@ -13,13 +13,13 @@ import { View, Text } from "../../components/Themed";
 type AuthContainerProps = {
   showLogo: boolean;
   title: string;
-  titleAlignCenter: boolean;
+  titleAlignCenter?: boolean;
 };
 
 const AuthContainer: React.FC<AuthContainerProps> = ({
   showLogo,
   title,
-  titleAlignCenter,
+  titleAlignCenter = false,
   children,
 }) => {
   return (
