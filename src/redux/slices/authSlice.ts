@@ -93,7 +93,7 @@ const authSlice = createSlice({
       ...state,
       error: null,
     }),
-    startVerification: (state, action) => ({
+    startVerification: (state) => ({
       ...state,
       verifying: true,
     }),
