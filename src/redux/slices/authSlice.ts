@@ -11,7 +11,6 @@ type AuthReducerType = {
   authenticating: boolean;
   authenticated: boolean;
   error: object | null;
-  retrievingToken: boolean;
   registering: boolean;
   registered: boolean;
   verifying: boolean;
@@ -24,7 +23,6 @@ const initialState: AuthReducerType = {
   authenticating: false,
   authenticated: false,
   error: null,
-  retrievingToken: true,
   registering: false,
   registered: false,
   verifying: false,
@@ -38,7 +36,6 @@ const authSlice = createSlice({
   reducers: {
     retrieveTokenSuccess: (state, action) => ({
       ...state,
-      retrievingToken: false,
       authenticated: action.payload.authenticated,
       token: action.payload.token,
     }),
@@ -186,6 +183,8 @@ export const verifyEpic = (action$: Observable<Action<any>>) =>
       );
     })
   );
+
+
 
 export const authEpics = [loginEpic, logoutEpic, registerEpic, verifyEpic];
 

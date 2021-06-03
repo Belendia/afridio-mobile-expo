@@ -1,5 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
+import { StyleSheet } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { ThemeProvider } from "react-native-elements";
 import { Provider } from "react-redux";
@@ -19,15 +20,21 @@ const App = () => {
   } else {
     return (
       <SafeAreaProvider>
-        <ThemeProvider theme={theme} useDark={colorScheme === "dark"}>
-          <Provider store={store}>
+        <Provider store={store}>
+          <ThemeProvider theme={theme} useDark={colorScheme === "dark"}>
             <Navigation colorScheme={colorScheme} />
             <StatusBar />
-          </Provider>
-        </ThemeProvider>
+          </ThemeProvider>
+        </Provider>
       </SafeAreaProvider>
     );
   }
 };
 
 export default App;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});

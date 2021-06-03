@@ -10,10 +10,17 @@ import { ColorSchemeName } from "react-native";
 import LinkingConfiguration from "./LinkingConfiguration";
 import RootNavigator from "./RootNavigator";
 import AuthNavigator from "./AuthNavigator";
+import useAutoLogin from '../hooks/useAutoLogin';
+import { useSelector } from "react-redux";
+import { RootStoreType } from "../redux/rootReducer";
 
 const Navigation = ({ colorScheme }: { colorScheme: ColorSchemeName }) => {
-  const token = null;
+  useAutoLogin()
 
+  const { token } = useSelector((state: RootStoreType) => ({
+    token: state.authReducer.token,
+  }));
+  
   return (
     <NavigationContainer
       linking={LinkingConfiguration}
