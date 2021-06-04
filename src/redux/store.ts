@@ -1,30 +1,19 @@
-import { createStore, applyMiddleware, compose } from "redux";
 import { combineEpics, createEpicMiddleware } from "redux-observable";
+import { configureStore } from "@reduxjs/toolkit"
 
 import rootReducer from "./rootReducer";
 import { authEpics } from "./slices";
+import reactotron from "../../reactotron"
 
 export const rootEpic = combineEpics(...authEpics);
 
 const epicMiddleware = createEpicMiddleware();
 
-// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-let composeEnhancers = compose;
-
-declare global {
-  interface Window {
-    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
-  }
-}
-
-if (__DEV__) {
-  composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-}
-
-const store = createStore(
-  rootReducer,
-  composeEnhancers(applyMiddleware(epicMiddleware))
-);
+const store = configureStore({
+  reducer: rootReducer,
+  middleware: [epicMiddleware],
+  enhancers: (__DEV__ && [reactotron.createEnhancer()]) || undefined,
+})
 
 epicMiddleware.run(rootEpic);
 
