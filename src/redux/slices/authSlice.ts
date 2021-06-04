@@ -39,7 +39,7 @@ const authSlice = createSlice({
       authenticated: action.payload.authenticated,
       token: action.payload.token,
     }),
-    authStart: (state) => ({
+    authStart: (state, _) => ({
       ...state,
       error: null,
       authenticating: true,
