@@ -14,7 +14,8 @@ import { RootStoreType } from "../../redux/rootReducer";
 
 let SignInSchema = Yup.object().shape({
   phone_number: Yup.number()
-    .positive()
+    .typeError('Phone must be a number')
+    .positive('Phone must be a positive number')
     .required('Required')
     .test('len', 'To short!', (value) => value !=undefined && value !=null && value.toString().length >= 6),
   password: Yup.string().min(6, 'To short!').required('Required'),
