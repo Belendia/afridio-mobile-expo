@@ -114,9 +114,14 @@ export const loginEpic = (action$: Observable<Action<any>>) =>
         catchError((err) => {
           console.log('Error ------------')
           console.log(JSON.stringify(err))
-          console.log(err._message.detail)
           console.log('----------------------')
-          return of(authFail(err._message.detail[0]));
+          let message = 'Something went wrong.'
+          if(err._status==="Offline"){
+            message = err._message
+          } else if(err._status === 400) {
+            message = err._message.detail[0]
+          }
+          return of(authFail(message));
         })
       );
     })
