@@ -6,10 +6,11 @@ import { useNavigation } from "@react-navigation/native";
 import * as Yup from 'yup';
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
+import { MaterialIcons } from '@expo/vector-icons';
 
-import { Text } from "../../components/Themed";
+import { Text, View } from "../../components/Themed";
 import { AuthContainer } from "../../components";
-import {authStart, resetError} from '../../redux/slices/authSlice';
+import { authStart } from '../../redux/slices/authSlice';
 import { RootStoreType } from "../../redux/rootReducer";
 
 let SignInSchema = Yup.object().shape({
@@ -24,8 +25,6 @@ let SignInSchema = Yup.object().shape({
 const SignInScreen = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  // const [phoneNumber, setPhoneNumber] = useState("");
-  // const [password, setPassword] = useState("");
   const password = useRef<typeof Input>(null);
 
   const {
@@ -40,8 +39,6 @@ const SignInScreen = () => {
     initialValues: {phone_number: '', password: '', remember: true},
     validationSchema: SignInSchema,
     onSubmit: (values) => {
-      console.log("Values")
-      console.log('+' + values.phone_number)
       dispatch(
         authStart({
           phone_number: '+' + values.phone_number,
@@ -57,25 +54,16 @@ const SignInScreen = () => {
     authenticated: state.authReducer.authenticated,
     error: state.authReducer.error,
   }));
-  
-  useEffect(() => {
-    console.log(error)
-    if (error && error.hasOwnProperty('type') && error.type === 'text') {
-      
-    }
-
-    return () => {
-      
-    };
-  }, [error]);
 
   return (
     <AuthContainer showLogo={true} title={"Sign In"}>
+      
       <Input
-        placeholder="Phone number"
+        placeholder="251912345678"
         leftIconContainerStyle={{ marginRight: 6 }}
         leftIcon={<FontAwesome name="phone" size={20} color="white" />}
         onChangeText={handleChange('phone_number')}
+        onBlur={handleBlur('phone_number')}
         errorMessage={errors.phone_number}
         keyboardType="phone-pad"
         returnKeyType="next"
@@ -88,6 +76,7 @@ const SignInScreen = () => {
         leftIconContainerStyle={{ marginRight: 6 }}
         leftIcon={<FontAwesome name="lock" size={20} color="white" />}
         onChangeText={handleChange('password')}
+        onBlur={handleBlur('phone_number')}
         errorMessage={errors.password}
         secureTextEntry
         returnKeyType="go"
@@ -103,6 +92,7 @@ const SignInScreen = () => {
         containerStyle={{ marginTop: 10 }}
         onPress={() => handleSubmit()}
       />
+      {error && <View style={styles.errorWrapper}><MaterialIcons name="error-outline" size={20} color="#f74440" /><Text style={styles.error}>{error}</Text></View>}
 
       <Divider style={{ backgroundColor: "#363333", marginTop: 20 }} />
       <TouchableOpacity
@@ -113,6 +103,9 @@ const SignInScreen = () => {
         <Text style={styles.footerRedText}>Afridio?</Text>
         <Text style={styles.footerWhiteText}> Sign up now.</Text>
       </TouchableOpacity>
+
+      
+
     </AuthContainer>
   );
 };
@@ -135,6 +128,18 @@ const styles = StyleSheet.create({
   footerWhiteText: {
     color: "#fff",
     fontSize: 16,
-    alignSelf: "center",
+    alignSelf: "center"
   },
+  errorWrapper: {
+    flexDirection: 'row',
+    backgroundColor: '#211f1f',
+    marginTop: 10,
+  },
+  error: {
+    color: "#f74440",
+    fontSize: 14,
+    fontWeight: "bold",
+    alignSelf: 'center',
+    marginLeft: 4,
+  }
 });

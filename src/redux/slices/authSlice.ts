@@ -55,8 +55,8 @@ const authSlice = createSlice({
     authFail: (state, action) => ({
       ...state,
       authenticated: false,
-      error: action.payload,
       authenticating: false,
+      error: action.payload,
     }),
     authLogout: (state) => ({
       ...state,
@@ -86,10 +86,6 @@ const authSlice = createSlice({
       registering: false,
       registered: false,
     }),
-    resetError: (state) => ({
-      ...state,
-      error: null,
-    }),
     startVerification: (state) => ({
       ...state,
       verifying: true,
@@ -109,11 +105,18 @@ export const loginEpic = (action$: Observable<Action<any>>) =>
       const { phone_number, password } = payload;
       return AfridioApiService.login(phone_number, password).pipe(
         map((res) => {
+          console.log('Success ------------')
+          console.log(JSON.stringify(res))
+          console.log('----------------------')
           AfridioAsyncStoreService.putToken(res.token);
           return authSuccess(res);
         }),
         catchError((err) => {
-          return of(authFail(err));
+          console.log('Error ------------')
+          console.log(JSON.stringify(err))
+          console.log(err._message.detail)
+          console.log('----------------------')
+          return of(authFail(err._message.detail[0]));
         })
       );
     })
@@ -198,7 +201,6 @@ export const {
   startRegistration,
   registrationSuccess,
   registrationFailed,
-  resetError,
   startVerification,
   verificationFailed,
 } = authSlice.actions;
