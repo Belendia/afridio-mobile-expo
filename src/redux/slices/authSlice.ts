@@ -108,6 +108,7 @@ export const loginEpic = (action$: Observable<Action<any>>) =>
           console.log('Success ------------')
           console.log(JSON.stringify(res))
           console.log('----------------------')
+
           AfridioAsyncStoreService.putToken(res.token);
           return authSuccess(res);
         }),
@@ -115,10 +116,11 @@ export const loginEpic = (action$: Observable<Action<any>>) =>
           console.log('Error ------------')
           console.log(JSON.stringify(err))
           console.log('----------------------')
+
           let message = 'Something went wrong.'
-          if(err._status==="Offline"){
+          if(err && err._status==="Offline") {
             message = err._message
-          } else if(err._status === 400) {
+          } else if(err && err._status === 400) {
             message = err._message.detail[0]
           }
           return of(authFail(message));

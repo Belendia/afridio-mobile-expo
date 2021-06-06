@@ -90,7 +90,8 @@ const SignInScreen = () => {
         }}
         titleStyle={{ fontSize: 16, fontWeight: "600" }}
         containerStyle={{ marginTop: 10 }}
-        onPress={() => handleSubmit()}
+        onPress={() => {if(!authenticating) handleSubmit()}}
+        loading = {authenticating}
       />
       {error && <View style={styles.errorWrapper}><MaterialIcons name="error-outline" size={20} color="#f74440" /><Text style={styles.error}>{error}</Text></View>}
 
