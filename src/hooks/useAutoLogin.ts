@@ -7,7 +7,7 @@ import { retrieveTokenSuccess, readToken } from "../redux/slices/authSlice";
 
 const useAutoLogin = () => {
   const dispatch = useDispatch();
-  
+
   React.useEffect(() => {
     function readTokenFromLocalStore() {
       const checkLoggedIn$ = from(readToken()).pipe(
@@ -16,6 +16,7 @@ const useAutoLogin = () => {
           return {
             token: data.token,
             authenticated: authenticated,
+            readingToken: false,
           };
         })
       );
@@ -26,7 +27,6 @@ const useAutoLogin = () => {
     }
     readTokenFromLocalStore();
   }, []);
-
 };
 
 export default useAutoLogin;

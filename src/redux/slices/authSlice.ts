@@ -15,6 +15,7 @@ type AuthReducerType = {
   registered: boolean;
   verifying: boolean;
   token: string | null;
+  readingToken: boolean;
   password: string | null;
 };
 
@@ -27,6 +28,7 @@ const initialState: AuthReducerType = {
   registered: false,
   verifying: false,
   token: null,
+  readingToken: true,
   password: null,
 };
 
@@ -105,23 +107,23 @@ export const loginEpic = (action$: Observable<Action<any>>) =>
       const { phone_number, password } = payload;
       return AfridioApiService.login(phone_number, password).pipe(
         map((res) => {
-          console.log('Success ------------')
-          console.log(JSON.stringify(res))
-          console.log('----------------------')
+          console.log("Success ------------");
+          console.log(JSON.stringify(res));
+          console.log("----------------------");
 
           AfridioAsyncStoreService.putToken(res.token);
           return authSuccess(res);
         }),
         catchError((err) => {
-          console.log('Error ------------')
-          console.log(JSON.stringify(err))
-          console.log('----------------------')
+          console.log("Error ------------");
+          console.log(JSON.stringify(err));
+          console.log("----------------------");
 
-          let message = 'Something went wrong.'
-          if(err && err._status==="Offline") {
-            message = err._message
-          } else if(err && err._status === 400) {
-            message = err._message.detail[0]
+          let message = "Something went wrong.";
+          if (err && err._status === "Offline") {
+            message = err._message;
+          } else if (err && err._status === 400) {
+            message = err._message.detail[0];
           }
           return of(authFail(message));
         })
@@ -193,8 +195,6 @@ export const verifyEpic = (action$: Observable<Action<any>>) =>
       );
     })
   );
-
-
 
 export const authEpics = [loginEpic, logoutEpic, registerEpic, verifyEpic];
 

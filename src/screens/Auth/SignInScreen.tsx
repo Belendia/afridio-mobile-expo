@@ -3,23 +3,28 @@ import { StyleSheet, TouchableOpacity } from "react-native";
 import { Input, Button, Divider } from "react-native-elements";
 import { FontAwesome } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import * as Yup from 'yup';
+import * as Yup from "yup";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import { MaterialIcons } from '@expo/vector-icons';
+import { MaterialIcons } from "@expo/vector-icons";
 
 import { Text, View } from "../../components/Themed";
-import { AuthContainer } from "../../components";
-import { authStart } from '../../redux/slices/authSlice';
+import { AuthContainer, ProgressBar } from "../../components";
+import { authStart } from "../../redux/slices/authSlice";
 import { RootStoreType } from "../../redux/rootReducer";
 
 let SignInSchema = Yup.object().shape({
   phone_number: Yup.number()
-    .typeError('Phone must be a number')
-    .positive('Phone must be a positive number')
-    .required('Required')
-    .test('len', 'To short!', (value) => value !=undefined && value !=null && value.toString().length >= 6),
-  password: Yup.string().min(6, 'To short!').required('Required'),
+    .typeError("Phone must be a number")
+    .positive("Phone must be a positive number")
+    .required("Required")
+    .test(
+      "len",
+      "To short!",
+      (value) =>
+        value != undefined && value != null && value.toString().length >= 6
+    ),
+  password: Yup.string().min(6, "To short!").required("Required"),
 });
 
 const SignInScreen = () => {
@@ -36,34 +41,40 @@ const SignInScreen = () => {
     touched,
     setFieldValue,
   } = useFormik({
-    initialValues: {phone_number: '', password: '', remember: true},
+    initialValues: { phone_number: "", password: "", remember: true },
     validationSchema: SignInSchema,
     onSubmit: (values) => {
       dispatch(
         authStart({
-          phone_number: '+' + values.phone_number,
+          phone_number: "+" + values.phone_number,
           password: values.password,
-        }),
+        })
       );
     },
   });
 
   //redux
-  const {authenticating, authenticated, error} = useSelector((state: RootStoreType) => ({
-    authenticating: state.authReducer.authenticating,
-    authenticated: state.authReducer.authenticated,
-    error: state.authReducer.error,
-  }));
+  const { authenticating, authenticated, error, readingToken } = useSelector(
+    (state: RootStoreType) => ({
+      authenticating: state.authReducer.authenticating,
+      authenticated: state.authReducer.authenticated,
+      error: state.authReducer.error,
+      readingToken: state.authReducer.readingToken,
+    })
+  );
 
-  return (
+  return readingToken ? (
+    <View style={styles.progressBar}>
+      <ProgressBar />
+    </View>
+  ) : (
     <AuthContainer showLogo={true} title={"Sign In"}>
-      
       <Input
         placeholder="251912345678"
         leftIconContainerStyle={{ marginRight: 6 }}
         leftIcon={<FontAwesome name="phone" size={20} color="white" />}
-        onChangeText={handleChange('phone_number')}
-        onBlur={handleBlur('phone_number')}
+        onChangeText={handleChange("phone_number")}
+        onBlur={handleBlur("phone_number")}
         errorMessage={errors.phone_number}
         keyboardType="phone-pad"
         returnKeyType="next"
@@ -75,8 +86,8 @@ const SignInScreen = () => {
         placeholder="Password"
         leftIconContainerStyle={{ marginRight: 6 }}
         leftIcon={<FontAwesome name="lock" size={20} color="white" />}
-        onChangeText={handleChange('password')}
-        onBlur={handleBlur('phone_number')}
+        onChangeText={handleChange("password")}
+        onBlur={handleBlur("phone_number")}
         errorMessage={errors.password}
         secureTextEntry
         returnKeyType="go"
@@ -90,10 +101,17 @@ const SignInScreen = () => {
         }}
         titleStyle={{ fontSize: 16, fontWeight: "600" }}
         containerStyle={{ marginTop: 10 }}
-        onPress={() => {if(!authenticating) handleSubmit()}}
-        loading = {authenticating}
+        onPress={() => {
+          if (!authenticating) handleSubmit();
+        }}
+        loading={authenticating}
       />
-      {error && <View style={styles.errorWrapper}><MaterialIcons name="error-outline" size={20} color="#f74440" /><Text style={styles.error}>{error}</Text></View>}
+      {error && (
+        <View style={styles.errorWrapper}>
+          <MaterialIcons name="error-outline" size={20} color="#f74440" />
+          <Text style={styles.error}>{error}</Text>
+        </View>
+      )}
 
       <Divider style={{ backgroundColor: "#363333", marginTop: 20 }} />
       <TouchableOpacity
@@ -104,9 +122,6 @@ const SignInScreen = () => {
         <Text style={styles.footerRedText}>Afridio?</Text>
         <Text style={styles.footerWhiteText}> Sign up now.</Text>
       </TouchableOpacity>
-
-      
-
     </AuthContainer>
   );
 };
@@ -129,18 +144,24 @@ const styles = StyleSheet.create({
   footerWhiteText: {
     color: "#fff",
     fontSize: 16,
-    alignSelf: "center"
+    alignSelf: "center",
   },
   errorWrapper: {
-    flexDirection: 'row',
-    backgroundColor: '#211f1f',
+    flexDirection: "row",
+    backgroundColor: "#211f1f",
     marginTop: 10,
   },
   error: {
     color: "#f74440",
     fontSize: 14,
     fontWeight: "bold",
-    alignSelf: 'center',
+    alignSelf: "center",
     marginLeft: 4,
-  }
+  },
+  progressBar: {
+    backgroundColor: "#0a0a0a",
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
 });
