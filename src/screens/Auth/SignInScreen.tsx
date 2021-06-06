@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { Input, Button, Divider } from "react-native-elements";
 import { FontAwesome } from "@expo/vector-icons";

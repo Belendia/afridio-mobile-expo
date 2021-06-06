@@ -107,18 +107,10 @@ export const loginEpic = (action$: Observable<Action<any>>) =>
       const { phone_number, password } = payload;
       return AfridioApiService.login(phone_number, password).pipe(
         map((res) => {
-          console.log("Success ------------");
-          console.log(JSON.stringify(res));
-          console.log("----------------------");
-
           AfridioAsyncStoreService.putToken(res.token);
           return authSuccess(res);
         }),
         catchError((err) => {
-          console.log("Error ------------");
-          console.log(JSON.stringify(err));
-          console.log("----------------------");
-
           let message = "Something went wrong.";
           if (err && err._status === "Offline") {
             message = err._message;
