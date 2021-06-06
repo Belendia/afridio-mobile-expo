@@ -13,10 +13,10 @@ const useAutoLogin = () => {
       const checkLoggedIn$ = from(readToken()).pipe(
         map((data) => {
           const authenticated = data.token !== null && data.token !== undefined;
+
           return {
             token: data.token,
             authenticated: authenticated,
-            readingToken: false,
           };
         })
       );

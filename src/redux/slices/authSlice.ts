@@ -40,6 +40,7 @@ const authSlice = createSlice({
       ...state,
       authenticated: action.payload.authenticated,
       token: action.payload.token,
+      readingToken: false,
     }),
     authStart: (state, _) => ({
       ...state,
