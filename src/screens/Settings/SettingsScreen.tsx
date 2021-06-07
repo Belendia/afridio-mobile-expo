@@ -10,7 +10,7 @@ import { Divider, Input, ListItem } from "react-native-elements";
 import { SimpleLineIcons } from "@expo/vector-icons";
 
 import { Text, View } from "../../components/Themed";
-import { EditableText } from "../../components";
+import { DateInput, EditableText } from "../../components";
 const { width, height } = Dimensions.get("screen");
 
 const SettingsScreen = () => {
@@ -54,11 +54,11 @@ const SettingsScreen = () => {
               value="Belendia"
               iconName={"user"}
             />
-            <EditableText
-              bottomDivider
-              onChangeText={(text) => console.log(text)}
+            <DateInput
               title="Birth date"
+              bottomDivider
               iconName={"event"}
+              onSubmit={(date) => console.log(date)}
             />
             <EditableText
               bottomDivider
