@@ -67,94 +67,105 @@ const SettingsScreen = () => {
       <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
         <Text style={styles.title1}>Account</Text>
 
-        <View style={styles.inputs}>
-          <View style={styles.inputContainer}>
-            <View>
-              <Text style={styles.inputTitle}>Name</Text>
-              {renderEdit("name")}
-            </View>
-            <Text style={styles.input} onPress={() => toggleEdit("name")}>
-              {editing === "name" ? "Save" : "Edit"}
-            </Text>
-          </View>
-          <Divider style={{ backgroundColor: "#403838" }} />
-
-          <View style={styles.inputContainer}>
-            <View>
-              <Text style={styles.inputTitle}>Birth date</Text>
-              <Text style={styles.boldText}>{profile.birthdate}</Text>
-            </View>
-            <Text style={styles.input} onPress={() => toggleEdit("birthdate")}>
-              {editing === "birthdate" ? "Save" : "Edit"}
-            </Text>
-          </View>
-          <Divider style={{ backgroundColor: "#403838" }} />
-
-          <View style={styles.inputContainer}>
-            <View>
-              <Text style={styles.inputTitle}>Phone</Text>
-              <Text style={styles.boldText}>{profile.phone}</Text>
-            </View>
-          </View>
-          <Divider style={{ backgroundColor: "#403838" }} />
-        </View>
-
-        <View style={styles.section}>
-          <Text style={styles.title}>Sex</Text>
-
-          <View style={styles.group}>
-            <TouchableOpacity
-              style={[
-                styles.button,
-                styles.first,
-                profile.sex === "male" ? styles.active : null,
-              ]}
-              onPress={() => true}
-            >
-              <Text
-                style={[
-                  styles.buttonText,
-                  profile.sex === "male" ? styles.activeText : null,
-                ]}
-              >
-                Male
+        <View style={styles.card}>
+          <View style={styles.inputs}>
+            <View style={styles.inputContainer}>
+              <View style={styles.inputTitleWrapper}>
+                <Text style={styles.inputTitle}>Name</Text>
+                {renderEdit("name")}
+              </View>
+              <Text style={styles.input} onPress={() => toggleEdit("name")}>
+                {editing === "name" ? "Save" : "Edit"}
               </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[
-                styles.button,
-                profile.sex === "female" ? styles.active : null,
-              ]}
-              onPress={() => true}
-            >
+            </View>
+            <Divider style={{ backgroundColor: "#403838" }} />
+
+            <View style={styles.inputContainer}>
+              <View style={styles.inputTitleWrapper}>
+                <Text style={styles.inputTitle}>Birth date</Text>
+                <Text style={styles.boldText}>{profile.birthdate}</Text>
+              </View>
               <Text
-                style={[
-                  styles.buttonText,
-                  profile.sex === "female" ? styles.activeText : null,
-                ]}
+                style={styles.input}
+                onPress={() => toggleEdit("birthdate")}
               >
-                Female
+                {editing === "birthdate" ? "Save" : "Edit"}
               </Text>
-            </TouchableOpacity>
+            </View>
+            <Divider style={{ backgroundColor: "#403838" }} />
+
+            <View style={styles.inputContainer}>
+              <View style={styles.inputTitleWrapper}>
+                <Text style={styles.inputTitle}>Phone</Text>
+                <Text style={styles.boldText}>{profile.phone}</Text>
+              </View>
+            </View>
+            <Divider style={{ backgroundColor: "#403838" }} />
+          </View>
+
+          <View style={styles.section}>
+            <Text style={styles.title}>Sex</Text>
+
+            <View style={styles.group}>
+              <TouchableOpacity
+                style={[
+                  styles.button,
+                  styles.first,
+                  profile.sex === "male" ? styles.active : null,
+                ]}
+                onPress={() => true}
+              >
+                <Text
+                  style={[
+                    styles.buttonText,
+                    profile.sex === "male" ? styles.activeText : null,
+                  ]}
+                >
+                  Male
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[
+                  styles.button,
+                  profile.sex === "female" ? styles.active : null,
+                ]}
+                onPress={() => true}
+              >
+                <Text
+                  style={[
+                    styles.buttonText,
+                    profile.sex === "female" ? styles.activeText : null,
+                  ]}
+                >
+                  Female
+                </Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
 
         <Text style={styles.title1}>More options</Text>
-        {settings.map((s, i) => (
-          <ListItem
-            key={i}
-            bottomDivider
-            containerStyle={{ borderColor: "#403838", marginHorizontal: 10 }}
-          >
-            <SimpleLineIcons name={s.icon} size={22} color="#ab9595" />
-            <ListItem.Content>
-              <ListItem.Title>
-                <Text style={{ color: "#ab9595" }}>{s.name}</Text>
-              </ListItem.Title>
-            </ListItem.Content>
-            {s.chevron && <ListItem.Chevron color="#ab9595" />}
-          </ListItem>
-        ))}
+        <View style={styles.card}>
+          {settings.map((s, i) => (
+            <ListItem
+              key={i}
+              bottomDivider
+              containerStyle={{
+                borderColor: "#403838",
+                marginHorizontal: 10,
+                backgroundColor: "transparent",
+              }}
+            >
+              <SimpleLineIcons name={s.icon} size={22} color="#ab9595" />
+              <ListItem.Content>
+                <ListItem.Title>
+                  <Text style={{ color: "#ab9595" }}>{s.name}</Text>
+                </ListItem.Title>
+              </ListItem.Content>
+              {s.chevron && <ListItem.Chevron color="#ab9595" />}
+            </ListItem>
+          ))}
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -167,6 +178,12 @@ const styles = StyleSheet.create({
     flex: 1,
     // backgroundColor: "#211f1f",
   },
+  card: {
+    borderRadius: 10,
+    backgroundColor: "#211f1f",
+    marginHorizontal: 10,
+    paddingVertical: 5,
+  },
   section: {
     flexDirection: "column",
     marginHorizontal: 14,
@@ -174,13 +191,12 @@ const styles = StyleSheet.create({
     paddingBottom: 24,
     borderBottomColor: "#403838",
     borderBottomWidth: 0.5,
-    // backgroundColor: "#211f1f",
+    backgroundColor: "transparent",
   },
   title: {
     color: "#ab9595",
     fontSize: 16,
     marginVertical: 14,
-    // backgroundColor: "#211f1f",
   },
   group: {
     flexDirection: "row",
@@ -188,7 +204,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#ed0400",
     justifyContent: "space-between",
-    // backgroundColor: "#211f1f",
+    backgroundColor: "transparent",
   },
   button: {
     flex: 1,
@@ -228,22 +244,28 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 18,
     marginLeft: 5,
-    marginTop: 10,
+    marginTop: 15,
+    marginBottom: 10,
   },
   inputs: {
     marginHorizontal: 12,
     marginVertical: 12,
+    backgroundColor: "transparent",
   },
   inputContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "flex-end",
     marginVertical: 4,
+    backgroundColor: "transparent",
   },
   inputTitle: {
     color: "#ab9595",
     fontSize: 16,
     marginBottom: 10,
+  },
+  inputTitleWrapper: {
+    backgroundColor: "transparent",
   },
   input: {
     fontWeight: "500",
