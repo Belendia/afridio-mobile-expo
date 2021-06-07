@@ -6,8 +6,9 @@ import DateField from "react-native-datefield";
 
 import { Text, View } from "../Themed";
 
-type EditableTextProps = {
+type DateInputProps = {
   title: string;
+  value?: Date | undefined;
   bottomDivider?: boolean | undefined;
   placeholderTextColor?: string | undefined;
   iconName: keyof typeof SimpleLineIcons.glyphMap;
@@ -16,11 +17,12 @@ type EditableTextProps = {
 
 const DateInput = ({
   title,
+  value,
   bottomDivider,
   iconName,
   placeholderTextColor,
   onSubmit,
-}: EditableTextProps) => {
+}: DateInputProps) => {
   const date: Date = new Date();
   return (
     <>
@@ -32,6 +34,7 @@ const DateInput = ({
             <DateField
               editable={true}
               styleInput={styles.border}
+              defaultValue={value}
               maximumDate={
                 new Date(date.getFullYear(), date.getMonth(), date.getDate())
               }
@@ -90,5 +93,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 20,
     color: "#ab9595",
+    height: 30,
   },
 });
