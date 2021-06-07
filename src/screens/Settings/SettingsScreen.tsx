@@ -38,6 +38,7 @@ const SettingsScreen = () => {
       chevron: false,
     },
   ];
+  const settingLength = settings.length;
 
   const handleEdit = (name: string, text: string) => {
     profile[name] = text;
@@ -68,7 +69,7 @@ const SettingsScreen = () => {
         <Text style={styles.title1}>Account</Text>
 
         <View style={styles.card}>
-          <View style={styles.inputs}>
+          <View style={styles.inputsContainer}>
             <View style={styles.inputContainer}>
               <View style={styles.inputTitleWrapper}>
                 <Text style={styles.inputTitle}>Name</Text>
@@ -149,7 +150,7 @@ const SettingsScreen = () => {
           {settings.map((s, i) => (
             <ListItem
               key={i}
-              bottomDivider
+              bottomDivider={settingLength === i + 1 ? false : true}
               containerStyle={{
                 borderColor: "#403838",
                 marginHorizontal: 10,
@@ -247,7 +248,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
     marginBottom: 10,
   },
-  inputs: {
+  inputsContainer: {
     marginHorizontal: 12,
     marginVertical: 12,
     backgroundColor: "transparent",
