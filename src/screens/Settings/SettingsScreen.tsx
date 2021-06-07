@@ -67,7 +67,7 @@ const SettingsScreen = () => {
             />
             <OptionsInput
               title={"Sex"}
-              iconName={"check"}
+              iconName={"user-female"}
               values={sexOptions}
               bottomDivider={false}
               defaultValue={sex}
