@@ -1,12 +1,6 @@
 import React, { useState } from "react";
-import {
-  StyleSheet,
-  ScrollView,
-  Dimensions,
-  SafeAreaView,
-  TouchableOpacity,
-} from "react-native";
-import { Divider, Input, ListItem } from "react-native-elements";
+import { StyleSheet, ScrollView, SafeAreaView } from "react-native";
+import { ListItem } from "react-native-elements";
 import { SimpleLineIcons } from "@expo/vector-icons";
 
 import { Text, View } from "../../components/Themed";
