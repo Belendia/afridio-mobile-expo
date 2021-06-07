@@ -25,3 +25,7 @@ export type AuthParamList = {
   SignUpScreen: undefined;
   VerifyScreen: undefined;
 };
+
+export type SettingsParamList = {
+  SettingsScreen: undefined;
+};

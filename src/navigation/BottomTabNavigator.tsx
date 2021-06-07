@@ -9,6 +9,7 @@ import HomeNavigator from "./HomeNavigator";
 import SearchNavigator from "./SearchNavigator";
 
 import { BottomTabParamList } from "../../types";
+import SettingsNavigator from "./SettingsNavigator";
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -60,7 +61,7 @@ const BottomTabNavigator = () => {
       />
       <BottomTab.Screen
         name="Settings"
-        component={SearchNavigator}
+        component={SettingsNavigator}
         options={{
           tabBarIcon: ({ color, focused }) =>
             focused ? (
