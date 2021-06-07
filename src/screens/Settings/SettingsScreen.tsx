@@ -10,18 +10,22 @@ import { Divider, Input, ListItem } from "react-native-elements";
 import { SimpleLineIcons } from "@expo/vector-icons";
 
 import { Text, View } from "../../components/Themed";
-import { DateInput, EditableText } from "../../components";
-const { width, height } = Dimensions.get("screen");
+import {
+  DateInput,
+  EditableText,
+  OptionsInput,
+  Option,
+} from "../../components";
 
 const SettingsScreen = () => {
-  const [profile, setProfile] = useState({
-    phone: "",
-    name: "",
-    sex: "female",
-    birthdate: "",
-  });
+  const [sex, setSex] = useState<Option>({ key: "male", value: "Male" });
 
-  const settings = [
+  const sexOptions: Option[] = [
+    { key: "male", value: "Male" },
+    { key: "female", value: "Female" },
+  ];
+
+  const moreOptions = [
     {
       name: "Language",
       icon: "globe",
@@ -38,12 +42,12 @@ const SettingsScreen = () => {
       chevron: false,
     },
   ];
-  const settingLength = settings.length;
+  const moreOptionsLength = moreOptions.length;
 
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
-        <Text style={styles.title1}>Account</Text>
+        <Text style={styles.title}>Account</Text>
 
         <View style={styles.card}>
           <View style={styles.inputsContainer}>
@@ -67,55 +71,23 @@ const SettingsScreen = () => {
               iconName={"phone"}
               keyboardType={"phone-pad"}
             />
-          </View>
-
-          <View style={styles.section}>
-            <Text style={styles.title}>Sex</Text>
-
-            <View style={styles.group}>
-              <TouchableOpacity
-                style={[
-                  styles.button,
-                  styles.first,
-                  profile.sex === "male" ? styles.active : null,
-                ]}
-                onPress={() => true}
-              >
-                <Text
-                  style={[
-                    styles.buttonText,
-                    profile.sex === "male" ? styles.activeText : null,
-                  ]}
-                >
-                  Male
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={[
-                  styles.button,
-                  profile.sex === "female" ? styles.active : null,
-                ]}
-                onPress={() => true}
-              >
-                <Text
-                  style={[
-                    styles.buttonText,
-                    profile.sex === "female" ? styles.activeText : null,
-                  ]}
-                >
-                  Female
-                </Text>
-              </TouchableOpacity>
-            </View>
+            <OptionsInput
+              title={"Sex"}
+              iconName={"check"}
+              values={sexOptions}
+              bottomDivider={false}
+              defaultValue={sex}
+              onPress={(selectedSex) => setSex(selectedSex)}
+            />
           </View>
         </View>
 
-        <Text style={styles.title1}>More options</Text>
+        <Text style={styles.title}>More options</Text>
         <View style={styles.card}>
-          {settings.map((s, i) => (
+          {moreOptions.map((s, i) => (
             <ListItem
               key={i}
-              bottomDivider={settingLength === i + 1 ? false : true}
+              bottomDivider={moreOptionsLength === i + 1 ? false : true}
               containerStyle={{
                 borderColor: "#403838",
                 marginHorizontal: 10,
@@ -150,62 +122,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     paddingVertical: 5,
   },
-  section: {
-    flexDirection: "column",
-    marginHorizontal: 14,
-    marginBottom: 14,
-    paddingBottom: 24,
-    borderBottomColor: "#403838",
-    borderBottomWidth: 0.5,
-    backgroundColor: "transparent",
-  },
-  title: {
-    color: "#ab9595",
-    fontSize: 16,
-    marginVertical: 14,
-  },
-  group: {
-    flexDirection: "row",
-    borderRadius: 14,
-    borderWidth: 1,
-    borderColor: "#ed0400",
-    justifyContent: "space-between",
-    backgroundColor: "transparent",
-  },
-  button: {
-    flex: 1,
-    padding: 8,
-    alignContent: "center",
-    alignItems: "center",
-  },
-  buttonText: {
-    textAlign: "center",
-    fontWeight: "500",
-    color: "#ab9595",
-  },
-  active: {
-    backgroundColor: "#ed0400",
-    borderRadius: 14,
-  },
-  activeText: {
-    color: "#FFF",
-  },
-  first: {
-    borderTopLeftRadius: 13,
-    borderBottomLeftRadius: 13,
-  },
-  last: {
-    borderTopRightRadius: 13,
-    borderBottomRightRadius: 13,
-  },
-  option: {
-    marginBottom: 14,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
 
-  title1: {
+  title: {
     color: "#756565",
     fontWeight: "bold",
     fontSize: 18,

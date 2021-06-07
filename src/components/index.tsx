@@ -5,3 +5,4 @@ export * from "./ProgressBar";
 export * from "./Layout/AuthContainer";
 export * from "./Form/EditableText";
 export * from "./Form/DateInput";
+export * from "./Form/OptionsInput";
