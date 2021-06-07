@@ -10,10 +10,10 @@ import { Divider, Input, ListItem } from "react-native-elements";
 import { SimpleLineIcons } from "@expo/vector-icons";
 
 import { Text, View } from "../../components/Themed";
+import { EditableText } from "../../components";
 const { width, height } = Dimensions.get("screen");
 
 const SettingsScreen = () => {
-  const [editing, setEditing] = useState<string | null>(null);
   const [profile, setProfile] = useState({
     phone: "",
     name: "",
@@ -40,29 +40,6 @@ const SettingsScreen = () => {
   ];
   const settingLength = settings.length;
 
-  const handleEdit = (name: string, text: string) => {
-    profile[name] = text;
-  };
-
-  const toggleEdit = (name: string) => {
-    if (!editing) setEditing(name);
-    else setEditing(null);
-  };
-
-  const renderEdit = (name: string) => {
-    if (editing === name) {
-      return (
-        <Input
-        // defaultValue={profile[name]}
-        // onChangeText={(text) => handleEdit([name], text)}
-        />
-      );
-    }
-
-    // return <Text bold>{profile[name]}</Text>;
-    return <Text style={styles.boldText}>Edited</Text>;
-  };
-
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
@@ -70,38 +47,26 @@ const SettingsScreen = () => {
 
         <View style={styles.card}>
           <View style={styles.inputsContainer}>
-            <View style={styles.inputContainer}>
-              <View style={styles.inputTitleWrapper}>
-                <Text style={styles.inputTitle}>Name</Text>
-                {renderEdit("name")}
-              </View>
-              <Text style={styles.input} onPress={() => toggleEdit("name")}>
-                {editing === "name" ? "Save" : "Edit"}
-              </Text>
-            </View>
-            <Divider style={{ backgroundColor: "#403838" }} />
-
-            <View style={styles.inputContainer}>
-              <View style={styles.inputTitleWrapper}>
-                <Text style={styles.inputTitle}>Birth date</Text>
-                <Text style={styles.boldText}>{profile.birthdate}</Text>
-              </View>
-              <Text
-                style={styles.input}
-                onPress={() => toggleEdit("birthdate")}
-              >
-                {editing === "birthdate" ? "Save" : "Edit"}
-              </Text>
-            </View>
-            <Divider style={{ backgroundColor: "#403838" }} />
-
-            <View style={styles.inputContainer}>
-              <View style={styles.inputTitleWrapper}>
-                <Text style={styles.inputTitle}>Phone</Text>
-                <Text style={styles.boldText}>{profile.phone}</Text>
-              </View>
-            </View>
-            <Divider style={{ backgroundColor: "#403838" }} />
+            <EditableText
+              bottomDivider
+              onChangeText={(text) => console.log(text)}
+              title="Name"
+              value="Belendia"
+              iconName={"user"}
+            />
+            <EditableText
+              bottomDivider
+              onChangeText={(text) => console.log(text)}
+              title="Birth date"
+              iconName={"event"}
+            />
+            <EditableText
+              bottomDivider
+              onChangeText={(text) => console.log(text)}
+              title="Phone"
+              iconName={"phone"}
+              keyboardType={"phone-pad"}
+            />
           </View>
 
           <View style={styles.section}>
@@ -249,31 +214,8 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   inputsContainer: {
-    marginHorizontal: 12,
+    marginHorizontal: 8,
     marginVertical: 12,
     backgroundColor: "transparent",
-  },
-  inputContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "flex-end",
-    marginVertical: 4,
-    backgroundColor: "transparent",
-  },
-  inputTitle: {
-    color: "#ab9595",
-    fontSize: 16,
-    marginBottom: 10,
-  },
-  inputTitleWrapper: {
-    backgroundColor: "transparent",
-  },
-  input: {
-    fontWeight: "500",
-    color: "#ed0400",
-  },
-  boldText: {
-    fontWeight: "bold",
-    color: "#7a4141",
   },
 });
