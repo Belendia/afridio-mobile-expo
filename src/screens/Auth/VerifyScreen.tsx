@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   resendWhiteText: {
-    color: "#fff",
+    color: "#ab9595",
     fontSize: 14,
     alignSelf: "center",
   },

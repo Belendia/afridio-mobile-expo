@@ -16,15 +16,17 @@ const SignUpScreen = () => {
       <Input
         placeholder="Name"
         leftIconContainerStyle={{ marginRight: 6 }}
-        leftIcon={<FontAwesome name="user" size={20} color="white" />}
+        leftIcon={<FontAwesome name="user" size={20} color="#ab9595" />}
         onChangeText={(text) => setName(text)}
+        style={styles.input}
         returnKeyType="next"
       />
       <Input
         placeholder="Phone number"
         leftIconContainerStyle={{ marginRight: 6 }}
-        leftIcon={<FontAwesome name="phone" size={20} color="white" />}
+        leftIcon={<FontAwesome name="phone" size={20} color="#ab9595" />}
         onChangeText={(text) => setPhoneNumber(text)}
+        style={styles.input}
         keyboardType="phone-pad"
         returnKeyType="next"
       />
@@ -32,16 +34,18 @@ const SignUpScreen = () => {
       <Input
         placeholder="Password"
         leftIconContainerStyle={{ marginRight: 6 }}
-        leftIcon={<FontAwesome name="lock" size={20} color="white" />}
+        leftIcon={<FontAwesome name="lock" size={20} color="#ab9595" />}
         onChangeText={(text) => setPassword(text)}
+        style={styles.input}
         secureTextEntry
         returnKeyType="next"
       />
       <Input
         placeholder="Confirm Password"
         leftIconContainerStyle={{ marginRight: 6 }}
-        leftIcon={<FontAwesome name="lock" size={20} color="white" />}
+        leftIcon={<FontAwesome name="lock" size={20} color="#ab9595" />}
         onChangeText={(text) => setSecondPassword(text)}
+        style={styles.input}
         secureTextEntry
         returnKeyType="go"
       />
@@ -62,13 +66,7 @@ const SignUpScreen = () => {
 export default SignUpScreen;
 
 const styles = StyleSheet.create({
-  footerTextWrapper: {
-    marginVertical: 25,
-    marginHorizontal: 0,
-  },
-  footerText: {
-    color: "#fff",
-    fontSize: 16,
-    alignSelf: "center",
+  input: {
+    color: "#ab9595",
   },
 });

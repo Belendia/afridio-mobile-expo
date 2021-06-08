@@ -72,7 +72,7 @@ const SignInScreen = () => {
       <Input
         placeholder="251912345678"
         leftIconContainerStyle={{ marginRight: 6 }}
-        leftIcon={<FontAwesome name="phone" size={20} color="white" />}
+        leftIcon={<FontAwesome name="phone" size={20} color="#ab9595" />}
         onChangeText={handleChange("phone_number")}
         onBlur={handleBlur("phone_number")}
         errorMessage={errors.phone_number}
@@ -85,7 +85,7 @@ const SignInScreen = () => {
         // ref={password}
         placeholder="Password"
         leftIconContainerStyle={{ marginRight: 6 }}
-        leftIcon={<FontAwesome name="lock" size={20} color="white" />}
+        leftIcon={<FontAwesome name="lock" size={20} color="#ab9595" />}
         onChangeText={handleChange("password")}
         onBlur={handleBlur("phone_number")}
         errorMessage={errors.password}
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   footerWhiteText: {
-    color: "#fff",
+    color: "#ab9595",
     fontSize: 16,
     alignSelf: "center",
   },
