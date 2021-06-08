@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
     borderRightWidth: 0,
     borderBottomWidth: 2,
     borderBottomColor: "#ed0400",
-    color: "gray",
+    color: "#ab9595",
     fontSize: 30,
     fontWeight: "bold",
     borderWidth: 1.5,

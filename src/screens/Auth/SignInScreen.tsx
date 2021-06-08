@@ -76,6 +76,7 @@ const SignInScreen = () => {
         onChangeText={handleChange("phone_number")}
         onBlur={handleBlur("phone_number")}
         errorMessage={errors.phone_number}
+        style={styles.input}
         keyboardType="phone-pad"
         returnKeyType="next"
         returnKeyLabel="Next"
@@ -89,6 +90,7 @@ const SignInScreen = () => {
         onChangeText={handleChange("password")}
         onBlur={handleBlur("phone_number")}
         errorMessage={errors.password}
+        style={styles.input}
         secureTextEntry
         returnKeyType="go"
         returnKeyLabel="Go"
@@ -163,5 +165,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+  },
+  input: {
+    color: "#ab9595",
   },
 });
