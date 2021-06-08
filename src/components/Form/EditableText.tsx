@@ -11,6 +11,7 @@ type EditableTextProps = {
   bottomDivider?: boolean | undefined;
   iconName: keyof typeof SimpleLineIcons.glyphMap;
   keyboardType?: KeyboardType | undefined;
+  editable?: boolean | undefined;
   onChangeText?: ((text: string) => void) | undefined;
 };
 
@@ -20,6 +21,7 @@ const EditableText = ({
   bottomDivider,
   iconName,
   keyboardType,
+  editable,
   onChangeText,
 }: EditableTextProps) => {
   const [editing, setEditing] = useState<boolean>(false);
@@ -48,9 +50,11 @@ const EditableText = ({
             {renderEdit()}
           </View>
         </View>
-        <Text style={styles.buttonText} onPress={() => setEditing(!editing)}>
-          {editing ? "Save" : "Edit"}
-        </Text>
+        {editable && (
+          <Text style={styles.buttonText} onPress={() => setEditing(!editing)}>
+            {editing ? "Save" : "Edit"}
+          </Text>
+        )}
       </View>
       {bottomDivider && <Divider style={{ backgroundColor: "#403838" }} />}
     </>
@@ -59,6 +63,7 @@ const EditableText = ({
 
 EditableText.defaultProps = {
   bottomDivider: true,
+  editable: true,
   keyboardType: "default",
 };
 
