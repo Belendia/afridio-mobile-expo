@@ -6,41 +6,19 @@ import { useDispatch } from "react-redux";
 
 import { Text, View } from "../../components/Themed";
 import { authLogout } from "../../redux/slices/authSlice";
-
 import {
   DateInput,
   EditableText,
   OptionsInput,
   Option,
 } from "../../components";
+import { SexOptions, SettingsMoreOptions } from "../../constants/Options";
 
 const SettingsScreen = () => {
   const dispatch = useDispatch();
   const [sex, setSex] = useState<Option>({ key: "male", value: "Male" });
 
-  const sexOptions: Option[] = [
-    { key: "male", value: "Male" },
-    { key: "female", value: "Female" },
-  ];
-
-  const moreOptions = [
-    {
-      name: "Language",
-      icon: "globe",
-      chevron: true,
-    },
-    {
-      name: "Change password",
-      icon: "lock",
-      chevron: true,
-    },
-    {
-      name: "Sign out",
-      icon: "logout",
-      chevron: false,
-    },
-  ];
-  const moreOptionsLength = moreOptions.length;
+  const moreOptionsLength = SettingsMoreOptions.length;
 
   const menuActions = (menu: string) => {
     if (menu == "Sign out") {
@@ -79,7 +57,7 @@ const SettingsScreen = () => {
             <OptionsInput
               title={"Sex"}
               iconName={"user-female"}
-              values={sexOptions}
+              values={SexOptions}
               bottomDivider={false}
               defaultValue={sex}
               style={{ marginLeft: 30 }}
@@ -90,7 +68,7 @@ const SettingsScreen = () => {
 
         <Text style={styles.title}>More options</Text>
         <View style={styles.card}>
-          {moreOptions.map((s, i) => (
+          {SettingsMoreOptions.map((s, i) => (
             <ListItem
               key={i}
               bottomDivider={moreOptionsLength === i + 1 ? false : true}
