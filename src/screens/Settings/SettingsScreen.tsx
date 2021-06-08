@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import { StyleSheet, ScrollView, SafeAreaView } from "react-native";
 import { ListItem } from "react-native-elements";
 import { SimpleLineIcons } from "@expo/vector-icons";
+import { useDispatch } from "react-redux";
 
 import { Text, View } from "../../components/Themed";
+import { authLogout } from "../../redux/slices/authSlice";
+
 import {
   DateInput,
   EditableText,
@@ -12,6 +15,7 @@ import {
 } from "../../components";
 
 const SettingsScreen = () => {
+  const dispatch = useDispatch();
   const [sex, setSex] = useState<Option>({ key: "male", value: "Male" });
 
   const sexOptions: Option[] = [
@@ -31,13 +35,18 @@ const SettingsScreen = () => {
       chevron: true,
     },
     {
-      name: "Log out",
+      name: "Sign out",
       icon: "logout",
       chevron: false,
     },
   ];
   const moreOptionsLength = moreOptions.length;
 
+  const menuActions = (menu: string) => {
+    if (menu == "Sign out") {
+      dispatch(authLogout());
+    }
+  };
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
@@ -62,7 +71,9 @@ const SettingsScreen = () => {
               bottomDivider
               onChangeText={(text) => console.log(text)}
               title="Phone"
+              value={"+251923157725"}
               iconName={"phone"}
+              editable={false}
               keyboardType={"phone-pad"}
             />
             <OptionsInput
@@ -71,7 +82,7 @@ const SettingsScreen = () => {
               values={sexOptions}
               bottomDivider={false}
               defaultValue={sex}
-              style={{ marginLeft: 24 }}
+              style={{ marginLeft: 30 }}
               onPress={(selectedSex) => setSex(selectedSex)}
             />
           </View>
@@ -88,6 +99,7 @@ const SettingsScreen = () => {
                 marginHorizontal: 10,
                 backgroundColor: "transparent",
               }}
+              onPress={() => menuActions(s.name)}
             >
               <SimpleLineIcons name={s.icon} size={22} color="#ab9595" />
               <ListItem.Content>
