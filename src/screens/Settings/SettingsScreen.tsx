@@ -71,6 +71,7 @@ const SettingsScreen = () => {
               values={sexOptions}
               bottomDivider={false}
               defaultValue={sex}
+              style={{ marginLeft: 24 }}
               onPress={(selectedSex) => setSex(selectedSex)}
             />
           </View>

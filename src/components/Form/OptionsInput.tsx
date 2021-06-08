@@ -1,5 +1,6 @@
 import { SimpleLineIcons } from "@expo/vector-icons";
 import React from "react";
+import { ViewStyle } from "react-native";
 import { StyleSheet, TouchableOpacity } from "react-native";
 
 import { Text, View } from "../Themed";
@@ -15,6 +16,7 @@ type OptionsInputProps = {
   defaultValue: Option;
   bottomDivider?: boolean | undefined;
   iconName: keyof typeof SimpleLineIcons.glyphMap;
+  style?: ViewStyle | undefined;
   onPress?: ((option: Option) => void) | undefined;
 };
 
@@ -24,6 +26,7 @@ const OptionsInput = ({
   defaultValue,
   bottomDivider,
   iconName,
+  style,
   onPress,
 }: OptionsInputProps) => {
   return (
@@ -41,7 +44,7 @@ const OptionsInput = ({
 
         <Text style={styles.title}>{title}</Text>
       </View>
-      <View style={styles.group}>
+      <View style={[styles.group, style]}>
         {values.map((v, i) => (
           <TouchableOpacity
             style={[
