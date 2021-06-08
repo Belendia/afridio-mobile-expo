@@ -91,7 +91,7 @@ class AfridioApiService {
     return this.doThrow(res, contentType);
   };
 
-  api = async <T,>({
+  api = async <T>({
     url,
     verb,
     timeoutInSeconds,
@@ -139,7 +139,7 @@ class AfridioApiService {
     from(
       this.api({
         url: AfridioEndpoints.logout(),
-        verb: "POST",
+        verb: "GET",
         withToken: true,
       })
     );
