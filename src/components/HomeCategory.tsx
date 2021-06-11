@@ -19,8 +19,7 @@ interface HomeCategoryProps {
   };
 }
 
-const HomeCategory = (props: HomeCategoryProps) => {
-  const { category } = props;
+const HomeCategory = ({ category }: HomeCategoryProps) => {
   const navigation = useNavigation();
 
   return (
