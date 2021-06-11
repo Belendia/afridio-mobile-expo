@@ -17,6 +17,7 @@ type OptionsInputProps = {
   defaultValue?: Option | undefined;
   bottomDivider?: boolean | undefined;
   iconName: keyof typeof SimpleLineIcons.glyphMap;
+  errorMessage?: string | undefined;
   style?: ViewStyle | undefined;
   onPress?: ((option: Option) => void) | undefined;
 };
@@ -27,6 +28,7 @@ const OptionsInput = ({
   defaultValue,
   bottomDivider,
   iconName,
+  errorMessage,
   style,
   onPress,
 }: OptionsInputProps) => {
@@ -69,6 +71,7 @@ const OptionsInput = ({
           </TouchableOpacity>
         ))}
       </View>
+      {errorMessage && <Text style={styles.errorMessage}>{errorMessage}</Text>}
     </View>
   );
 };
@@ -137,5 +140,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+  },
+  errorMessage: {
+    fontSize: 12,
+    color: colors.red800,
+    marginTop: 5,
   },
 });

@@ -12,6 +12,7 @@ type DateInputProps = {
   value?: Date | undefined;
   bottomDivider?: boolean | undefined;
   placeholderTextColor?: string | undefined;
+  errorMessage?: string | undefined;
   iconName: keyof typeof SimpleLineIcons.glyphMap;
   onSubmit?: ((value: Date) => void) | undefined;
 };
@@ -21,6 +22,7 @@ const DateInput = ({
   value,
   bottomDivider,
   iconName,
+  errorMessage,
   placeholderTextColor,
   onSubmit,
 }: DateInputProps) => {
@@ -46,6 +48,9 @@ const DateInput = ({
                 if (onSubmit) onSubmit(value);
               }}
             />
+            {errorMessage && (
+              <Text style={styles.errorMessage}>{errorMessage}</Text>
+            )}
           </View>
         </View>
       </View>
@@ -94,8 +99,13 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     borderColor: colors.red800,
     borderWidth: 1,
-    marginBottom: 20,
+    marginBottom: 5,
     color: colors.red300,
     height: 30,
+  },
+  errorMessage: {
+    fontSize: 12,
+    color: colors.red800,
+    alignItems: "flex-end",
   },
 });
