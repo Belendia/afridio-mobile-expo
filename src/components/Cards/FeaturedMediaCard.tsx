@@ -6,6 +6,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { Button } from "react-native-elements";
 
 import { View, Text } from "../Themed";
+import { colors } from "../../constants/Colors";
 
 interface FeaturedMediaCardProps {
   movie: {
@@ -38,7 +39,7 @@ const FeaturedMediaCard = ({ movie }: FeaturedMediaCardProps) => {
           </View>
           <View style={styles.cardNumbers}>
             <View style={styles.cardHeart}>
-              <Ionicons name="heart" size={20} color="#ed0400" />
+              <Ionicons name="heart" size={20} color={colors.red800} />
               <Text style={styles.cardRatings}>1.2K</Text>
             </View>
           </View>
@@ -47,7 +48,7 @@ const FeaturedMediaCard = ({ movie }: FeaturedMediaCardProps) => {
           </Text>
           <Button
             title="View Detail"
-            buttonStyle={{ backgroundColor: "#ed0400" }}
+            buttonStyle={{ backgroundColor: colors.red800 }}
             titleStyle={{ fontSize: 16 }}
             onPress={() =>
               navigation.navigate("Home", { screen: "MediaScreen" })
@@ -93,7 +94,7 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
   },
   cardTitle: {
-    color: "white",
+    color: colors.white,
     fontSize: 19,
     fontWeight: "500",
     paddingTop: 10,
@@ -105,11 +106,11 @@ const styles = StyleSheet.create({
   cardGenreItem: {
     fontSize: 11,
     marginRight: 5,
-    color: "white",
+    color: colors.white,
     backgroundColor: "transparent",
   },
   cardDescription: {
-    color: "#f7f7f7",
+    color: colors.red300,
     fontSize: 13,
     marginTop: 5,
     marginBottom: 10,
@@ -127,6 +128,6 @@ const styles = StyleSheet.create({
   cardRatings: {
     marginLeft: 5,
     fontSize: 12,
-    color: "white",
+    color: colors.white,
   },
 });

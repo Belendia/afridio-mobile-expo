@@ -5,6 +5,7 @@ import { SimpleLineIcons } from "@expo/vector-icons";
 import DateField from "react-native-datefield";
 
 import { Text, View } from "../Themed";
+import { colors } from "../../constants/Colors";
 
 type DateInputProps = {
   title: string;
@@ -28,7 +29,7 @@ const DateInput = ({
     <>
       <View style={styles.container}>
         <View style={styles.content}>
-          <SimpleLineIcons name={iconName} size={22} color="#ab9595" />
+          <SimpleLineIcons name={iconName} size={20} color={colors.red300} />
           <View style={styles.titleWrapper}>
             <Text style={styles.title}>{title}</Text>
             <DateField
@@ -48,14 +49,16 @@ const DateInput = ({
           </View>
         </View>
       </View>
-      {bottomDivider && <Divider style={{ backgroundColor: "#403838" }} />}
+      {bottomDivider && (
+        <Divider style={{ backgroundColor: colors.black700 }} />
+      )}
     </>
   );
 };
 
 DateInput.defaultProps = {
   bottomDivider: true,
-  placeholderTextColor: "#ab9595",
+  placeholderTextColor: colors.black700,
 };
 
 export { DateInput };
@@ -82,17 +85,17 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   title: {
-    color: "#ab9595",
+    color: colors.red300,
     fontSize: 16,
     marginBottom: 10,
   },
   border: {
     width: "30%",
     borderRadius: 8,
-    borderColor: "#ed0400",
+    borderColor: colors.red800,
     borderWidth: 1,
     marginBottom: 20,
-    color: "#ab9595",
+    color: colors.red300,
     height: 30,
   },
 });

@@ -4,6 +4,7 @@ import { View } from "../components/Themed";
 
 import categories from "../../assets/data/categories";
 import { ProgressBar, MediaListCard } from "../components";
+import { colors } from "../constants/Colors";
 
 const MediaListScreen = () => {
   const isLoading = false;
@@ -19,9 +20,6 @@ const MediaListScreen = () => {
       onEndReachedThreshold={1200}
       //   dataSource={this.state.dataSource}
       renderItem={({ item }) => <MediaListCard movie={item} />}
-      //   renderSeparator={(sectionId, rowId) => (
-      //     <View key={rowId} style={styles.seperator} />
-      //   )}
       data={categories.items[0].movies}
       ListFooterComponent={() => (
         <View style={{ height: 50 }}>
@@ -32,7 +30,7 @@ const MediaListScreen = () => {
         <RefreshControl
           refreshing={isRefreshing}
           // onRefresh={this._onRefresh}
-          colors={["#EA0000"]}
+          colors={[colors.red900]}
           tintColor="white"
           title="loading..."
           titleColor="white"
@@ -48,7 +46,7 @@ export default MediaListScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#0a0a0a",
+    backgroundColor: colors.black800,
     ...Platform.select({
       ios: {
         paddingTop: 83,
@@ -56,13 +54,9 @@ const styles = StyleSheet.create({
     }),
   },
   progressBar: {
-    backgroundColor: "#0a0a0a",
+    backgroundColor: colors.black800,
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-  },
-  seperator: {
-    marginTop: 10,
-    backgroundColor: "#8E8E8E",
   },
 });

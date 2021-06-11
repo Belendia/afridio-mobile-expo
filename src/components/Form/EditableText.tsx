@@ -4,6 +4,7 @@ import { Divider, Input } from "react-native-elements";
 import { SimpleLineIcons } from "@expo/vector-icons";
 
 import { Text, View } from "../Themed";
+import { colors } from "../../constants/Colors";
 
 type EditableTextProps = {
   title: string;
@@ -32,6 +33,8 @@ const EditableText = ({
         <Input
           keyboardType={keyboardType}
           defaultValue={value}
+          style={styles.input}
+          inputContainerStyle={styles.inputContainer}
           onChangeText={(text) => onChangeText && onChangeText(text)}
         />
       );
@@ -44,7 +47,7 @@ const EditableText = ({
     <>
       <View style={styles.container}>
         <View style={styles.content}>
-          <SimpleLineIcons name={iconName} size={22} color="#ab9595" />
+          <SimpleLineIcons name={iconName} size={22} color={colors.red300} />
           <View style={styles.titleWrapper}>
             <Text style={styles.title}>{title}</Text>
             {renderEdit()}
@@ -56,7 +59,9 @@ const EditableText = ({
           </Text>
         )}
       </View>
-      {bottomDivider && <Divider style={{ backgroundColor: "#403838" }} />}
+      {bottomDivider && (
+        <Divider style={{ backgroundColor: colors.black700 }} />
+      )}
     </>
   );
 };
@@ -91,18 +96,24 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   title: {
-    color: "#ab9595",
+    color: colors.red300,
     fontSize: 16,
     marginBottom: 10,
   },
   buttonText: {
     fontWeight: "500",
-    color: "#ed0400",
+    color: colors.red800,
     marginRight: 12,
     backgroundColor: "transparent",
   },
   boldText: {
     fontWeight: "bold",
-    color: "#7a4141",
+    color: colors.red600,
+  },
+  input: {
+    color: colors.red300,
+  },
+  inputContainer: {
+    borderBottomColor: colors.red800,
   },
 });

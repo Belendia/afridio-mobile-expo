@@ -6,6 +6,7 @@ import { FeaturedMediaCard } from "../components/Cards/FeaturedMediaCard";
 import { View } from "../components/Themed";
 import HomeCategory from "../components/HomeCategory";
 import categories from "../../assets/data/categories";
+import { colors } from "../constants/Colors";
 
 const HomeScreen = () => {
   const featuredMovies = categories.items.filter(
@@ -24,11 +25,11 @@ const HomeScreen = () => {
           <RefreshControl
             refreshing={false}
             // onRefresh={this._onRefresh}
-            colors={["#EA0000"]}
-            tintColor="white"
+            colors={[colors.white]}
+            tintColor={colors.red400}
             title="loading..."
-            titleColor="white"
-            progressBackgroundColor="white"
+            titleColor={colors.red400}
+            progressBackgroundColor={colors.red400}
           />
         }
         ListHeaderComponent={

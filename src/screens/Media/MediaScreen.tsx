@@ -16,6 +16,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import TrackScreen from "./TrackScreen";
 import InfoScreen from "./InfoScreen";
+import { colors } from "../../constants/Colors";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -74,11 +75,11 @@ const MediaScreen = (props) => {
         <RefreshControl
           refreshing={isRefreshing}
           onRefresh={_onRefresh}
-          colors={["#EA0000"]}
+          colors={[colors.red900]}
           tintColor="white"
           title="loading..."
           titleColor="white"
-          progressBackgroundColor="white"
+          progressBackgroundColor={colors.white}
         />
       }
     >
@@ -107,7 +108,9 @@ const MediaScreen = (props) => {
                 <Image
                   source={{ uri: `${item.file_path}` }}
                   style={styles.imageBackdrop}
-                  PlaceholderContent={<ActivityIndicator />}
+                  PlaceholderContent={
+                    <ActivityIndicator color={colors.red900} />
+                  }
                 />
                 <LinearGradient
                   colors={[
@@ -125,7 +128,7 @@ const MediaScreen = (props) => {
           <Image
             source={{ uri: `${info.poster_path}` }}
             style={styles.cardImage}
-            PlaceholderContent={<ActivityIndicator />}
+            PlaceholderContent={<ActivityIndicator color={colors.red300} />}
           />
           <View style={styles.cardDetails}>
             <Text style={styles.cardTitle}>{info.original_title}</Text>
@@ -145,7 +148,7 @@ const MediaScreen = (props) => {
             </View>
             <View style={styles.cardNumbers}>
               <View style={styles.ratingContainer}>
-                <Ionicons name="heart" size={20} color="#ed0400" />
+                <Ionicons name="heart" size={20} color={colors.red800} />
                 <Text style={styles.ratingText}>1.2K</Text>
               </View>
             </View>
@@ -169,7 +172,7 @@ const MediaScreen = (props) => {
                   color="white"
                 />
               }
-              buttonStyle={{ backgroundColor: "#ed0400" }}
+              buttonStyle={{ backgroundColor: colors.red800 }}
               onPress={() => console.log("Add to cart")}
             />
           </View>
@@ -178,9 +181,9 @@ const MediaScreen = (props) => {
             tabBarOptions={{
               activeTintColor: "white",
               labelStyle: { fontSize: 12 },
-              style: { backgroundColor: "#121212" },
+              style: { backgroundColor: colors.black600 },
               indicatorStyle: {
-                backgroundColor: "#ed0500",
+                backgroundColor: colors.red800,
               },
             }}
           >
@@ -210,7 +213,7 @@ export default MediaScreen;
 
 const styles = StyleSheet.create({
   mainContainer: {
-    backgroundColor: "#0a0a0a",
+    backgroundColor: colors.black800,
   },
   contentContainer: {
     flex: 1,
@@ -245,13 +248,13 @@ const styles = StyleSheet.create({
     paddingTop: 50,
   },
   cardTitle: {
-    color: "white",
+    color: colors.red300,
     fontSize: 20,
     fontWeight: "500",
     paddingTop: 10,
   },
   cardTagline: {
-    color: "white",
+    color: colors.red300,
     fontSize: 15,
   },
   cardGenre: {
@@ -270,7 +273,7 @@ const styles = StyleSheet.create({
     marginLeft: 2,
     fontSize: 12,
     fontWeight: "bold",
-    color: "white",
+    color: colors.red300,
   },
   bannerContainer: {
     justifyContent: "center",

@@ -5,6 +5,7 @@ import { AntDesign } from "@expo/vector-icons";
 
 import { Text } from "../../components/Themed";
 import movie from "../../../assets/data/movie";
+import { colors } from "../../constants/Colors";
 
 const TrackScreen = () => {
   return movie.seasons.items[0].episodes.items.map((item, index) => (
@@ -13,9 +14,11 @@ const TrackScreen = () => {
         size="small"
         rounded
         title={(index + 1).toString()}
+        titleStyle={{ color: colors.red300 }}
         avatarStyle={{
           borderWidth: 1,
-          borderColor: "gray",
+          borderColor: colors.red300,
+
           ...Platform.select({
             android: {
               borderTopWidth: 0,
@@ -27,9 +30,11 @@ const TrackScreen = () => {
         }}
       />
       <ListItem.Content>
-        <ListItem.Title>{item.title}</ListItem.Title>
+        <ListItem.Title>
+          <Text style={styles.title}>{item.title}</Text>
+        </ListItem.Title>
         <ListItem.Subtitle>
-          <Text style={styles.text}>{item.duration}</Text>
+          <Text style={styles.duration}>{item.duration}</Text>
         </ListItem.Subtitle>
       </ListItem.Content>
       <AntDesign name="clouddownloado" size={24} color={"gray"} />
@@ -44,8 +49,12 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginHorizontal: 16,
   },
-  text: {
-    color: "gray",
-    fontSize: 14,
+  title: {
+    color: colors.red300,
+  },
+  duration: {
+    color: colors.black300,
+    fontSize: 13,
+    fontStyle: "italic",
   },
 });

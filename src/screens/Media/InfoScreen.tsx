@@ -4,6 +4,7 @@ import { Avatar } from "react-native-elements";
 
 import { View, Text } from "../../components/Themed";
 import movie from "../../../assets/data/movie";
+import { colors } from "../../constants/Colors";
 
 const info = movie.seasons.items[0].episodes.items[0];
 const authors = [
@@ -71,18 +72,18 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   overviewText: {
-    color: "#d2d2d2",
+    color: colors.red300,
     fontSize: 14,
     paddingTop: 10,
     lineHeight: 22,
   },
   label: {
-    color: "white",
+    color: colors.red300,
     fontSize: 16,
     fontWeight: "500",
   },
   value: {
-    color: "#d2d2d2",
+    color: colors.red300,
     fontSize: 14,
   },
   labelRow: {
@@ -103,7 +104,7 @@ const styles = StyleSheet.create({
     paddingLeft: 16,
   },
   characterName: {
-    color: "white",
+    color: colors.red300,
     flexDirection: "column",
     fontSize: 16,
     fontWeight: "500",

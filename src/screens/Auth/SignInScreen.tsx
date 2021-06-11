@@ -12,6 +12,7 @@ import { Text, View } from "../../components/Themed";
 import { AuthContainer, ProgressBar } from "../../components";
 import { authStart } from "../../redux/slices/authSlice";
 import { RootStoreType } from "../../redux/rootReducer";
+import { colors } from "../../constants/Colors";
 
 let SignInSchema = Yup.object().shape({
   phone_number: Yup.number()
@@ -72,11 +73,13 @@ const SignInScreen = () => {
       <Input
         placeholder="251912345678"
         leftIconContainerStyle={{ marginRight: 6 }}
-        leftIcon={<FontAwesome name="phone" size={20} color="#ab9595" />}
+        leftIcon={<FontAwesome name="phone" size={20} color={colors.red300} />}
         onChangeText={handleChange("phone_number")}
         onBlur={handleBlur("phone_number")}
         errorMessage={errors.phone_number}
         style={styles.input}
+        inputContainerStyle={styles.inputContainer}
+        placeholderTextColor={colors.black700}
         keyboardType="phone-pad"
         returnKeyType="next"
         returnKeyLabel="Next"
@@ -86,11 +89,13 @@ const SignInScreen = () => {
         // ref={password}
         placeholder="Password"
         leftIconContainerStyle={{ marginRight: 6 }}
-        leftIcon={<FontAwesome name="lock" size={20} color="#ab9595" />}
+        leftIcon={<FontAwesome name="lock" size={20} color={colors.red300} />}
         onChangeText={handleChange("password")}
         onBlur={handleBlur("phone_number")}
         errorMessage={errors.password}
         style={styles.input}
+        inputContainerStyle={styles.inputContainer}
+        placeholderTextColor={colors.black700}
         secureTextEntry
         returnKeyType="go"
         returnKeyLabel="Go"
@@ -98,7 +103,7 @@ const SignInScreen = () => {
       <Button
         title="Sign In"
         buttonStyle={{
-          backgroundColor: "#ed0400",
+          backgroundColor: colors.red800,
           paddingVertical: 12,
         }}
         titleStyle={{ fontSize: 16, fontWeight: "600" }}
@@ -110,12 +115,12 @@ const SignInScreen = () => {
       />
       {error && (
         <View style={styles.errorWrapper}>
-          <MaterialIcons name="error-outline" size={20} color="#f74440" />
+          <MaterialIcons name="error-outline" size={20} color={colors.red400} />
           <Text style={styles.error}>{error}</Text>
         </View>
       )}
 
-      <Divider style={{ backgroundColor: "#363333", marginTop: 20 }} />
+      <Divider style={{ backgroundColor: colors.black700, marginTop: 20 }} />
       <TouchableOpacity
         style={styles.footerTextWrapper}
         onPress={() => navigation.navigate("SignUpScreen")}
@@ -138,35 +143,38 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   footerRedText: {
-    color: "#f74440",
+    color: colors.red400,
     fontSize: 16,
     alignSelf: "center",
     fontWeight: "bold",
   },
   footerWhiteText: {
-    color: "#ab9595",
+    color: colors.red300,
     fontSize: 16,
     alignSelf: "center",
   },
   errorWrapper: {
     flexDirection: "row",
-    backgroundColor: "#211f1f",
+    backgroundColor: colors.black600,
     marginTop: 10,
   },
   error: {
-    color: "#f74440",
+    color: colors.red400,
     fontSize: 14,
     fontWeight: "bold",
     alignSelf: "center",
     marginLeft: 4,
   },
   progressBar: {
-    backgroundColor: "#0a0a0a",
+    backgroundColor: colors.black800,
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
   },
   input: {
-    color: "#ab9595",
+    color: colors.red300,
+  },
+  inputContainer: {
+    borderBottomColor: colors.red800,
   },
 });

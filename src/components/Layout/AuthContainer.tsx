@@ -9,6 +9,7 @@ import {
 import { Divider } from "react-native-elements";
 
 import { View, Text } from "../../components/Themed";
+import { colors } from "../../constants/Colors";
 
 type AuthContainerProps = {
   showLogo: boolean;
@@ -36,7 +37,7 @@ const AuthContainer = ({
                 />
 
                 <Divider
-                  style={{ backgroundColor: "#363333", marginBottom: 20 }}
+                  style={{ backgroundColor: colors.black700, marginBottom: 20 }}
                 />
               </>
             )}
@@ -70,7 +71,7 @@ const styles = StyleSheet.create({
   },
   card: {
     borderRadius: 10,
-    backgroundColor: "#211f1f",
+    backgroundColor: colors.black600,
     marginHorizontal: 10,
     paddingVertical: 5,
   },
@@ -85,14 +86,14 @@ const styles = StyleSheet.create({
   title: {
     fontWeight: "bold",
     fontSize: 24,
-    color: "#ab9595",
+    color: colors.red300,
     marginBottom: 20,
     marginHorizontal: 16,
   },
   formWrapper: {
     marginVertical: 0,
     marginHorizontal: 12,
-    backgroundColor: "#211f1f",
+    backgroundColor: colors.black600,
   },
   titleAlignCenter: {
     alignSelf: "center",

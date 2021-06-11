@@ -4,6 +4,7 @@ import { ViewStyle } from "react-native";
 import { StyleSheet, TouchableOpacity } from "react-native";
 
 import { Text, View } from "../Themed";
+import { colors } from "../../constants/Colors";
 
 export type Option = {
   key: string;
@@ -13,7 +14,7 @@ export type Option = {
 type OptionsInputProps = {
   title: string;
   values: Option[];
-  defaultValue: Option;
+  defaultValue?: Option | undefined;
   bottomDivider?: boolean | undefined;
   iconName: keyof typeof SimpleLineIcons.glyphMap;
   style?: ViewStyle | undefined;
@@ -34,13 +35,13 @@ const OptionsInput = ({
       style={[
         styles.section,
         bottomDivider && {
-          borderBottomColor: "#403838",
+          borderBottomColor: colors.black700,
           borderBottomWidth: 0.5,
         },
       ]}
     >
       <View style={styles.content}>
-        <SimpleLineIcons name={iconName} size={22} color="#ab9595" />
+        <SimpleLineIcons name={iconName} size={20} color={colors.red300} />
 
         <Text style={styles.title}>{title}</Text>
       </View>
@@ -50,7 +51,8 @@ const OptionsInput = ({
             style={[
               styles.button,
               styles.first,
-              v.key === defaultValue.key ? styles.active : null,
+              defaultValue &&
+                (v.key === defaultValue.key ? styles.active : null),
             ]}
             key={i}
             onPress={() => onPress && onPress(v)}
@@ -58,7 +60,8 @@ const OptionsInput = ({
             <Text
               style={[
                 styles.buttonText,
-                v.key === defaultValue.key ? styles.activeText : null,
+                defaultValue &&
+                  (v.key === defaultValue.key ? styles.activeText : null),
               ]}
             >
               {v.value}
@@ -91,7 +94,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   title: {
-    color: "#ab9595",
+    color: colors.red300,
     fontSize: 16,
     marginLeft: 10,
   },
@@ -99,7 +102,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     borderRadius: 14,
     borderWidth: 1,
-    borderColor: "#ed0400",
+    borderColor: colors.red800,
     justifyContent: "space-between",
     backgroundColor: "transparent",
   },
@@ -112,14 +115,14 @@ const styles = StyleSheet.create({
   buttonText: {
     textAlign: "center",
     fontWeight: "500",
-    color: "#ab9595",
+    color: colors.red300,
   },
   active: {
-    backgroundColor: "#ed0400",
+    backgroundColor: colors.red800,
     borderRadius: 14,
   },
   activeText: {
-    color: "#FFF",
+    color: colors.white,
   },
   first: {
     borderTopLeftRadius: 13,

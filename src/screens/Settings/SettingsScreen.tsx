@@ -13,6 +13,7 @@ import {
   Option,
 } from "../../components";
 import { SexOptions, SettingsMoreOptions } from "../../constants/Options";
+import { colors } from "../../constants/Colors";
 
 const SettingsScreen = () => {
   const dispatch = useDispatch();
@@ -73,19 +74,19 @@ const SettingsScreen = () => {
               key={i}
               bottomDivider={moreOptionsLength === i + 1 ? false : true}
               containerStyle={{
-                borderColor: "#403838",
+                borderColor: colors.black700,
                 marginHorizontal: 10,
                 backgroundColor: "transparent",
               }}
               onPress={() => menuActions(s.name)}
             >
-              <SimpleLineIcons name={s.icon} size={22} color="#ab9595" />
+              <SimpleLineIcons name={s.icon} size={22} color={colors.red300} />
               <ListItem.Content>
                 <ListItem.Title>
-                  <Text style={{ color: "#ab9595" }}>{s.name}</Text>
+                  <Text style={{ color: colors.red300 }}>{s.name}</Text>
                 </ListItem.Title>
               </ListItem.Content>
-              {s.chevron && <ListItem.Chevron color="#ab9595" />}
+              {s.chevron && <ListItem.Chevron color={colors.red300} />}
             </ListItem>
           ))}
         </View>
@@ -99,17 +100,16 @@ export default SettingsScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: "#211f1f",
   },
   card: {
     borderRadius: 10,
-    backgroundColor: "#211f1f",
+    backgroundColor: colors.black600,
     marginHorizontal: 10,
     paddingVertical: 5,
   },
 
   title: {
-    color: "#756565",
+    color: colors.black300,
     fontWeight: "bold",
     fontSize: 18,
     marginLeft: 5,

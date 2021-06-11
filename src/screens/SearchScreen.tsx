@@ -4,6 +4,7 @@ import { MediaListCard } from "../components";
 
 import categories from "../../assets/data/categories";
 import { View } from "../components/Themed";
+import { colors } from "../constants/Colors";
 
 const SearchScreen = () => {
   const [query, setQuery] = useState("");
@@ -71,10 +72,10 @@ export default SearchScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#0a0a0a",
+    backgroundColor: colors.black800,
   },
   textInput: {
-    backgroundColor: "white",
+    backgroundColor: colors.white,
     ...Platform.select({
       ios: {
         height: 35,
@@ -90,7 +91,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 3,
   },
   searchbox: {
-    backgroundColor: "#191919",
+    backgroundColor: colors.black600,
     paddingHorizontal: 16,
     paddingVertical: 8,
     marginBottom: 16,

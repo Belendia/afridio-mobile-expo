@@ -4,7 +4,7 @@ import { StyleSheet } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { ThemeProvider } from "react-native-elements";
 import { Provider } from "react-redux";
-import reactotron from "reactotron-react-native"
+import reactotron from "reactotron-react-native";
 
 import useCachedResources from "./src/hooks/useCachedResources";
 import useColorScheme from "./src/hooks/useColorScheme";
@@ -15,13 +15,13 @@ import { store } from "./src/redux/store";
 function setup() {
   if (__DEV__) {
     import("./reactotron").then(() => {
-      reactotron.clear!()
-      console.log("Reactotron Configured")
-    })
+      reactotron.clear!();
+      console.log("Reactotron Configured");
+    });
   }
 }
 
-setup()
+setup();
 
 const AppWithStore = () => {
   const isLoadingComplete = useCachedResources();
@@ -43,7 +43,7 @@ const AppWithStore = () => {
   }
 };
 
-const App = __DEV__ ? reactotron.overlay(AppWithStore) : AppWithStore
+const App = __DEV__ ? reactotron.overlay(AppWithStore) : AppWithStore;
 
 export default App;
 

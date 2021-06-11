@@ -4,6 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 
 import { View, Text } from "./Themed";
 import { SimpleMediaCard } from "./Cards/SimpleMediaCard";
+import { colors } from "../constants/Colors";
 
 interface HomeCategoryProps {
   category: {
@@ -70,12 +71,12 @@ const styles = StyleSheet.create({
     marginTop: 30,
   },
   listHeadingLeft: {
-    color: "white",
+    color: colors.red300,
     fontWeight: "bold",
     fontSize: 18,
   },
   listHeadingRight: {
-    color: "white",
+    color: colors.red300,
     ...Platform.select({
       ios: {
         fontSize: 15,

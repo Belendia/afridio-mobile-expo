@@ -5,6 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 import { ActivityIndicator } from "react-native";
 
 import { View, Text } from "../Themed";
+import { colors } from "../../constants/Colors";
 
 interface SimpleMediaCardProps {
   movie: {
@@ -25,7 +26,7 @@ const SimpleMediaCard = ({ movie }: SimpleMediaCardProps) => {
         <Image
           source={{ uri: movie.cover }}
           style={styles.cardImage}
-          PlaceholderContent={<ActivityIndicator />}
+          PlaceholderContent={<ActivityIndicator color={colors.red300} />}
         />
         <View style={styles.cardTitleContainer}>
           <Text style={styles.cardTitle} numberOfLines={2}>
@@ -43,7 +44,7 @@ const styles = StyleSheet.create({
   cardContainer: {
     height: 231,
     width: 135,
-    backgroundColor: "white",
+    backgroundColor: colors.black600,
     flexDirection: "column",
     marginRight: 10,
     borderRadius: 5,
@@ -57,12 +58,12 @@ const styles = StyleSheet.create({
   cardTitleContainer: {
     flex: 1,
     justifyContent: "center",
-    backgroundColor: "white",
+    backgroundColor: colors.black600,
     borderBottomLeftRadius: 5,
     borderBottomRightRadius: 5,
   },
   cardTitle: {
-    color: "black",
+    color: colors.red300,
     fontSize: 13,
     fontWeight: "500",
     textAlign: "center",

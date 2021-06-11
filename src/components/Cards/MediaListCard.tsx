@@ -6,6 +6,7 @@ import { Chip } from "react-native-elements";
 
 import { View, Text } from "../Themed";
 import { Ionicons } from "@expo/vector-icons";
+import { colors } from "../../constants/Colors";
 
 interface MediaListCardProps {
   movie: {
@@ -54,7 +55,7 @@ const MediaListCard = ({ movie }: MediaListCardProps) => {
             </View>
             <View style={styles.cardNumbers}>
               <View style={styles.cardHeart}>
-                <Ionicons name="heart" size={20} color="#ed0400" />
+                <Ionicons name="heart" size={20} color={colors.red800} />
                 <Text style={styles.cardRatings}>1.2k</Text>
               </View>
             </View>
@@ -77,7 +78,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   card: {
-    backgroundColor: "white",
+    backgroundColor: colors.black600,
     borderRadius: 3,
     minHeight: 148,
     flexDirection: "row",
@@ -96,7 +97,7 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 3,
   },
   cardTitle: {
-    color: "black",
+    color: colors.black300,
     fontSize: 16,
     fontWeight: "bold",
     paddingTop: 10,
@@ -110,7 +111,7 @@ const styles = StyleSheet.create({
     marginRight: 5,
   },
   cardDescription: {
-    color: "#636363",
+    color: colors.black300,
     fontSize: 13,
     marginTop: 5,
   },
@@ -127,6 +128,6 @@ const styles = StyleSheet.create({
   cardRatings: {
     marginLeft: 5,
     fontSize: 12,
-    color: "black",
+    color: colors.black300,
   },
 });

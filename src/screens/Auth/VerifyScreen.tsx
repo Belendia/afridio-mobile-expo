@@ -6,6 +6,7 @@ import { useNavigation } from "@react-navigation/native";
 
 import { AuthContainer } from "../../components";
 import { View, Text } from "../../components/Themed";
+import { colors } from "../../constants/Colors";
 
 const VerifyScreen = () => {
   const navigation = useNavigation();
@@ -35,7 +36,7 @@ const VerifyScreen = () => {
       <Button
         title="Verify"
         buttonStyle={{
-          backgroundColor: "#ed0400",
+          backgroundColor: colors.red800,
           paddingVertical: 12,
         }}
         titleStyle={{ fontSize: 16, fontWeight: "600" }}
@@ -43,7 +44,7 @@ const VerifyScreen = () => {
         onPress={() => console.log("Handle Verify OTP")}
       />
 
-      <Divider style={{ backgroundColor: "#363333", marginTop: 20 }} />
+      <Divider style={{ backgroundColor: colors.black700, marginTop: 20 }} />
 
       <View style={styles.resendTextWrapper}>
         <Text style={styles.resendWhiteText}>
@@ -72,7 +73,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   otpWrapper: {
-    backgroundColor: "#211f1f",
+    backgroundColor: colors.black600,
     marginHorizontal: 20,
     marginVertical: 25,
   },
@@ -88,8 +89,8 @@ const styles = StyleSheet.create({
     borderLeftWidth: 0,
     borderRightWidth: 0,
     borderBottomWidth: 2,
-    borderBottomColor: "#ed0400",
-    color: "#ab9595",
+    borderBottomColor: colors.red800,
+    color: colors.red300,
     fontSize: 30,
     fontWeight: "bold",
     borderWidth: 1.5,
@@ -97,18 +98,18 @@ const styles = StyleSheet.create({
   },
   resendTextWrapper: {
     marginVertical: 20,
-    backgroundColor: "#211f1f",
+    backgroundColor: colors.black600,
     flexDirection: "row",
     justifyContent: "center",
   },
   resendRedText: {
-    color: "#f74440",
+    color: colors.red400,
     fontSize: 16,
     alignSelf: "center",
     fontWeight: "bold",
   },
   resendWhiteText: {
-    color: "#ab9595",
+    color: colors.red300,
     fontSize: 14,
     alignSelf: "center",
   },
