@@ -1,8 +1,8 @@
 import { Option } from "../components";
 
 export const SexOptions: Option[] = [
-  { key: "male", value: "Male" },
-  { key: "female", value: "Female" },
+  { key: "MALE", value: "Male" },
+  { key: "FEMALE", value: "Female" },
 ];
 
 export const SettingsMoreOptions = [
