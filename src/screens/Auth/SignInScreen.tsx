@@ -6,10 +6,9 @@ import { useNavigation } from "@react-navigation/native";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import { MaterialIcons } from "@expo/vector-icons";
 
 import { Text, View } from "../../components/Themed";
-import { AuthContainer, ProgressBar } from "../../components";
+import { AuthContainer, ProgressBar, FormError } from "../../components";
 import { authStart } from "../../redux/slices/authSlice";
 import { RootStoreType } from "../../redux/rootReducer";
 import { colors } from "../../constants/Colors";
@@ -113,12 +112,7 @@ const SignInScreen = () => {
         }}
         loading={authenticating}
       />
-      {error && (
-        <View style={styles.errorWrapper}>
-          <MaterialIcons name="error-outline" size={20} color={colors.red400} />
-          <Text style={styles.error}>{error}</Text>
-        </View>
-      )}
+      {error && typeof error == "string" && <FormError error={error} />}
 
       <Divider style={{ backgroundColor: colors.black700, marginTop: 20 }} />
       <TouchableOpacity
@@ -152,18 +146,6 @@ const styles = StyleSheet.create({
     color: colors.red300,
     fontSize: 16,
     alignSelf: "center",
-  },
-  errorWrapper: {
-    flexDirection: "row",
-    backgroundColor: colors.black600,
-    marginTop: 10,
-  },
-  error: {
-    color: colors.red400,
-    fontSize: 14,
-    fontWeight: "bold",
-    alignSelf: "center",
-    marginLeft: 4,
   },
   progressBar: {
     backgroundColor: colors.black800,

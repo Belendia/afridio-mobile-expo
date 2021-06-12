@@ -6,3 +6,4 @@ export * from "./Layout/AuthContainer";
 export * from "./Form/EditableText";
 export * from "./Form/DateInput";
 export * from "./Form/OptionsInput";
+export * from "./Form/FormError";
