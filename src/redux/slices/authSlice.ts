@@ -11,12 +11,8 @@ type AuthReducerType = {
   authenticating: boolean;
   authenticated: boolean;
   error: object | null;
-  registering: boolean;
-  registered: boolean;
-  verifying: boolean;
   token: string | null;
   readingToken: boolean;
-  password: string | null;
 };
 
 const initialState: AuthReducerType = {
@@ -24,12 +20,8 @@ const initialState: AuthReducerType = {
   authenticating: false,
   authenticated: false,
   error: null,
-  registering: false,
-  registered: false,
-  verifying: false,
   token: null,
   readingToken: true,
-  password: null,
 };
 
 const authSlice = createSlice({
@@ -69,34 +61,6 @@ const authSlice = createSlice({
     authLogoutDone: (state) => ({
       ...state,
       token: null,
-    }),
-    startRegistration: (state, action) => ({
-      ...state,
-      registering: true,
-      registered: false,
-      password: action.payload.password,
-    }),
-    registrationSuccess: (state, action) => ({
-      ...state,
-      user: action.payload.user,
-      error: null,
-      registering: false,
-      registered: true,
-    }),
-    registrationFailed: (state, action) => ({
-      ...state,
-      error: action.payload,
-      registering: false,
-      registered: false,
-    }),
-    startVerification: (state) => ({
-      ...state,
-      verifying: true,
-    }),
-    verificationFailed: (state, action) => ({
-      ...state,
-      error: action.payload,
-      verifying: false,
     }),
   },
 });
@@ -150,46 +114,7 @@ export const readToken = async () => {
   return { token: token };
 };
 
-export const registerEpic = (action$: Observable<Action<any>>) =>
-  action$.pipe(
-    ofType(startRegistration.type),
-    switchMap(({ payload }) => {
-      return AfridioApiService.register(payload).pipe(
-        map((res) => {
-          const userData = {
-            user: {
-              phone_number: res.phone_number,
-              password: payload.password,
-              session_token: res.session_token,
-            },
-          };
-
-          return registrationSuccess(userData);
-        }),
-        catchError((err) => {
-          return of(registrationFailed(err));
-        })
-      );
-    })
-  );
-
-export const verifyEpic = (action$: Observable<Action<any>>) =>
-  action$.pipe(
-    ofType(startVerification.type),
-    switchMap(({ payload }) => {
-      return AfridioApiService.verify(payload).pipe(
-        map((res) => {
-          AfridioAsyncStoreService.putToken(res.token);
-          return authSuccess(res);
-        }),
-        catchError((err) => {
-          return of(verificationFailed(err));
-        })
-      );
-    })
-  );
-
-export const authEpics = [loginEpic, logoutEpic, registerEpic, verifyEpic];
+export const authEpics = [loginEpic, logoutEpic];
 
 export const {
   retrieveTokenSuccess,
@@ -198,11 +123,6 @@ export const {
   authFail,
   authLogout,
   authLogoutDone,
-  startRegistration,
-  registrationSuccess,
-  registrationFailed,
-  startVerification,
-  verificationFailed,
 } = authSlice.actions;
 
 export default authSlice.reducer;
