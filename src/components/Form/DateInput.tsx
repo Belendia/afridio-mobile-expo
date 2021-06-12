@@ -27,6 +27,8 @@ const DateInput = ({
   onSubmit,
 }: DateInputProps) => {
   const date: Date = new Date();
+  const [error, setError] = useState<string | undefined>(undefined);
+
   return (
     <>
       <View style={styles.container}>
@@ -43,14 +45,16 @@ const DateInput = ({
               }
               minimumDate={new Date(1900, 1, 1)}
               placeholderTextColor={placeholderTextColor}
-              handleErrors={() => console.log("ERROR")}
+              handleErrors={() => setError("Invalid date")}
               onSubmit={(value: Date) => {
+                setError(undefined);
                 if (onSubmit) onSubmit(value);
               }}
             />
             {errorMessage && (
               <Text style={styles.errorMessage}>{errorMessage}</Text>
             )}
+            {error && <Text style={styles.errorMessage}>{error}</Text>}
           </View>
         </View>
       </View>
