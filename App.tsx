@@ -11,6 +11,7 @@ import useColorScheme from "./src/hooks/useColorScheme";
 import Navigation from "./src/navigation";
 import { theme } from "./src/components/Themed";
 import { store } from "./src/redux/store";
+import NetworkProvider from "./src/helpers/NetworkProvider";
 
 function setup() {
   if (__DEV__) {
@@ -34,8 +35,10 @@ const AppWithStore = () => {
       <SafeAreaProvider>
         <Provider store={store}>
           <ThemeProvider theme={theme} useDark={colorScheme === "dark"}>
-            <Navigation colorScheme={colorScheme} />
-            <StatusBar />
+            <NetworkProvider>
+              <Navigation colorScheme={colorScheme} />
+              <StatusBar />
+            </NetworkProvider>
           </ThemeProvider>
         </Provider>
       </SafeAreaProvider>
