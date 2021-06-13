@@ -1,15 +1,75 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import OtpInputs from "react-native-otp-inputs";
 import { Button, Divider } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
+import { useDispatch, useSelector } from "react-redux";
 
-import { AuthContainer } from "../../components";
+import { AuthContainer, FormError } from "../../components";
 import { View, Text } from "../../components/Themed";
 import { colors } from "../../constants/Colors";
+import { RootStoreType } from "../../redux/rootReducer";
+import { startVerification, resetRegError } from "../../redux/slices/authSlice";
 
 const VerifyScreen = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const [verificationCode, setVerificationCode] = useState("");
+
+  //redux
+  const { user, verifying, regError, otp_expiration_time } = useSelector(
+    (state: RootStoreType) => ({
+      user: state.authReducer.user,
+      verifying: state.authReducer.verifying,
+      regError: state.authReducer.regError,
+      otp_expiration_time: state.authReducer.otp_expiration_time,
+    })
+  );
+
+  const [resendTime, setResendTime] = useState<number>(otp_expiration_time);
+
+  useEffect(() => {
+    setResendTime(otp_expiration_time);
+  }, [otp_expiration_time]);
+
+  //timer that counts the OTP expiration time
+  useEffect(() => {
+    const timerId = setInterval(() => {
+      if (resendTime <= 0) {
+        clearInterval(timerId);
+      } else {
+        setResendTime(resendTime - 1);
+      }
+    }, 1000);
+
+    return () => {
+      if (timerId) {
+        clearInterval(timerId);
+      }
+    };
+  }, [resendTime]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(resetRegError());
+    };
+  }, []);
+
+  const handleSubmit = () => {
+    dispatch(
+      startVerification({
+        phone_number: user && user.phone_number,
+        password: user && user.password,
+        security_code: verificationCode,
+        session_token: user && user.session_token,
+      })
+    );
+  };
+
+  const handleOnReset = () => {
+    setResendTime(otp_expiration_time);
+  };
+
   return (
     <AuthContainer
       showLogo={true}
@@ -19,15 +79,19 @@ const VerifyScreen = () => {
       <Text style={styles.message}>
         Please type the verification code sent to
       </Text>
-      <Text style={styles.phone}>+251911234567</Text>
+      {user && <Text style={styles.phone}>{user.phone_number}</Text>}
 
       <View style={styles.otpWrapper}>
         <OtpInputs
-          handleChange={(code) => console.log(code)}
+          handleChange={(code) => {
+            setVerificationCode(code);
+          }}
           numberOfInputs={6}
           keyboardType="phone-pad"
-          autofillFromClipboard={true}
-          autofillListenerIntervalMS={3000}
+          autofillFromClipboard={false}
+          clearTextOnFocus={true}
+          selectTextOnFocus={false}
+          autofillListenerIntervalMS={8000}
           inputContainerStyles={styles.otpInputContainer}
           inputStyles={styles.otpInput}
         />
@@ -41,19 +105,31 @@ const VerifyScreen = () => {
         }}
         titleStyle={{ fontSize: 16, fontWeight: "600" }}
         containerStyle={{ marginTop: 10, marginBottom: 20 }}
-        onPress={() => console.log("Handle Verify OTP")}
+        loading={verifying}
+        onPress={() => {
+          if (!verifying) handleSubmit();
+        }}
+        disabled={verificationCode.length !== 6}
       />
+
+      {regError && typeof regError == "string" && (
+        <FormError error={regError} />
+      )}
 
       <Divider style={{ backgroundColor: colors.black700, marginTop: 20 }} />
 
-      <View style={styles.resendTextWrapper}>
-        <Text style={styles.resendWhiteText}>
-          Didn't receive the verification code?{" "}
-        </Text>
-        <TouchableOpacity onPress={() => console.log("Resend code")}>
-          <Text style={styles.resendRedText}>Resend again</Text>
-        </TouchableOpacity>
-      </View>
+      {resendTime > 0 ? (
+        <Text style={styles.resendWhiteText}>Resend OTP in {resendTime}</Text>
+      ) : (
+        <View style={styles.resendTextWrapper}>
+          <Text style={styles.resendWhiteText}>
+            Didn't receive the verification code?{" "}
+          </Text>
+          <TouchableOpacity onPress={() => handleOnReset}>
+            <Text style={styles.resendRedText}>Resend again</Text>
+          </TouchableOpacity>
+        </View>
+      )}
     </AuthContainer>
   );
 };
