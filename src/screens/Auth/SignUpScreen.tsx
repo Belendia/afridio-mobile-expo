@@ -17,10 +17,7 @@ import {
 import { SexOptions } from "../../constants/Options";
 import { colors } from "../../constants/Colors";
 import { RootStoreType } from "../../redux/rootReducer";
-import {
-  startRegistration,
-  resetError,
-} from "../../redux/slices/registrationSlice";
+import { startRegistration, resetRegError } from "../../redux/slices/authSlice";
 
 let SignUpSchema = Yup.object().shape({
   name: Yup.string().min(3, "To short!").required("Required"),
@@ -81,23 +78,23 @@ const SignUpScreen = () => {
   });
 
   //redux
-  const { registering, registered, error } = useSelector(
+  const { registering, registered, regError } = useSelector(
     (state: RootStoreType) => ({
-      registering: state.registrationReducer.registering,
-      registered: state.registrationReducer.registered,
-      error: state.registrationReducer.error,
+      registering: state.authReducer.registering,
+      registered: state.authReducer.registered,
+      regError: state.authReducer.regError,
     })
   );
 
   useEffect(() => {
-    if (error) {
-      setErrors(error);
+    if (regError) {
+      setErrors(regError);
     }
-  }, [error]);
+  }, [regError]);
 
   useEffect(() => {
     return () => {
-      dispatch(resetError());
+      dispatch(resetRegError());
     };
   }, []);
 
@@ -140,7 +137,6 @@ const SignUpScreen = () => {
         iconName={"event"}
         errorMessage={errors.date_of_birth}
         onSubmit={(date) => {
-          console.log(date);
           setFieldValue(
             "date_of_birth",
             date.getFullYear() +
@@ -203,8 +199,8 @@ const SignUpScreen = () => {
         loading={registering}
       />
 
-      {error && typeof error == "string" && (
-        <FormError error={error} style={{ marginBottom: 10 }} />
+      {regError && typeof regError == "string" && (
+        <FormError error={regError} style={{ marginBottom: 10 }} />
       )}
     </AuthContainer>
   );
