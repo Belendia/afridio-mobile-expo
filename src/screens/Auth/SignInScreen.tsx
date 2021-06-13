@@ -54,14 +54,13 @@ const SignInScreen = () => {
   });
 
   //redux
-  const { authenticating, authenticated, error, readingToken } = useSelector(
-    (state: RootStoreType) => ({
+  const { authenticating, authenticated, authError, readingToken } =
+    useSelector((state: RootStoreType) => ({
       authenticating: state.authReducer.authenticating,
       authenticated: state.authReducer.authenticated,
-      error: state.authReducer.error,
+      authError: state.authReducer.authError,
       readingToken: state.authReducer.readingToken,
-    })
-  );
+    }));
 
   return readingToken ? (
     <View style={styles.progressBar}>
@@ -112,7 +111,9 @@ const SignInScreen = () => {
         }}
         loading={authenticating}
       />
-      {error && typeof error == "string" && <FormError error={error} />}
+      {authError && typeof authError == "string" && (
+        <FormError error={authError} />
+      )}
 
       <Divider style={{ backgroundColor: colors.black700, marginTop: 20 }} />
       <TouchableOpacity
