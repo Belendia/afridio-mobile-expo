@@ -1,11 +1,9 @@
 import { combineReducers } from "redux";
 
 import authReducer from "./slices/authSlice";
-import registrationReducer from "./slices/registrationSlice";
 
 const rootReducer = combineReducers({
   authReducer,
-  registrationReducer,
 });
 
 export type RootStoreType = ReturnType<typeof rootReducer>;

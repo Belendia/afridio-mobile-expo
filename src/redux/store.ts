@@ -4,9 +4,8 @@ import { configureStore } from "@reduxjs/toolkit";
 import reactotron from "../../reactotron";
 import rootReducer from "./rootReducer";
 import { authEpics } from "./slices";
-import { registrationEpics } from "./slices";
 
-export const rootEpic = combineEpics(...authEpics, ...registrationEpics);
+export const rootEpic = combineEpics(...authEpics);
 
 const epicMiddleware = createEpicMiddleware();
 
