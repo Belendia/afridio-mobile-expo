@@ -82,6 +82,7 @@ const authSlice = createSlice({
       authenticated: false,
       authenticating: false,
       authError: action.payload.message,
+      otp_resend_time: action.payload.otp_resend_time,
       user: {
         ...state.user,
         session_token: action.payload.session_token,
@@ -149,17 +150,23 @@ export const loginEpic = (action$: Observable<Action<any>>) =>
         catchError((err) => {
           let message = "Something went wrong.";
           let session_token = null;
+          let otp_resend_time = 0;
           if (err && err._status === "Offline") {
             message = err._message;
           } else if (err && err._status === 403) {
             message = err._message.detail;
             session_token = err._message.session_token;
+            otp_resend_time = err._message.otp_resend_time;
           } else if (err && err._status === 400) {
             message = err._message.detail[0];
           }
 
           return of(
-            authFail({ message: message, session_token: session_token })
+            authFail({
+              message: message,
+              session_token: session_token,
+              otp_resend_time: otp_resend_time,
+            })
           );
         })
       );
