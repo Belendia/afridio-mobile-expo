@@ -28,7 +28,7 @@ type AuthReducerType = {
   registered: boolean;
   verifying: boolean;
   password: string | null;
-  otp_send_time: number;
+  otp_resend_time: number;
 };
 
 const initialState: AuthReducerType = {
@@ -43,7 +43,7 @@ const initialState: AuthReducerType = {
   registered: false,
   verifying: false,
   password: null,
-  otp_send_time: 0,
+  otp_resend_time: 0,
 };
 
 const authSlice = createSlice({
@@ -106,7 +106,7 @@ const authSlice = createSlice({
     registrationSuccess: (state, action) => ({
       ...state,
       user: action.payload.user,
-      otp_send_time: action.payload.otp_send_time,
+      otp_resend_time: action.payload.otp_resend_time,
       regError: null,
       registering: false,
       registered: true,
@@ -207,7 +207,7 @@ export const registerEpic = (action$: Observable<Action<any>>) =>
               sex: res.sex,
               date_of_birth: res.date_of_birth,
             },
-            otp_send_time: res.otp_send_time,
+            otp_resend_time: res.otp_resend_time,
           };
 
           return registrationSuccess(userData);

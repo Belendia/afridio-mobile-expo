@@ -17,20 +17,20 @@ const VerifyScreen = () => {
   const [verificationCode, setVerificationCode] = useState("");
 
   //redux
-  const { user, verifying, regError, otp_send_time } = useSelector(
+  const { user, verifying, regError, otp_resend_time } = useSelector(
     (state: RootStoreType) => ({
       user: state.authReducer.user,
       verifying: state.authReducer.verifying,
       regError: state.authReducer.regError,
-      otp_send_time: state.authReducer.otp_send_time,
+      otp_resend_time: state.authReducer.otp_resend_time,
     })
   );
 
-  const [resendTime, setResendTime] = useState<number>(otp_send_time);
+  const [resendTime, setResendTime] = useState<number>(otp_resend_time);
 
   useEffect(() => {
-    setResendTime(otp_send_time);
-  }, [otp_send_time]);
+    setResendTime(otp_resend_time);
+  }, [otp_resend_time]);
 
   //timer that counts the OTP expiration time
   useEffect(() => {
@@ -67,7 +67,7 @@ const VerifyScreen = () => {
   };
 
   const handleOnReset = () => {
-    setResendTime(otp_send_time);
+    setResendTime(otp_resend_time);
   };
 
   return (
