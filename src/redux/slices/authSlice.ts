@@ -28,7 +28,7 @@ type AuthReducerType = {
   registered: boolean;
   verifying: boolean;
   password: string | null;
-  otp_expiration_time: number;
+  otp_send_time: number;
 };
 
 const initialState: AuthReducerType = {
@@ -43,7 +43,7 @@ const initialState: AuthReducerType = {
   registered: false,
   verifying: false,
   password: null,
-  otp_expiration_time: 100,
+  otp_send_time: 0,
 };
 
 const authSlice = createSlice({
@@ -56,10 +56,15 @@ const authSlice = createSlice({
       token: action.payload.token,
       readingToken: false,
     }),
-    authStart: (state, _) => ({
+    authStart: (state, action) => ({
       ...state,
       authError: null,
       authenticating: true,
+      user: {
+        ...state.user,
+        phone_number: action.payload.phone_number,
+        password: action.payload.password,
+      },
     }),
     authSuccess: (state, action) => ({
       ...state,
@@ -76,7 +81,11 @@ const authSlice = createSlice({
       ...state,
       authenticated: false,
       authenticating: false,
-      authError: action.payload,
+      authError: action.payload.message,
+      user: {
+        ...state.user,
+        session_token: action.payload.session_token,
+      },
     }),
     authLogout: (state) => ({
       ...state,
@@ -96,7 +105,7 @@ const authSlice = createSlice({
     registrationSuccess: (state, action) => ({
       ...state,
       user: action.payload.user,
-      otp_expiration_time: action.payload.otp_expiration_time,
+      otp_send_time: action.payload.otp_send_time,
       regError: null,
       registering: false,
       registered: true,
@@ -139,12 +148,19 @@ export const loginEpic = (action$: Observable<Action<any>>) =>
         }),
         catchError((err) => {
           let message = "Something went wrong.";
+          let session_token = null;
           if (err && err._status === "Offline") {
             message = err._message;
+          } else if (err && err._status === 403) {
+            message = err._message.detail;
+            session_token = err._message.session_token;
           } else if (err && err._status === 400) {
             message = err._message.detail[0];
           }
-          return of(authFail(message));
+
+          return of(
+            authFail({ message: message, session_token: session_token })
+          );
         })
       );
     })
@@ -184,7 +200,7 @@ export const registerEpic = (action$: Observable<Action<any>>) =>
               sex: res.sex,
               date_of_birth: res.date_of_birth,
             },
-            otp_expiration_time: res.otp_expiration_time,
+            otp_send_time: res.otp_send_time,
           };
 
           return registrationSuccess(userData);

@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { Input, Button, Divider } from "react-native-elements";
 import { FontAwesome } from "@expo/vector-icons";
@@ -61,6 +61,15 @@ const SignInScreen = () => {
       authError: state.authReducer.authError,
       readingToken: state.authReducer.readingToken,
     }));
+
+  useEffect(() => {
+    if (
+      typeof authError == "string" &&
+      authError === "Please verify your phone."
+    ) {
+      navigation.navigate("VerifyScreen");
+    }
+  }, [authError]);
 
   return readingToken ? (
     <View style={styles.progressBar}>
