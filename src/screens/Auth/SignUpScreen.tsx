@@ -94,7 +94,7 @@ const SignUpScreen = () => {
 
   useEffect(() => {
     return () => {
-      dispatch(resetRegError());
+      dispatch(resetRegError(null));
     };
   }, []);
 

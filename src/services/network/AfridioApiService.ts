@@ -181,6 +181,16 @@ class AfridioApiService {
         withToken: true,
       })
     );
+
+  resendOTP = (data: object) =>
+    from(
+      this.api({
+        url: AfridioEndpoints.resend(),
+        verb: "POST",
+        data: { ...data },
+        withToken: false,
+      })
+    );
 }
 
 export default new AfridioApiService();

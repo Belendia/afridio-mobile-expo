@@ -29,6 +29,7 @@ type AuthReducerType = {
   verifying: boolean;
   password: string | null;
   otp_resend_time: number;
+  resendingOTP: boolean;
 };
 
 const initialState: AuthReducerType = {
@@ -44,6 +45,7 @@ const initialState: AuthReducerType = {
   verifying: false,
   password: null,
   otp_resend_time: 0,
+  resendingOTP: false,
 };
 
 const authSlice = createSlice({
@@ -126,13 +128,31 @@ const authSlice = createSlice({
       regError: action.payload,
       verifying: false,
     }),
-    resetRegError: (state) => ({
+    resetRegError: (state, _) => ({
       ...state,
       regError: null,
     }),
     resetAuthError: (state) => ({
       ...state,
       authError: null,
+    }),
+    startResendOTP: (state, action) => ({
+      ...state,
+      resendingOTP: true,
+      password: action.payload.password,
+    }),
+    resendOTPSuccess: (state, action) => ({
+      ...state,
+      resendingOTP: false,
+      otp_resend_time: action.payload.otp_resend_time,
+      user: {
+        ...state.user,
+        session_token: action.payload.session_token,
+      },
+    }),
+    resendOTPFailed: (state, action) => ({
+      ...state,
+      resendingOTP: false,
     }),
   },
 });
@@ -181,12 +201,12 @@ export const logoutEpic = (action$: Observable<Action<any>>) =>
         map((res) => {
           AfridioAsyncStoreService.removeToken();
 
-          return authLogoutDone();
+          return authLogoutDone(res);
         }),
         catchError((err) => {
           AfridioAsyncStoreService.removeToken();
 
-          return of(authLogoutDone());
+          return of(authLogoutDone(err));
         })
       );
     })
@@ -240,9 +260,11 @@ export const verifyEpic = (action$: Observable<Action<any>>) =>
         }),
         catchError((err) => {
           let message: any = "Something went wrong.";
+          console.log(err);
           if (err && err._status === "Offline") {
             message = err._message;
           } else if (err && err._status === 400) {
+            console.log(err._message.detail[0]);
             message = err._message.detail[0];
           }
 
@@ -258,7 +280,37 @@ export const readToken = async () => {
   return { token: token };
 };
 
-export const authEpics = [loginEpic, logoutEpic, registerEpic, verifyEpic];
+export const resendOTPEpic = (action$: Observable<Action<any>>) =>
+  action$.pipe(
+    ofType(startResendOTP.type),
+    switchMap(({ payload }) => {
+      return AfridioApiService.resendOTP(payload).pipe(
+        map((res) => {
+          console.log(res);
+          return resendOTPSuccess(res);
+        }),
+        catchError((err) => {
+          console.log(err);
+          let message: any = "Something went wrong.";
+          if (err && err._status === "Offline") {
+            message = err._message;
+          } else if (err && err._status === 400) {
+            message = err._message.detail[0];
+          }
+
+          return of(resendOTPFailed(message));
+        })
+      );
+    })
+  );
+
+export const authEpics = [
+  loginEpic,
+  logoutEpic,
+  registerEpic,
+  verifyEpic,
+  resendOTPEpic,
+];
 
 export const {
   retrieveTokenSuccess,
@@ -274,6 +326,9 @@ export const {
   verificationFailed,
   resetAuthError,
   resetRegError,
+  startResendOTP,
+  resendOTPSuccess,
+  resendOTPFailed,
 } = authSlice.actions;
 
 export default authSlice.reducer;

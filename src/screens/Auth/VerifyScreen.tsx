@@ -5,11 +5,15 @@ import { Button, Divider } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
 
-import { AuthContainer, FormError } from "../../components";
+import { AuthContainer, FormError, ProgressBar } from "../../components";
 import { View, Text } from "../../components/Themed";
 import { colors } from "../../constants/Colors";
 import { RootStoreType } from "../../redux/rootReducer";
-import { startVerification, resetRegError } from "../../redux/slices/authSlice";
+import {
+  startVerification,
+  resetRegError,
+  startResendOTP,
+} from "../../redux/slices/authSlice";
 
 const VerifyScreen = () => {
   const navigation = useNavigation();
@@ -17,14 +21,14 @@ const VerifyScreen = () => {
   const [verificationCode, setVerificationCode] = useState("");
 
   //redux
-  const { user, verifying, regError, otp_resend_time } = useSelector(
-    (state: RootStoreType) => ({
+  const { user, verifying, regError, otp_resend_time, resendingOTP } =
+    useSelector((state: RootStoreType) => ({
       user: state.authReducer.user,
       verifying: state.authReducer.verifying,
       regError: state.authReducer.regError,
       otp_resend_time: state.authReducer.otp_resend_time,
-    })
-  );
+      resendingOTP: state.authReducer.resendingOTP,
+    }));
 
   const [resendTime, setResendTime] = useState<number>(otp_resend_time);
 
@@ -51,7 +55,7 @@ const VerifyScreen = () => {
 
   useEffect(() => {
     return () => {
-      dispatch(resetRegError());
+      dispatch(resetRegError(null));
     };
   }, []);
 
@@ -67,7 +71,13 @@ const VerifyScreen = () => {
   };
 
   const handleOnReset = () => {
-    setResendTime(otp_resend_time);
+    dispatch(
+      startResendOTP({
+        phone_number: user && user.phone_number,
+        password: user && user.password,
+        session_token: user && user.session_token,
+      })
+    );
   };
 
   return (
@@ -119,13 +129,23 @@ const VerifyScreen = () => {
       <Divider style={{ backgroundColor: colors.black700, marginTop: 20 }} />
 
       {resendTime > 0 ? (
-        <Text style={styles.resendWhiteText}>Resend OTP in {resendTime}</Text>
+        <View style={styles.resendTextWrapper}>
+          <Text style={styles.resendWhiteText}>Resend in {resendTime}</Text>
+        </View>
+      ) : resendingOTP ? (
+        <View style={styles.resendTextWrapper}>
+          <ProgressBar />
+        </View>
       ) : (
         <View style={styles.resendTextWrapper}>
           <Text style={styles.resendWhiteText}>
             Didn't receive the verification code?{" "}
           </Text>
-          <TouchableOpacity onPress={() => handleOnReset}>
+          <TouchableOpacity
+            onPress={() => {
+              if (!resendingOTP) handleOnReset();
+            }}
+          >
             <Text style={styles.resendRedText}>Resend again</Text>
           </TouchableOpacity>
         </View>
