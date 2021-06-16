@@ -31,10 +31,19 @@ let SignUpSchema = Yup.object().shape({
       "To short!",
       (value) =>
         value != undefined && value != null && value.toString().length >= 6
+    )
+    .test(
+      "len",
+      "To long!",
+      (value) =>
+        value != undefined && value != null && value.toString().length <= 15
     ),
   date_of_birth: Yup.string().required("Required"),
   sex: Yup.string().required("Required"),
-  password: Yup.string().min(6, "To short!").required("Required"),
+  password: Yup.string()
+    .min(8, "To short!")
+    .max(30, "To long!")
+    .required("Required"),
   password2: Yup.string()
     .equals([Yup.ref("password")], "Passwords don't match")
     .required("Required"),
