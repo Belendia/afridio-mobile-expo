@@ -13,6 +13,7 @@ import {
   startVerification,
   resetRegError,
   startResendOTP,
+  resetRegistered,
 } from "../../redux/slices/authSlice";
 
 const VerifyScreen = () => {
@@ -56,6 +57,7 @@ const VerifyScreen = () => {
   useEffect(() => {
     return () => {
       dispatch(resetRegError(null));
+      dispatch(resetRegistered(null));
     };
   }, []);
 

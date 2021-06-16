@@ -154,6 +154,10 @@ const authSlice = createSlice({
       ...state,
       resendingOTP: false,
     }),
+    resetRegistered: (state) => ({
+      ...state,
+      registered: false,
+    }),
   },
 });
 
@@ -329,6 +333,7 @@ export const {
   startResendOTP,
   resendOTPSuccess,
   resendOTPFailed,
+  resetRegistered,
 } = authSlice.actions;
 
 export default authSlice.reducer;
