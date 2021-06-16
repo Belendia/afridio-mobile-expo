@@ -7,3 +7,4 @@ export * from "./Form/EditableText";
 export * from "./Form/DateInput";
 export * from "./Form/OptionsInput";
 export * from "./Form/FormError";
+export * from "./Form/PhoneInput";

@@ -8,7 +8,12 @@ import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Text, View } from "../../components/Themed";
-import { AuthContainer, ProgressBar, FormError } from "../../components";
+import {
+  AuthContainer,
+  ProgressBar,
+  FormError,
+  PhoneInput,
+} from "../../components";
 import { authStart } from "../../redux/slices/authSlice";
 import { RootStoreType } from "../../redux/rootReducer";
 import { colors } from "../../constants/Colors";
@@ -77,21 +82,14 @@ const SignInScreen = () => {
     </View>
   ) : (
     <AuthContainer showLogo={true} title={"Sign In"}>
-      <Input
-        placeholder="251912345678"
-        leftIconContainerStyle={{ marginRight: 6 }}
-        leftIcon={<FontAwesome name="phone" size={20} color={colors.red300} />}
-        onChangeText={handleChange("phone_number")}
-        onBlur={handleBlur("phone_number")}
+      <PhoneInput
         errorMessage={errors.phone_number}
-        style={styles.input}
-        inputContainerStyle={styles.inputContainer}
-        placeholderTextColor={colors.black700}
-        keyboardType="phone-pad"
-        returnKeyType="next"
-        returnKeyLabel="Next"
-        // onSubmitEditing={() => password.current?.focus()}
+        style={styles.phone}
+        onChangeText={(phone) => {
+          setFieldValue("phone_number", phone);
+        }}
       />
+
       <Input
         // ref={password}
         placeholder="Password"
@@ -168,5 +166,8 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     borderBottomColor: colors.red800,
+  },
+  phone: {
+    marginBottom: 20,
   },
 });
