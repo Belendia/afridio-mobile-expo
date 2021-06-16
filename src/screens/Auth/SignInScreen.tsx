@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { Input, Button, Divider } from "react-native-elements";
 import { FontAwesome } from "@expo/vector-icons";
@@ -35,7 +35,7 @@ let SignInSchema = Yup.object().shape({
 const SignInScreen = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const password = useRef<typeof Input>(null);
+  const [countryCode, setCountryCode] = useState<string>("251");
 
   const {
     handleChange,
@@ -51,7 +51,7 @@ const SignInScreen = () => {
     onSubmit: (values) => {
       dispatch(
         authStart({
-          phone_number: "+" + values.phone_number,
+          phone_number: "+" + countryCode + values.phone_number,
           password: values.password,
         })
       );
@@ -85,8 +85,11 @@ const SignInScreen = () => {
       <PhoneInput
         errorMessage={errors.phone_number}
         style={styles.phone}
-        onChangeText={(phone) => {
+        onChangePhoneNumber={(phone) => {
           setFieldValue("phone_number", phone);
+        }}
+        onChangeCountryCode={(code) => {
+          setCountryCode(code);
         }}
       />
 

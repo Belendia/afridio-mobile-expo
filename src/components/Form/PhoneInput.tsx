@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { StyleSheet, TextInput, ViewStyle } from "react-native";
-import { SimpleLineIcons } from "@expo/vector-icons";
 import CountryPicker, {
   Country,
   CountryCode,
   DARK_THEME,
 } from "react-native-country-picker-modal";
-import { Input, Divider } from "react-native-elements";
 
 import { Text, View } from "../Themed";
 import { colors } from "../../constants/Colors";
@@ -22,21 +20,18 @@ type PhoneInputProps = {
   value?: string | undefined;
   errorMessage?: string | undefined;
   style?: ViewStyle | undefined;
-  onChangeText?: ((value: string | undefined) => void) | undefined;
+  onChangePhoneNumber?: ((phone: string) => void) | undefined;
+  onChangeCountryCode?: ((code: string) => void) | undefined;
 };
 
 const PhoneInput = ({
   value,
   errorMessage,
   style,
-  onChangeText,
+  onChangeCountryCode,
+  onChangePhoneNumber,
 }: PhoneInputProps) => {
   const [countryCode, setCountryCode] = useState<CountryCode>("ET");
-  const [callingCode, setCallingCode] = useState<string>("251");
-
-  const onChange = (phone: string) => {
-    onChangeText && onChangeText(callingCode + phone);
-  };
 
   return (
     <View style={[styles.container, style]}>
@@ -52,12 +47,14 @@ const PhoneInput = ({
           theme={DARK_THEME_COUNTRY}
           onSelect={(country: Country) => {
             setCountryCode(country.cca2);
-            setCallingCode(country.callingCode[0]);
+            onChangeCountryCode && onChangeCountryCode(country.callingCode[0]);
           }}
         />
         <TextInput
           placeholder="912345678"
-          onChangeText={(num) => onChange(num)}
+          onChangeText={(phoneNumber) =>
+            onChangePhoneNumber && onChangePhoneNumber(phoneNumber)
+          }
           style={styles.input}
           placeholderTextColor={colors.black700}
           keyboardType="phone-pad"

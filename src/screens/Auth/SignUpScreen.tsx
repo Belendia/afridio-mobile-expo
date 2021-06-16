@@ -44,6 +44,7 @@ const SignUpScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const [sex, setSex] = useState<Option | undefined>(undefined);
+  const [countryCode, setCountryCode] = useState<string>("251");
 
   const {
     handleChange,
@@ -67,7 +68,7 @@ const SignUpScreen = () => {
     onSubmit: (values) => {
       dispatch(
         startRegistration({
-          phone_number: "+" + values.phone_number,
+          phone_number: "+" + countryCode + values.phone_number,
           name: values.name,
           date_of_birth: values.date_of_birth,
           sex: values.sex,
@@ -123,8 +124,11 @@ const SignUpScreen = () => {
       <PhoneInput
         errorMessage={errors.phone_number}
         style={styles.phone}
-        onChangeText={(phone) => {
+        onChangePhoneNumber={(phone) => {
           setFieldValue("phone_number", phone);
+        }}
+        onChangeCountryCode={(code) => {
+          setCountryCode(code);
         }}
       />
       <DateInput
