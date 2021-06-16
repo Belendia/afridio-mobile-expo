@@ -13,6 +13,7 @@ import {
   OptionsInput,
   Option,
   FormError,
+  PhoneInput,
 } from "../../components";
 import { SexOptions } from "../../constants/Options";
 import { colors } from "../../constants/Colors";
@@ -118,18 +119,13 @@ const SignUpScreen = () => {
         placeholderTextColor={colors.black700}
         returnKeyType="next"
       />
-      <Input
-        placeholder="Phone number"
-        leftIconContainerStyle={{ marginRight: 6 }}
-        leftIcon={<FontAwesome name="phone" size={20} color={colors.red300} />}
-        onChangeText={handleChange("phone_number")}
-        onBlur={handleBlur("phone_number")}
+
+      <PhoneInput
         errorMessage={errors.phone_number}
-        style={styles.input}
-        inputContainerStyle={styles.inputContainer}
-        placeholderTextColor={colors.black700}
-        keyboardType="phone-pad"
-        returnKeyType="next"
+        style={styles.phone}
+        onChangeText={(phone) => {
+          setFieldValue("phone_number", phone);
+        }}
       />
       <DateInput
         title="Birth date"
@@ -214,5 +210,8 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     borderBottomColor: colors.red800,
+  },
+  phone: {
+    marginBottom: 20,
   },
 });
