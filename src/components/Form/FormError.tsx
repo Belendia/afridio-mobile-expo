@@ -14,7 +14,9 @@ const FormError = ({ error, style }: ErrorProps) => {
   return (
     <View style={[styles.errorWrapper, style]}>
       <MaterialIcons name="error-outline" size={20} color={colors.red400} />
-      <Text style={styles.error}>{error}</Text>
+      <Text style={styles.error} numberOfLines={1} ellipsizeMode="tail">
+        {error}
+      </Text>
     </View>
   );
 };
@@ -28,6 +30,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   error: {
+    flex: 1,
     color: colors.red400,
     fontSize: 14,
     fontWeight: "bold",
