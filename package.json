@@ -47,7 +47,6 @@
     "react-native-swiper": "^1.6.0",
     "react-native-tab-view": "^2.16.0",
     "react-native-web": "~0.13.12",
-    "react-native-wizard": "^2.1.0",
     "react-redux": "^7.2.4",
     "redux": "^4.1.0",
     "redux-observable": "^1.2.0",
