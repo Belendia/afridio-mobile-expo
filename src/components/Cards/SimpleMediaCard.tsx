@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { Image } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
@@ -15,7 +15,7 @@ interface SimpleMediaCardProps {
   };
 }
 
-const SimpleMediaCard = ({ movie }: SimpleMediaCardProps) => {
+const SimpleMediaCard = memo(({ movie }: SimpleMediaCardProps) => {
   const navigation = useNavigation();
   return (
     <TouchableOpacity
@@ -36,7 +36,7 @@ const SimpleMediaCard = ({ movie }: SimpleMediaCardProps) => {
       </View>
     </TouchableOpacity>
   );
-};
+});
 
 export { SimpleMediaCard };
 
