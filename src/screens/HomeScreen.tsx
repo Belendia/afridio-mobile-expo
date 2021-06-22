@@ -25,8 +25,12 @@ const HomeScreen = () => {
   );
 
   useEffect(() => {
-    dispatch(startToGetHomeScreenData());
+    fetchData();
   }, []);
+
+  const fetchData = () => {
+    dispatch(startToGetHomeScreenData());
+  };
 
   return loading ? (
     <ProgressBar />
@@ -40,7 +44,7 @@ const HomeScreen = () => {
         refreshControl={
           <RefreshControl
             refreshing={false}
-            // onRefresh={this._onRefresh}
+            onRefresh={fetchData}
             colors={[colors.white]}
             tintColor={colors.red400}
             title="loading..."
@@ -52,7 +56,7 @@ const HomeScreen = () => {
           featuredMedias &&
           featuredMedias.length > 0 &&
           featuredMedias[0].medias ? (
-            <PagerView style={{ height: 248 }}>
+            <PagerView style={{ height: 248 }} overdrag={false}>
               {featuredMedias[0].medias.map((media) => (
                 <FeaturedMediaCard key={media.slug} {...media} />
               ))}
