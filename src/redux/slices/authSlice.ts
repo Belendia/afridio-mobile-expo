@@ -5,16 +5,7 @@ import { catchError, map, switchMap } from "rxjs/operators";
 import AfridioAsyncStoreService from "../../services/asyncstorage/AfridioAsyncStoreService";
 import AfridioApiService from "../../services/network/AfridioApiService";
 import { Action } from "../rootReducer";
-
-type User = {
-  name: string;
-  phone_number: string;
-  sex: string;
-  date_of_birth: string;
-  picture: string;
-  password: string;
-  session_token: string;
-};
+import { User } from "../../../types";
 
 type AuthReducerType = {
   user: User | null;

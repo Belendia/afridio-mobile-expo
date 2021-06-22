@@ -11,7 +11,7 @@ import { Chip, Image, Icon, Button } from "react-native-elements";
 import { ActivityIndicator } from "react-native";
 
 import { View, Text } from "../../components/Themed";
-import Swiper from "react-native-swiper";
+// import Swiper from "react-native-swiper";
 import { Ionicons } from "@expo/vector-icons";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import TrackScreen from "./TrackScreen";
@@ -95,7 +95,7 @@ const MediaScreen = (props) => {
               />
             </TouchableWithoutFeedback>
           </View>
-          <Swiper
+          {/* <Swiper
             autoplay
             autoplayTimeout={4}
             showsPagination={false}
@@ -122,7 +122,7 @@ const MediaScreen = (props) => {
                 />
               </View>
             ))}
-          </Swiper>
+          </Swiper> */}
         </View>
         <View style={styles.cardContainer}>
           <Image

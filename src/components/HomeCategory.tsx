@@ -5,27 +5,21 @@ import { useNavigation } from "@react-navigation/native";
 import { View, Text } from "./Themed";
 import { SimpleMediaCard } from "./Cards/SimpleMediaCard";
 import { colors } from "../constants/Colors";
+import { Media } from "../../types";
 
-interface HomeCategoryProps {
-  category: {
-    id: string;
-    title: string;
-    movies: {
-      id: string;
-      title: string;
-      plot: string;
-      poster: string;
-    }[];
-  };
-}
+type HomeCategoryProps = {
+  id: string;
+  title: string;
+  medias: Media[];
+};
 
-const HomeCategory = ({ category }: HomeCategoryProps) => {
+const HomeCategory = ({ id, title, medias }: HomeCategoryProps) => {
   const navigation = useNavigation();
 
   return (
     <View style={styles.container}>
       <View style={styles.listHeading}>
-        <Text style={styles.listHeadingLeft}>{category.title}</Text>
+        <Text style={styles.listHeadingLeft}>{title}</Text>
         <TouchableOpacity>
           <Text
             style={styles.listHeadingRight}
@@ -38,8 +32,9 @@ const HomeCategory = ({ category }: HomeCategoryProps) => {
         </TouchableOpacity>
       </View>
       <FlatList
-        data={category.movies}
-        renderItem={({ item }) => <SimpleMediaCard movie={item} />}
+        data={medias}
+        renderItem={({ item }) => <SimpleMediaCard key={item.slug} {...item} />}
+        keyExtractor={(item) => item.slug}
         horizontal
         showsHorizontalScrollIndicator={false}
       />
@@ -62,7 +57,7 @@ const styles = StyleSheet.create({
     margin: 5,
   },
   listHeading: {
-    paddingHorizontal: 16,
+    paddingHorizontal: 2,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",

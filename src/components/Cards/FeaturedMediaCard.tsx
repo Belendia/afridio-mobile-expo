@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { StyleSheet, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
@@ -7,58 +7,81 @@ import { Button } from "react-native-elements";
 
 import { View, Text } from "../Themed";
 import { colors } from "../../constants/Colors";
+import { Media } from "../../../types";
+import { Genre } from "../Media/Genre";
 
-interface FeaturedMediaCardProps {
-  movie: {
-    id: string;
-    title: string;
-    description: string;
-    cover: string;
-    poster: string;
-  };
-}
+const FeaturedMediaCard = memo(
+  ({ title, images, genres, description }: Media) => {
+    const navigation = useNavigation();
+    let poster = null;
+    if (images?.length > 0) {
+      poster = images.find((img) => img.width === 500);
+    }
 
-const FeaturedMediaCard = ({ movie }: FeaturedMediaCardProps) => {
-  const navigation = useNavigation();
-
-  return (
-    <View>
-      <Image source={{ uri: movie.poster }} style={styles.imageBackdrop} />
-      <LinearGradient
-        colors={["rgba(0, 0, 0, 0.5)", "rgba(0,0,0, 0.7)", "rgba(0,0,0, 0.8)"]}
-        style={styles.linearGradient}
-      />
-      <View style={styles.cardContainer}>
-        <Image source={{ uri: movie.cover }} style={styles.cardImage} />
-        <View style={styles.cardDetails}>
-          <Text style={styles.cardTitle} numberOfLines={2}>
-            {movie.title}
-          </Text>
-          <View style={styles.cardGenre}>
-            <Text style={styles.cardGenreItem}>Action</Text>
-          </View>
-          <View style={styles.cardNumbers}>
-            <View style={styles.cardHeart}>
-              <Ionicons name="heart" size={20} color={colors.red800} />
-              <Text style={styles.cardRatings}>1.2K</Text>
-            </View>
-          </View>
-          <Text style={styles.cardDescription} numberOfLines={3}>
-            {movie.description}
-          </Text>
-          <Button
-            title="View Detail"
-            buttonStyle={{ backgroundColor: colors.red800 }}
-            titleStyle={{ fontSize: 16 }}
-            onPress={() =>
-              navigation.navigate("Home", { screen: "MediaScreen" })
-            }
+    let cover = null;
+    if (images?.length > 0) {
+      cover = images.find((img) => img.width === 300);
+    }
+    return (
+      <View>
+        {poster ? (
+          <Image source={{ uri: poster?.image }} style={styles.imageBackdrop} />
+        ) : (
+          <Image
+            source={require("../../../assets/images/backdrop.png")}
+            style={styles.imageBackdrop}
           />
+        )}
+
+        <LinearGradient
+          colors={[
+            "rgba(0, 0, 0, 0.5)",
+            "rgba(0,0,0, 0.7)",
+            "rgba(0,0,0, 0.8)",
+          ]}
+          style={styles.linearGradient}
+        />
+        <View style={styles.cardContainer}>
+          {cover ? (
+            <Image source={{ uri: cover?.image }} style={styles.cardImage} />
+          ) : (
+            <Image
+              source={require("../../../assets/images/no-cover.png")}
+              style={styles.cardImage}
+            />
+          )}
+          <View style={styles.cardDetails}>
+            <Text style={styles.cardTitle} numberOfLines={2}>
+              {title}
+            </Text>
+            <Genre genres={genres} />
+            <View style={styles.cardNumbers}>
+              <View style={styles.cardHeart}>
+                <Ionicons name="heart" size={20} color={colors.red800} />
+                <Text style={styles.cardRatings}>1.2K</Text>
+              </View>
+            </View>
+            <Text
+              style={styles.cardDescription}
+              numberOfLines={3}
+              ellipsizeMode="tail"
+            >
+              {description}
+            </Text>
+            <Button
+              title="View Detail"
+              buttonStyle={{ backgroundColor: colors.red800 }}
+              titleStyle={{ fontSize: 16 }}
+              onPress={() =>
+                navigation.navigate("Home", { screen: "MediaScreen" })
+              }
+            />
+          </View>
         </View>
       </View>
-    </View>
-  );
-};
+    );
+  }
+);
 
 export { FeaturedMediaCard };
 
@@ -98,16 +121,6 @@ const styles = StyleSheet.create({
     fontSize: 19,
     fontWeight: "500",
     paddingTop: 10,
-  },
-  cardGenre: {
-    flexDirection: "row",
-    backgroundColor: "transparent",
-  },
-  cardGenreItem: {
-    fontSize: 11,
-    marginRight: 5,
-    color: colors.white,
-    backgroundColor: "transparent",
   },
   cardDescription: {
     color: colors.red300,

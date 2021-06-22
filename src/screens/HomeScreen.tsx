@@ -1,25 +1,42 @@
-import * as React from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, FlatList, RefreshControl } from "react-native";
-import Swiper from "react-native-swiper";
+import PagerView from "react-native-pager-view";
 import { FeaturedMediaCard } from "../components/Cards/FeaturedMediaCard";
+import { useDispatch, useSelector } from "react-redux";
 
 import { View } from "../components/Themed";
 import HomeCategory from "../components/HomeCategory";
 import categories from "../../assets/data/categories";
 import { colors } from "../constants/Colors";
+import { startToGetHomeScreenData } from "../redux/slices/homeSlice";
+import { RootStoreType } from "../redux/rootReducer";
+import { ProgressBar } from "../components";
 
 const HomeScreen = () => {
-  const featuredMovies = categories.items.filter(
-    (item) => item.title === "Featured"
+  const dispatch = useDispatch();
+
+  //redux
+  const { loading, featuredMedias, nonFeaturedMedias, error } = useSelector(
+    (state: RootStoreType) => ({
+      loading: state.homeReducer.loading,
+      featuredMedias: state.homeReducer.featuredMedias,
+      nonFeaturedMedias: state.homeReducer.nonFeaturedMedias,
+      error: state.homeReducer.error,
+    })
   );
-  const allExceptFeaturedMovies = categories.items.filter(
-    (item) => item.title !== "Featured"
-  );
-  return (
+
+  useEffect(() => {
+    dispatch(startToGetHomeScreenData());
+  }, []);
+
+  return loading ? (
+    <ProgressBar />
+  ) : (
     <View style={styles.container}>
       <FlatList
-        data={allExceptFeaturedMovies}
-        renderItem={({ item }) => <HomeCategory category={item} />}
+        data={nonFeaturedMedias}
+        renderItem={({ item }) => <HomeCategory key={item.id} {...item} />}
+        keyExtractor={(item) => item.id}
         showsVerticalScrollIndicator={false}
         refreshControl={
           <RefreshControl
@@ -33,17 +50,14 @@ const HomeScreen = () => {
           />
         }
         ListHeaderComponent={
-          featuredMovies !== null && featuredMovies.length > 0 ? (
-            <Swiper
-              autoplay
-              autoplayTimeout={4}
-              showsPagination={false}
-              height={248}
-            >
-              {featuredMovies[0].movies.map((movie) => (
-                <FeaturedMediaCard key={movie.id} movie={movie} />
+          featuredMedias &&
+          featuredMedias.length > 0 &&
+          featuredMedias[0].medias ? (
+            <PagerView style={{ height: 248 }}>
+              {featuredMedias[0].medias.map((media) => (
+                <FeaturedMediaCard key={media.slug} {...media} />
               ))}
-            </Swiper>
+            </PagerView>
           ) : (
             <></>
           )

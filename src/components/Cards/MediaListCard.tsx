@@ -2,11 +2,11 @@ import React, { memo } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { Image } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
-import { Chip } from "react-native-elements";
 
 import { View, Text } from "../Themed";
 import { Ionicons } from "@expo/vector-icons";
 import { colors } from "../../constants/Colors";
+import { Genre } from "../Media/Genre";
 
 interface MediaListCardProps {
   movie: {
@@ -37,22 +37,7 @@ const MediaListCard = memo(({ movie }: MediaListCardProps) => {
             <Text style={styles.cardTitle} numberOfLines={3}>
               {movie.title}
             </Text>
-            <View style={styles.cardGenre}>
-              {movie.genres.map((item, index) => (
-                <View
-                  style={{ marginRight: 3, backgroundColor: "transparent" }}
-                  key={index}
-                >
-                  <Chip
-                    title={item.name}
-                    type="outline"
-                    titleStyle={{ fontSize: 12 }}
-                    buttonStyle={{ padding: 5 }}
-                    disabled
-                  />
-                </View>
-              ))}
-            </View>
+            <Genre genres={[]} />
             <View style={styles.cardNumbers}>
               <View style={styles.cardHeart}>
                 <Ionicons name="heart" size={20} color={colors.red800} />
@@ -101,14 +86,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
     paddingTop: 10,
-  },
-  cardGenre: {
-    flexDirection: "row",
-    backgroundColor: "transparent",
-  },
-  cardGenreItem: {
-    fontSize: 11,
-    marginRight: 5,
   },
   cardDescription: {
     color: colors.black300,

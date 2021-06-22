@@ -6,31 +6,45 @@ import { ActivityIndicator } from "react-native";
 
 import { View, Text } from "../Themed";
 import { colors } from "../../constants/Colors";
+import { Media } from "../../../types";
 
-interface SimpleMediaCardProps {
-  movie: {
-    id: string;
-    title: string;
-    cover: string;
-  };
-}
+// interface SimpleMediaCardProps {
+//   movie: {
+//     id: string;
+//     title: string;
+//     cover: string;
+//   };
+// }
 
-const SimpleMediaCard = memo(({ movie }: SimpleMediaCardProps) => {
+const SimpleMediaCard = memo(({ images, title }: Media) => {
   const navigation = useNavigation();
+  let cover = null;
+  if (images?.length > 0) {
+    cover = images.find((img) => img.width === 300);
+  }
+
   return (
     <TouchableOpacity
       activeOpacity={0.8}
       onPress={() => navigation.navigate("Home", { screen: "MediaScreen" })}
     >
       <View style={styles.cardContainer}>
-        <Image
-          source={{ uri: movie.cover }}
-          style={styles.cardImage}
-          PlaceholderContent={<ActivityIndicator color={colors.red300} />}
-        />
+        {cover ? (
+          <Image
+            source={{ uri: cover?.image }}
+            style={styles.cardImage}
+            PlaceholderContent={<ActivityIndicator color={colors.red300} />}
+          />
+        ) : (
+          <Image
+            source={require("../../../assets/images/no-cover.png")}
+            style={styles.cardImage}
+          />
+        )}
+
         <View style={styles.cardTitleContainer}>
           <Text style={styles.cardTitle} numberOfLines={2}>
-            {movie.title}
+            {title}
           </Text>
         </View>
       </View>
@@ -67,6 +81,6 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: "500",
     textAlign: "center",
-    paddingHorizontal: 1,
+    paddingHorizontal: 3,
   },
 });

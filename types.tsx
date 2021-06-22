@@ -29,3 +29,46 @@ export type AuthParamList = {
 export type SettingsParamList = {
   SettingsScreen: undefined;
 };
+
+export type User = {
+  name: string;
+  phone_number: string;
+  sex: string;
+  date_of_birth: string;
+  picture: string;
+  password: string;
+  session_token: string;
+};
+
+export type Track = {
+  slug: string;
+  name: string;
+  file_url: string;
+  duration: number;
+  sequence: number;
+};
+
+export type Image = {
+  width: number;
+  image: string;
+};
+
+export type Media = {
+  title: string;
+  price: number;
+  discount_price: number | null;
+  description: string;
+  slug: string;
+  estimated_length_in_seconds: number;
+  rating: number | null;
+  release_date: string;
+  language: string;
+  media_format: string;
+  word_count: number;
+  featured: boolean;
+  album_type: string | null;
+  genres: string[];
+  tracks: Track[];
+  authors: string[];
+  images: Image[];
+};
