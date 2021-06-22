@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { View } from "../components/Themed";
 import HomeCategory from "../components/HomeCategory";
-import categories from "../../assets/data/categories";
 import { colors } from "../constants/Colors";
 import { startToGetHomeScreenData } from "../redux/slices/homeSlice";
 import { RootStoreType } from "../redux/rootReducer";

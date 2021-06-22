@@ -8,14 +8,6 @@ import { View, Text } from "../Themed";
 import { colors } from "../../constants/Colors";
 import { Media } from "../../../types";
 
-// interface SimpleMediaCardProps {
-//   movie: {
-//     id: string;
-//     title: string;
-//     cover: string;
-//   };
-// }
-
 const SimpleMediaCard = memo(({ images, title }: Media) => {
   const navigation = useNavigation();
   let cover = null;
