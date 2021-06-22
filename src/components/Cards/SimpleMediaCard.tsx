@@ -8,7 +8,7 @@ import { View, Text } from "../Themed";
 import { colors } from "../../constants/Colors";
 import { Media } from "../../../types";
 
-const SimpleMediaCard = memo(({ images, title }: Media) => {
+const SimpleMediaCard = memo(({ slug, images, title }: Media) => {
   const navigation = useNavigation();
   let cover = null;
   if (images?.length > 0) {
@@ -18,7 +18,12 @@ const SimpleMediaCard = memo(({ images, title }: Media) => {
   return (
     <TouchableOpacity
       activeOpacity={0.8}
-      onPress={() => navigation.navigate("Home", { screen: "MediaScreen" })}
+      onPress={() =>
+        navigation.navigate("Home", {
+          screen: "MediaScreen",
+          params: { slug: slug },
+        })
+      }
     >
       <View style={styles.cardContainer}>
         {cover ? (

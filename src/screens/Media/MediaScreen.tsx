@@ -17,6 +17,7 @@ import { createMaterialTopTabNavigator } from "@react-navigation/material-top-ta
 import TrackScreen from "./TrackScreen";
 import InfoScreen from "./InfoScreen";
 import { colors } from "../../constants/Colors";
+import { useRoute } from "@react-navigation/native";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -59,6 +60,9 @@ const info = {
 const MediaScreen = (props) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isRefreshing, setIsRefreshing] = useState(false);
+
+  const route = useRoute();
+  console.log(route.params?.slug);
 
   const retrieveDetails = (isRefreshed) => {};
 

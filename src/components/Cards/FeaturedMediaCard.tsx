@@ -11,8 +11,9 @@ import { Media } from "../../../types";
 import { Genre } from "../Media/Genre";
 
 const FeaturedMediaCard = memo(
-  ({ title, images, genres, description }: Media) => {
+  ({ slug, title, images, genres, description }: Media) => {
     const navigation = useNavigation();
+
     let poster = null;
     if (images?.length > 0) {
       poster = images.find((img) => img.width === 500);
@@ -73,7 +74,10 @@ const FeaturedMediaCard = memo(
               buttonStyle={{ backgroundColor: colors.red800 }}
               titleStyle={{ fontSize: 16 }}
               onPress={() =>
-                navigation.navigate("Home", { screen: "MediaScreen" })
+                navigation.navigate("Home", {
+                  screen: "MediaScreen",
+                  params: { slug: slug },
+                })
               }
             />
           </View>
