@@ -1,16 +1,17 @@
 import React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, ViewStyle } from "react-native";
 import { Chip } from "react-native-elements";
 
 import { View } from "../Themed";
 
 type GenreProps = {
-  genres: string[];
+  genres?: string[] | undefined;
+  style?: ViewStyle | undefined;
 };
 
-const Genre = ({ genres }: GenreProps) => {
-  return (
-    <View style={styles.cardGenre}>
+const Genre = ({ genres, style }: GenreProps) => {
+  return genres ? (
+    <View style={[styles.cardGenre, style]}>
       {genres.map((item, index) => (
         <View
           style={{ marginRight: 3, backgroundColor: "transparent" }}
@@ -26,6 +27,8 @@ const Genre = ({ genres }: GenreProps) => {
         </View>
       ))}
     </View>
+  ) : (
+    <></>
   );
 };
 

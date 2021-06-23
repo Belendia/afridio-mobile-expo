@@ -49,8 +49,20 @@ export type Track = {
 };
 
 export type Image = {
+  slug: string;
   width: number;
   image: string;
+};
+
+export type Photo = {
+  slug: string;
+  file: string;
+};
+
+export type Author = {
+  name: string;
+  slug: string;
+  photo: Photo[];
 };
 
 export type Media = {
@@ -69,6 +81,6 @@ export type Media = {
   album_type: string | null;
   genres: string[];
   tracks: Track[];
-  authors: string[];
+  authors: Author[];
   images: Image[];
 };

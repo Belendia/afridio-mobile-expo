@@ -1,36 +1,27 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import { Avatar } from "react-native-elements";
+import { useSelector } from "react-redux";
 
 import { View, Text } from "../../components/Themed";
 import movie from "../../../assets/data/movie";
 import { colors } from "../../constants/Colors";
+import { RootStoreType } from "../../redux/rootReducer";
+import { Author } from "../../components";
 
-const info = movie.seasons.items[0].episodes.items[0];
-const authors = [
-  {
-    id: 1,
-    name: "Addis Alemayehu",
-    profile_photo:
-      "https://www.themoviedb.org/t/p/w185/oIciQWr8VwKoR8TmAw1owaiZFyb.jpg",
-  },
-  {
-    id: 2,
-    name: "Tola Dinku",
-    profile_photo:
-      "https://www.themoviedb.org/t/p/w185/djhT0A2hZxpYKPnCeRtim8qUdPi.jpg",
-  },
-];
 const InfoScreen = () => {
+  const { media } = useSelector((state: RootStoreType) => ({
+    media: state.mediaReducer.media,
+  }));
   return (
     <View style={styles.container}>
       <View style={styles.overview}>
         <Text style={styles.label}>Overview</Text>
-        <Text style={styles.overviewText}>{info.description}</Text>
+        <Text style={styles.overviewText}>{media?.description}</Text>
       </View>
       <View style={styles.labelRow}>
         <Text style={styles.label}>Release Date</Text>
-        <Text style={styles.value}>{info.duration}</Text>
+        <Text style={styles.value}>{media?.release_date}</Text>
       </View>
       <View style={styles.labelRow}>
         <Text style={styles.label}>Narrated By</Text>
@@ -41,19 +32,8 @@ const InfoScreen = () => {
         <Text style={styles.label}>Authors</Text>
       </View>
       <View style={styles.authorsContainer}>
-        {authors.map((item) => (
-          <View key={item.id} style={styles.castContainer}>
-            <Avatar
-              rounded
-              source={{
-                uri: `${item.profile_photo}`,
-              }}
-              size="large"
-            />
-            <View style={styles.characterContainer}>
-              <Text style={styles.characterName}>{item.name}</Text>
-            </View>
-          </View>
+        {media?.authors.map((item, index) => (
+          <Author {...item} key={index} />
         ))}
       </View>
     </View>
@@ -93,20 +73,5 @@ const styles = StyleSheet.create({
   },
   authorsContainer: {
     marginTop: 20,
-  },
-  castContainer: {
-    flexDirection: "row",
-    marginBottom: 15,
-  },
-  characterContainer: {
-    flex: 1,
-    justifyContent: "center",
-    paddingLeft: 16,
-  },
-  characterName: {
-    color: colors.red300,
-    flexDirection: "column",
-    fontSize: 16,
-    fontWeight: "500",
   },
 });

@@ -1,91 +1,55 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import {
   StyleSheet,
-  RefreshControl,
   ScrollView,
   TouchableWithoutFeedback,
   Dimensions,
 } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
-import { Chip, Image, Icon, Button } from "react-native-elements";
-import { ActivityIndicator } from "react-native";
+import { Icon, Button } from "react-native-elements";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import { useDispatch, useSelector } from "react-redux";
 
 import { View, Text } from "../../components/Themed";
-// import Swiper from "react-native-swiper";
 import { Ionicons } from "@expo/vector-icons";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import TrackScreen from "./TrackScreen";
 import InfoScreen from "./InfoScreen";
 import { colors } from "../../constants/Colors";
-import { useRoute } from "@react-navigation/native";
+import { RootStoreType } from "../../redux/rootReducer";
+import { startToGetMedia } from "../../redux/slices/mediaSlice";
+import { ProgressBar, Backdrop, Cover, Genre } from "../../components";
 
 const Tab = createMaterialTopTabNavigator();
 
-const info = {
-  poster_path:
-    "https://www.themoviedb.org/t/p/w1280/AoWY1gkcNzabh229Icboa1Ff0BM.jpg",
-  original_title: "Vanquish",
-  tagline: "She's got one night to same her life.",
-  genres: [
-    {
-      id: 1,
-      name: "Novel",
-    },
-    {
-      id: 2,
-      name: "Fiction",
-    },
-  ],
-  images: {
-    backdrops: [
-      {
-        file_path:
-          "https://www.themoviedb.org/t/p/original/mb3fcmQzXd8aUf7r6izZfMHSJmz.jpg",
-      },
-      {
-        file_path:
-          "https://www.themoviedb.org/t/p/original/mYM8x2Atv4MaLulaV0KVJWI1Djv.jpg",
-      },
-      {
-        file_path:
-          "https://www.themoviedb.org/t/p/original/zL3UK7vSbPqN7PVyScXObzlvPBD.jpg",
-      },
-      {
-        file_path:
-          "https://www.themoviedb.org/t/p/original/fg8NRmYSUp1hXppmsEmclQfDNOF.jpg",
-      },
-    ],
-  },
-};
-const MediaScreen = (props) => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [isRefreshing, setIsRefreshing] = useState(false);
-
+const MediaScreen = () => {
+  const dispatch = useDispatch();
   const route = useRoute();
-  console.log(route.params?.slug);
+  const navigation = useNavigation();
 
-  const retrieveDetails = (isRefreshed) => {};
+  console.log("Hi");
+  const { loading, media, error } = useSelector((state: RootStoreType) => ({
+    loading: state.mediaReducer.loading,
+    media: state.mediaReducer.media,
+    error: state.mediaReducer.error,
+  }));
 
-  const _onRefresh = () => {
-    // setIsRefreshing(true);
-    // retrieveDetails("isRefreshed");
-  };
+  useEffect(() => {
+    if (route.params?.slug) {
+      dispatch(startToGetMedia(route.params?.slug));
+    } else {
+      navigation.goBack();
+    }
+  }, [route.params?.slug]);
 
-  return (
+  return loading ? (
+    <ProgressBar />
+  ) : (
     <ScrollView
       style={styles.mainContainer}
       scrollEventThrottle={100}
-      refreshControl={
-        <RefreshControl
-          refreshing={isRefreshing}
-          onRefresh={_onRefresh}
-          colors={[colors.red900]}
-          tintColor="white"
-          title="loading..."
-          titleColor="white"
-          progressBackgroundColor={colors.white}
-        />
-      }
+      bounces={false}
+      showsHorizontalScrollIndicator={false}
+      showsVerticalScrollIndicator={false}
     >
       <View>
         <View style={styles.bannerContainer}>
@@ -99,57 +63,21 @@ const MediaScreen = (props) => {
               />
             </TouchableWithoutFeedback>
           </View>
-          {/* <Swiper
-            autoplay
-            autoplayTimeout={4}
-            showsPagination={false}
-            height={248}
-            loop
-            index={5}
-          >
-            {info.images.backdrops.map((item, index) => (
-              <View key={index}>
-                <Image
-                  source={{ uri: `${item.file_path}` }}
-                  style={styles.imageBackdrop}
-                  PlaceholderContent={
-                    <ActivityIndicator color={colors.red900} />
-                  }
-                />
-                <LinearGradient
-                  colors={[
-                    "rgba(0, 0, 0, 0.2)",
-                    "rgba(0,0,0, 0.2)",
-                    "rgba(0,0,0, 0.7)",
-                  ]}
-                  style={styles.linearGradient}
-                />
-              </View>
-            ))}
-          </Swiper> */}
+          <Backdrop images={media?.images} />
         </View>
         <View style={styles.cardContainer}>
-          <Image
-            source={{ uri: `${info.poster_path}` }}
-            style={styles.cardImage}
-            PlaceholderContent={<ActivityIndicator color={colors.red300} />}
-          />
+          <Cover images={media?.images} />
+
           <View style={styles.cardDetails}>
-            <Text style={styles.cardTitle}>{info.original_title}</Text>
-            <Text style={styles.cardTagline}>{info.tagline}</Text>
-            <View style={styles.cardGenre}>
-              {info.genres.map((item, index) => (
-                <View style={{ marginRight: 3 }} key={index}>
-                  <Chip
-                    title={item.name}
-                    type="outline"
-                    titleStyle={{ fontSize: 12 }}
-                    buttonStyle={{ padding: 5 }}
-                    disabled
-                  />
-                </View>
-              ))}
-            </View>
+            <Text style={styles.cardTitle}>{media?.title}</Text>
+            <Text
+              style={styles.cardTagline}
+              numberOfLines={2}
+              ellipsizeMode={"tail"}
+            >
+              {media?.description}
+            </Text>
+            <Genre genres={media?.genres} style={{ marginTop: 5 }} />
             <View style={styles.cardNumbers}>
               <View style={styles.ratingContainer}>
                 <Ionicons name="heart" size={20} color={colors.red800} />
@@ -201,11 +129,6 @@ const MediaScreen = (props) => {
               component={TrackScreen}
               options={{ tabBarLabel: "Chapters" }}
             />
-            <Tab.Screen
-              name="Review"
-              component={TrackScreen}
-              options={{ tabBarLabel: "Reviews" }}
-            />
           </Tab.Navigator>
         </View>
       </View>
@@ -223,16 +146,6 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: 157,
   },
-  linearGradient: {
-    top: 0,
-    left: 0,
-    right: 0,
-    height: 248,
-    position: "absolute",
-  },
-  imageBackdrop: {
-    height: 248,
-  },
   cardContainer: {
     flex: 1,
     position: "absolute",
@@ -241,15 +154,10 @@ const styles = StyleSheet.create({
     left: 16,
     flexDirection: "row",
   },
-  cardImage: {
-    height: 184,
-    width: 135,
-    borderRadius: 3,
-  },
   cardDetails: {
     paddingLeft: 10,
     flex: 1,
-    paddingTop: 50,
+    paddingTop: 2,
   },
   cardTitle: {
     color: colors.red300,
@@ -260,10 +168,6 @@ const styles = StyleSheet.create({
   cardTagline: {
     color: colors.red300,
     fontSize: 15,
-  },
-  cardGenre: {
-    flexDirection: "row",
-    marginTop: 5,
   },
   cardNumbers: {
     flexDirection: "row",

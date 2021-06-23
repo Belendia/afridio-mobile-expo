@@ -1,43 +1,36 @@
 import React, { memo } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
-import { Image } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
-import { ActivityIndicator } from "react-native";
+import { useDispatch } from "react-redux";
 
 import { View, Text } from "../Themed";
 import { colors } from "../../constants/Colors";
 import { Media } from "../../../types";
+import { setMediaLoadingTrue } from "../../redux/slices/mediaSlice";
+import { Cover } from "../Media/Cover";
 
 const SimpleMediaCard = memo(({ slug, images, title }: Media) => {
+  const dispatch = useDispatch();
   const navigation = useNavigation();
-  let cover = null;
-  if (images?.length > 0) {
-    cover = images.find((img) => img.width === 300);
-  }
 
   return (
     <TouchableOpacity
       activeOpacity={0.8}
-      onPress={() =>
+      onPress={() => {
+        /**
+         * When you open a media a second or more time, reload is false but there is a
+         * media data in the redux from the previous call. So the app will try to render
+         * that before it gets the latest data.
+         **/
+        dispatch(setMediaLoadingTrue());
         navigation.navigate("Home", {
           screen: "MediaScreen",
           params: { slug: slug },
-        })
-      }
+        });
+      }}
     >
       <View style={styles.cardContainer}>
-        {cover ? (
-          <Image
-            source={{ uri: cover?.image }}
-            style={styles.cardImage}
-            PlaceholderContent={<ActivityIndicator color={colors.red300} />}
-          />
-        ) : (
-          <Image
-            source={require("../../../assets/images/no-cover.png")}
-            style={styles.cardImage}
-          />
-        )}
+        <Cover images={images} />
 
         <View style={styles.cardTitleContainer}>
           <Text style={styles.cardTitle} numberOfLines={2}>
@@ -59,12 +52,6 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     marginRight: 10,
     borderRadius: 5,
-  },
-  cardImage: {
-    width: 135,
-    height: 184,
-    borderTopLeftRadius: 5,
-    borderTopRightRadius: 5,
   },
   cardTitleContainer: {
     flex: 1,

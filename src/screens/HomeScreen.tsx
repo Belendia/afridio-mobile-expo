@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { StyleSheet, FlatList, RefreshControl } from "react-native";
 import { FeaturedMediaCard } from "../components/Cards/FeaturedMediaCard";
 import { useDispatch, useSelector } from "react-redux";

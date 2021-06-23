@@ -9,3 +9,6 @@ export * from "./Form/OptionsInput";
 export * from "./Form/FormError";
 export * from "./Form/PhoneInput";
 export * from "./Media/Genre";
+export * from "./Media/Backdrop";
+export * from "./Media/Cover";
+export * from "./Media/Author";

@@ -4,15 +4,18 @@ import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons";
 import { Button } from "react-native-elements";
+import { useDispatch } from "react-redux";
 
 import { View, Text } from "../Themed";
 import { colors } from "../../constants/Colors";
 import { Media } from "../../../types";
 import { Genre } from "../Media/Genre";
+import { setMediaLoadingTrue } from "../../redux/slices/mediaSlice";
 
 const FeaturedMediaCard = memo(
   ({ slug, title, images, genres, description }: Media) => {
     const navigation = useNavigation();
+    const dispatch = useDispatch();
 
     let poster = null;
     if (images?.length > 0) {
@@ -73,12 +76,18 @@ const FeaturedMediaCard = memo(
               title="View Detail"
               buttonStyle={{ backgroundColor: colors.red800 }}
               titleStyle={{ fontSize: 16 }}
-              onPress={() =>
+              onPress={() => {
+                /**
+                 * When you open a media a second or more time, reload is false but there is a
+                 * media data in the redux from the previous call. So the app will try to render
+                 * that before it gets the latest data.
+                 **/
+                dispatch(setMediaLoadingTrue());
                 navigation.navigate("Home", {
                   screen: "MediaScreen",
                   params: { slug: slug },
-                })
-              }
+                });
+              }}
             />
           </View>
         </View>

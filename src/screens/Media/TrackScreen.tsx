@@ -2,13 +2,18 @@ import React from "react";
 import { StyleSheet, Platform } from "react-native";
 import { ListItem, Avatar } from "react-native-elements";
 import { AntDesign } from "@expo/vector-icons";
+import { useSelector } from "react-redux";
 
 import { Text } from "../../components/Themed";
-import movie from "../../../assets/data/movie";
 import { colors } from "../../constants/Colors";
+import { RootStoreType } from "../../redux/rootReducer";
 
 const TrackScreen = () => {
-  return movie.seasons.items[0].episodes.items.map((item, index) => (
+  const { media } = useSelector((state: RootStoreType) => ({
+    media: state.mediaReducer.media,
+  }));
+
+  return media?.tracks.map((item, index) => (
     <ListItem key={index}>
       <Avatar
         size="small"
@@ -31,7 +36,7 @@ const TrackScreen = () => {
       />
       <ListItem.Content>
         <ListItem.Title>
-          <Text style={styles.title}>{item.title}</Text>
+          <Text style={styles.title}>{item.name}</Text>
         </ListItem.Title>
         <ListItem.Subtitle>
           <Text style={styles.duration}>{item.duration}</Text>
