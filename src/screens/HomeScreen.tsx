@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, FlatList, RefreshControl } from "react-native";
-import PagerView from "react-native-pager-view";
 import { FeaturedMediaCard } from "../components/Cards/FeaturedMediaCard";
 import { useDispatch, useSelector } from "react-redux";
+import Carousel from "@r0b0t3d/react-native-carousel";
 
 import { View } from "../components/Themed";
 import HomeCategory from "../components/HomeCategory";
@@ -10,9 +10,11 @@ import { colors } from "../constants/Colors";
 import { startToGetHomeScreenData } from "../redux/slices/homeSlice";
 import { RootStoreType } from "../redux/rootReducer";
 import { ProgressBar } from "../components";
+import { useSharedValue } from "react-native-reanimated";
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
+  const currentPage = useSharedValue(0);
 
   //redux
   const { loading, featuredMedias, nonFeaturedMedias, error } = useSelector(
@@ -56,11 +58,22 @@ const HomeScreen = () => {
           featuredMedias &&
           featuredMedias.length > 0 &&
           featuredMedias[0].medias ? (
-            <PagerView style={{ height: 248 }} overdrag={false}>
-              {featuredMedias[0].medias.map((media) => (
-                <FeaturedMediaCard key={media.slug} {...media} />
-              ))}
-            </PagerView>
+            <Carousel
+              style={{ height: 248 }}
+              data={featuredMedias[0].medias}
+              loop={true}
+              autoPlay={true}
+              duration={5000}
+              inactiveOpacity={0.5}
+              inactiveScale={0.9}
+              firstItemAlignment="start"
+              spaceBetween={20}
+              animatedPage={currentPage}
+              keyExtractor={(item) => item.slug}
+              renderItem={({ item }) => {
+                return <FeaturedMediaCard key={item.slug} {...item} />;
+              }}
+            />
           ) : (
             <></>
           )

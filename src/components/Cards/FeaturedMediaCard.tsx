@@ -101,6 +101,8 @@ const styles = StyleSheet.create({
     // flex: 1,
     height: 248,
     backgroundColor: "black",
+    opacity: 0.5,
+    width: "100%",
   },
   cardContainer: {
     position: "absolute",

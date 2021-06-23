@@ -1932,6 +1932,18 @@
     "@babel/runtime" "^7.7.2"
     regenerator-runtime "^0.13.3"
 
+"@r0b0t3d/react-native-carousel@^3.3.3":
+  version "3.3.3"
+  resolved "https://registry.yarnpkg.com/@r0b0t3d/react-native-carousel/-/react-native-carousel-3.3.3.tgz#652c7fd1d0ecff557b965ef22dfc56f08aa5ce93"
+  integrity sha512-4QpEav4n7aeVQD+wECVUvvl6eLhdzACecCRuvEtvwuX0ZFkWlwcCgzWm0I+0NAxHF9nz9G5TMuX56nhs0FLK/Q==
+  dependencies:
+    "@r0b0t3d/react-native-hooks" "^1.0.2"
+
+"@r0b0t3d/react-native-hooks@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@r0b0t3d/react-native-hooks/-/react-native-hooks-1.0.2.tgz#06660801f665fe05bb77b881d9440e4278da8fe4"
+  integrity sha512-oBiK3yadQyh7LsM9CZCf2PYNFGd8gDskbxuAQWwhsQJmsVPDqFwx9h9+KxLj2Av5f8av2aE0uOv7QHhCYbuAsQ==
+
 "@react-native-async-storage/async-storage@^1.13.0":
   version "1.15.5"
   resolved "https://registry.yarnpkg.com/@react-native-async-storage/async-storage/-/async-storage-1.15.5.tgz#0d221a5ef1cd7a6494a42fcaad43136d68379afb"
@@ -7166,11 +7178,6 @@ react-native-otp-inputs@^7.0.3:
   version "7.0.3"
   resolved "https://registry.yarnpkg.com/react-native-otp-inputs/-/react-native-otp-inputs-7.0.3.tgz#f341284ff5f865239c59f0aad008994e26b114cb"
   integrity sha512-s+Bfcct2xpNSOqO9EiGjDh0RzwjDuiNW+nH41BzUz3ahL2iHo073RutHtb4wrvHX9r8f9aJNsfI9HtVCS80slA==
-
-react-native-pager-view@5.0.12:
-  version "5.0.12"
-  resolved "https://registry.yarnpkg.com/react-native-pager-view/-/react-native-pager-view-5.0.12.tgz#5106735d944e7f876b006377ab6a18859bf7730c"
-  integrity sha512-QmHUnQeP2qcxDofEOnKRmoUue0RaT55lhNJDfcQ1/SNuxif4Q2UyvDfqeItm1+toaE5tVnXqoreZh82FqUqnvw==
 
 react-native-ratings@^7.3.0:
   version "7.6.1"
