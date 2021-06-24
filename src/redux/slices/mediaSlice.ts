@@ -6,6 +6,7 @@ import { catchError, map, switchMap } from "rxjs/operators";
 import { Media } from "../../../types";
 import { Action } from "../rootReducer";
 import AfridioApiService from "../../services/network/AfridioApiService";
+import { authLogout } from "./authSlice";
 
 type MediaReducerType = {
   media: Media | null;
@@ -26,6 +27,8 @@ const mediaSlice = createSlice({
     startToGetMedia: (state, _) => ({
       ...state,
       loading: true,
+      media: null,
+      error: null,
     }),
     getMediaSuccess: (state, action) => ({
       ...state,
@@ -37,6 +40,7 @@ const mediaSlice = createSlice({
       ...state,
       loading: false,
       error: action.payload,
+      media: null,
     }),
     setMediaLoadingTrue: (state) => ({
       ...state,
@@ -54,7 +58,13 @@ export const getMediaEpic = (action$: Observable<Action<any>>) =>
           return getMediaSuccess(res);
         }),
         catchError((err) => {
-          return of(getMediaFailed(err));
+          let message = "Something went wrong";
+          if (err && err._status === "Offline") {
+            message = err._message;
+          } else if (err && err._status === 401) {
+            return of(authLogout("logout"));
+          }
+          return of(getMediaFailed(message));
         })
       );
     })

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import {
   StyleSheet,
   ScrollView,
@@ -17,7 +17,14 @@ import InfoScreen from "./InfoScreen";
 import { colors } from "../../constants/Colors";
 import { RootStoreType } from "../../redux/rootReducer";
 import { startToGetMedia } from "../../redux/slices/mediaSlice";
-import { ProgressBar, Backdrop, Cover, Genre } from "../../components";
+import {
+  ProgressBar,
+  Backdrop,
+  Cover,
+  Genre,
+  Error,
+  NoData,
+} from "../../components";
 
 const Tab = createMaterialTopTabNavigator();
 const WIDTH = Dimensions.get("window").width - 32;
@@ -33,6 +40,14 @@ const MediaScreen = () => {
     error: state.mediaReducer.error,
   }));
 
+  const fetchData = () => {
+    if (route.params?.slug) {
+      dispatch(startToGetMedia(route.params?.slug));
+    } else {
+      navigation.goBack();
+    }
+  };
+
   useEffect(() => {
     if (route.params?.slug) {
       dispatch(startToGetMedia(route.params?.slug));
@@ -41,9 +56,13 @@ const MediaScreen = () => {
     }
   }, [route.params?.slug]);
 
+  if (error && typeof error === "string") {
+    return <Error title={"Error"} message={error} onRetry={fetchData} />;
+  }
+
   return loading ? (
     <ProgressBar />
-  ) : (
+  ) : media ? (
     <ScrollView
       style={styles.mainContainer}
       scrollEventThrottle={100}
@@ -133,6 +152,8 @@ const MediaScreen = () => {
         </View>
       </View>
     </ScrollView>
+  ) : (
+    <NoData />
   );
 };
 
