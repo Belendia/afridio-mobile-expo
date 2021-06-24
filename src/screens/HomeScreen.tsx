@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import { StyleSheet, FlatList, RefreshControl } from "react-native";
 import { FeaturedMediaCard } from "../components/Cards/FeaturedMediaCard";
 import { useDispatch, useSelector } from "react-redux";
@@ -26,13 +26,9 @@ const HomeScreen = () => {
     })
   );
 
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const fetchData = () => {
+  const fetchData = useCallback(() => {
     dispatch(startToGetHomeScreenData());
-  };
+  }, []);
 
   return loading ? (
     <ProgressBar />

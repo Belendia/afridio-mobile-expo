@@ -20,13 +20,13 @@ import { startToGetMedia } from "../../redux/slices/mediaSlice";
 import { ProgressBar, Backdrop, Cover, Genre } from "../../components";
 
 const Tab = createMaterialTopTabNavigator();
+const WIDTH = Dimensions.get("window").width - 32;
 
 const MediaScreen = () => {
   const dispatch = useDispatch();
   const route = useRoute();
   const navigation = useNavigation();
 
-  console.log("Hi");
   const { loading, media, error } = useSelector((state: RootStoreType) => ({
     loading: state.mediaReducer.loading,
     media: state.mediaReducer.media,
@@ -91,7 +91,7 @@ const MediaScreen = () => {
           <View
             style={{
               alignSelf: "center",
-              width: Dimensions.get("window").width - 32,
+              width: WIDTH,
               marginBottom: 10,
             }}
           >
