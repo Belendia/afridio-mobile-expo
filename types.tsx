@@ -82,5 +82,6 @@ export type Media = {
   genres: string[];
   tracks: Track[];
   authors: Author[];
+  narrators: string[];
   images: Image[];
 };

@@ -1,13 +1,11 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import { Avatar } from "react-native-elements";
 import { useSelector } from "react-redux";
 
 import { View, Text } from "../../components/Themed";
-import movie from "../../../assets/data/movie";
 import { colors } from "../../constants/Colors";
 import { RootStoreType } from "../../redux/rootReducer";
-import { Author } from "../../components";
+import { Author, Chip } from "../../components";
 
 const InfoScreen = () => {
   const { media } = useSelector((state: RootStoreType) => ({
@@ -25,7 +23,9 @@ const InfoScreen = () => {
       </View>
       <View style={styles.labelRow}>
         <Text style={styles.label}>Narrated By</Text>
-        <Text style={styles.value}>Tigist Getachew</Text>
+      </View>
+      <View>
+        <Chip values={media?.narrators} style={{ marginVertical: 5 }} />
       </View>
 
       <View style={styles.labelRow}>
@@ -66,10 +66,13 @@ const styles = StyleSheet.create({
     color: colors.red300,
     fontSize: 14,
   },
+
   labelRow: {
     flexDirection: "row",
     justifyContent: "space-between",
     paddingTop: 10,
+    borderBottomColor: colors.black600,
+    borderBottomWidth: 1,
   },
   authorsContainer: {
     marginTop: 20,

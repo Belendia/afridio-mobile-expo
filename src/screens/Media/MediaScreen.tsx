@@ -21,7 +21,7 @@ import {
   ProgressBar,
   Backdrop,
   Cover,
-  Genre,
+  Chip,
   Error,
   NoData,
 } from "../../components";
@@ -92,7 +92,7 @@ const MediaScreen = () => {
             >
               {media?.description}
             </Text>
-            <Genre genres={media?.genres} style={{ marginTop: 5 }} />
+            <Chip values={media?.genres} style={{ marginTop: 5 }} />
             <View style={styles.cardNumbers}>
               <View style={styles.ratingContainer}>
                 <Ionicons name="heart" size={20} color={colors.red800} />

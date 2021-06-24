@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 import { View, Text } from "../Themed";
 import { colors } from "../../constants/Colors";
 import { Media } from "../../../types";
-import { Genre } from "../Media/Genre";
+import { Chip } from "../Media/Chip";
 import { setMediaLoadingTrue } from "../../redux/slices/mediaSlice";
 
 const FeaturedMediaCard = memo(
@@ -58,7 +58,7 @@ const FeaturedMediaCard = memo(
             <Text style={styles.cardTitle} numberOfLines={2}>
               {title}
             </Text>
-            <Genre genres={genres} />
+            <Chip values={genres} />
             <View style={styles.cardNumbers}>
               <View style={styles.cardHeart}>
                 <Ionicons name="heart" size={20} color={colors.red800} />

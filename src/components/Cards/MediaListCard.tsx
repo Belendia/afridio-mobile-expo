@@ -6,7 +6,7 @@ import { useNavigation } from "@react-navigation/native";
 import { View, Text } from "../Themed";
 import { Ionicons } from "@expo/vector-icons";
 import { colors } from "../../constants/Colors";
-import { Genre } from "../Media/Genre";
+import { Chip } from "../Media/Chip";
 
 interface MediaListCardProps {
   movie: {
@@ -37,7 +37,7 @@ const MediaListCard = memo(({ movie }: MediaListCardProps) => {
             <Text style={styles.cardTitle} numberOfLines={3}>
               {movie.title}
             </Text>
-            <Genre genres={[]} />
+            <Chip values={[]} />
             <View style={styles.cardNumbers}>
               <View style={styles.cardHeart}>
                 <Ionicons name="heart" size={20} color={colors.red800} />

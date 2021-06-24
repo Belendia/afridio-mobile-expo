@@ -1,23 +1,21 @@
 import React from "react";
 import { StyleSheet, ViewStyle } from "react-native";
-import { Chip } from "react-native-elements";
+import { Chip as ChipCom } from "react-native-elements";
+import { colors } from "../../constants/Colors";
 
 import { View } from "../Themed";
 
-type GenreProps = {
-  genres?: string[] | undefined;
+type ChipProps = {
+  values?: string[] | undefined;
   style?: ViewStyle | undefined;
 };
 
-const Genre = ({ genres, style }: GenreProps) => {
-  return genres ? (
-    <View style={[styles.cardGenre, style]}>
-      {genres.map((item, index) => (
-        <View
-          style={{ marginRight: 3, backgroundColor: "transparent" }}
-          key={index}
-        >
-          <Chip
+const Chip = ({ values, style }: ChipProps) => {
+  return values ? (
+    <View style={[styles.container, style]}>
+      {values.map((item, index) => (
+        <View style={{ backgroundColor: "transparent", margin: 2 }} key={index}>
+          <ChipCom
             title={item}
             type="outline"
             titleStyle={{ fontSize: 12 }}
@@ -32,14 +30,16 @@ const Genre = ({ genres, style }: GenreProps) => {
   );
 };
 
-export { Genre };
+export { Chip };
 
 const styles = StyleSheet.create({
-  cardGenre: {
+  container: {
     flexDirection: "row",
     backgroundColor: "transparent",
+    flexWrap: "wrap",
+    paddingVertical: 3,
   },
-  cardGenreItem: {
+  item: {
     fontSize: 11,
     marginRight: 5,
   },
