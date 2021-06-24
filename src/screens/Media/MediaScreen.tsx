@@ -40,21 +40,17 @@ const MediaScreen = () => {
     error: state.mediaReducer.error,
   }));
 
-  const fetchData = () => {
+  const fetchData = useCallback(() => {
     if (route.params?.slug) {
       dispatch(startToGetMedia(route.params?.slug));
     } else {
       navigation.goBack();
     }
-  };
+  }, [route.params?.slug, dispatch, startToGetMedia]);
 
   useEffect(() => {
-    if (route.params?.slug) {
-      dispatch(startToGetMedia(route.params?.slug));
-    } else {
-      navigation.goBack();
-    }
-  }, [route.params?.slug]);
+    fetchData();
+  }, [fetchData]);
 
   if (error && typeof error === "string") {
     return <Error title={"Error"} message={error} onRetry={fetchData} />;
