@@ -9,7 +9,7 @@ import HomeCategory from "../components/HomeCategory";
 import { colors } from "../constants/Colors";
 import { startToGetHomeScreenData } from "../redux/slices/homeSlice";
 import { RootStoreType } from "../redux/rootReducer";
-import { ProgressBar } from "../components";
+import { ProgressBar, Error } from "../components";
 import { useSharedValue } from "react-native-reanimated";
 
 const HomeScreen = () => {
@@ -28,8 +28,15 @@ const HomeScreen = () => {
 
   const fetchData = useCallback(() => {
     dispatch(startToGetHomeScreenData());
+  }, [dispatch, startToGetHomeScreenData]);
+
+  useEffect(() => {
+    fetchData();
   }, []);
 
+  if (error && typeof error === "string") {
+    return <Error title={"Error"} message={error} onRetry={fetchData} />;
+  }
   return loading ? (
     <ProgressBar />
   ) : (

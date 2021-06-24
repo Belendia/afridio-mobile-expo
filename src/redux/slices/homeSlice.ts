@@ -6,6 +6,7 @@ import { catchError, map, switchMap } from "rxjs/operators";
 import AfridioApiService from "../../services/network/AfridioApiService";
 import { Action } from "../rootReducer";
 import { Media } from "../../../types";
+import { authLogout } from "./authSlice";
 
 type HomeMedia = {
   id: string;
@@ -16,7 +17,7 @@ type HomeMedia = {
 type HomeReducerType = {
   featuredMedias: HomeMedia[] | null;
   nonFeaturedMedias: HomeMedia[] | null;
-  error: object | null;
+  error: Error | null;
   loading: boolean;
 };
 
@@ -68,7 +69,13 @@ export const getHomeEpic = (action$: Observable<Action<any>>) =>
           });
         }),
         catchError((err) => {
-          return of(getHomeScreenDataFailed(err));
+          let message = "Something went wrong";
+          if (err && err._status === "Offline") {
+            message = err._message;
+          } else if (err && err._status === 401) {
+            return of(authLogout("logout"));
+          }
+          return of(getHomeScreenDataFailed(message));
         })
       );
     })
