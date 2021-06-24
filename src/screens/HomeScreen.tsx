@@ -60,7 +60,8 @@ const HomeScreen = () => {
         ListHeaderComponent={
           featuredMedias &&
           featuredMedias.length > 0 &&
-          featuredMedias[0].medias ? (
+          featuredMedias[0].medias &&
+          featuredMedias[0].medias.length > 1 ? (
             <Carousel
               style={{ height: 248 }}
               data={featuredMedias[0].medias}
@@ -76,6 +77,14 @@ const HomeScreen = () => {
               renderItem={({ item }) => {
                 return <FeaturedMediaCard key={item.slug} {...item} />;
               }}
+            />
+          ) : featuredMedias &&
+            featuredMedias.length > 0 &&
+            featuredMedias[0].medias &&
+            featuredMedias[0].medias.length === 1 ? (
+            <FeaturedMediaCard
+              key={featuredMedias[0].medias[0].slug}
+              {...featuredMedias[0].medias[0]}
             />
           ) : (
             <></>
