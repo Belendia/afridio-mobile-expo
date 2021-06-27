@@ -58,7 +58,8 @@ const FeaturedMediaCard = memo(
             <Text style={styles.cardTitle} numberOfLines={2}>
               {title}
             </Text>
-            <Chip values={genres} />
+            {genres && genres.length > 0 && <Chip values={[genres[0]]} />}
+
             <View style={styles.cardNumbers}>
               <View style={styles.cardHeart}>
                 <Ionicons name="heart" size={20} color={colors.red800} />
