@@ -24,7 +24,10 @@ const HomeCategory = ({ id, title, medias }: HomeCategoryProps) => {
           <Text
             style={styles.listHeadingRight}
             onPress={() =>
-              navigation.navigate("Home", { screen: "MediaListScreen" })
+              navigation.navigate("Home", {
+                screen: "MediaListScreen",
+                params: { slug: id },
+              })
             }
           >
             See all

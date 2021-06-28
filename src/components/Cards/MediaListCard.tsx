@@ -7,22 +7,14 @@ import { View, Text } from "../Themed";
 import { Ionicons } from "@expo/vector-icons";
 import { colors } from "../../constants/Colors";
 import { Chip } from "../Media/Chip";
+import { Media } from "../../../types";
+import { Cover } from "../Media/Cover";
 
-interface MediaListCardProps {
-  movie: {
-    id: string;
-    title: string;
-    description: string;
-    cover: string;
-    poster: string;
-    genres: {
-      id: number;
-      name: string;
-    }[];
-  };
-}
+type MediaListCardProps = {
+  media: Media;
+};
 
-const MediaListCard = memo(({ movie }: MediaListCardProps) => {
+const MediaListCard = memo(({ media }: MediaListCardProps) => {
   const navigation = useNavigation();
 
   return (
@@ -32,20 +24,24 @@ const MediaListCard = memo(({ movie }: MediaListCardProps) => {
         onPress={() => navigation.navigate("Home", { screen: "MediaScreen" })}
       >
         <View style={styles.card}>
-          <Image source={{ uri: movie.cover }} style={styles.cardImage} />
+          <Cover images={media?.images} />
           <View style={styles.cardDetails}>
             <Text style={styles.cardTitle} numberOfLines={3}>
-              {movie.title}
+              {media.title}
             </Text>
-            <Chip values={[]} />
+            <Chip values={media.genres} />
             <View style={styles.cardNumbers}>
               <View style={styles.cardHeart}>
                 <Ionicons name="heart" size={20} color={colors.red800} />
                 <Text style={styles.cardRatings}>1.2k</Text>
               </View>
             </View>
-            <Text style={styles.cardDescription} numberOfLines={3}>
-              {movie.description}
+            <Text
+              style={styles.cardDescription}
+              numberOfLines={3}
+              ellipsizeMode="tail"
+            >
+              {media.description}
             </Text>
           </View>
         </View>
@@ -74,12 +70,6 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     flex: 1,
     backgroundColor: "transparent",
-  },
-  cardImage: {
-    height: 163,
-    width: 120,
-    borderTopLeftRadius: 3,
-    borderBottomLeftRadius: 3,
   },
   cardTitle: {
     color: colors.black300,

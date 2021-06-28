@@ -1,14 +1,42 @@
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { StyleSheet, Platform, FlatList, RefreshControl } from "react-native";
-import { View } from "../components/Themed";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigation, useRoute } from "@react-navigation/native";
 
-import categories from "../../assets/data/categories";
+import { View } from "../components/Themed";
 import { ProgressBar, MediaListCard } from "../components";
 import { colors } from "../constants/Colors";
+import { RootStoreType } from "../redux/rootReducer";
+import { startToGetMediaListByFormat } from "../redux/slices/mediaSlice";
 
 const MediaListScreen = () => {
+  const dispatch = useDispatch();
   const isLoading = false;
-  const isRefreshing = false;
+  const [isRefreshing, setIsRefresing] = useState(false);
+  const route = useRoute();
+  const navigation = useNavigation();
+
+  const retrieveNextPage = () => {};
+
+  const { mediaListByFormat, mediaListByFormatError } = useSelector(
+    (state: RootStoreType) => ({
+      mediaListByFormat: state.mediaReducer.mediaListByFormat,
+      mediaListByFormatError: state.mediaReducer.mediaListByFormatError,
+    })
+  );
+
+  const fetchData = useCallback(() => {
+    if (route.params?.slug) {
+      dispatch(startToGetMediaListByFormat(route.params?.slug));
+    } else {
+      navigation.goBack();
+    }
+  }, [route.params?.slug, dispatch, startToGetMediaListByFormat]);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return isLoading ? (
     <View style={styles.progressBar}>
       <ProgressBar />
@@ -16,11 +44,11 @@ const MediaListScreen = () => {
   ) : (
     <FlatList
       style={styles.container}
-      onEndReached={() => true}
+      onEndReached={() => retrieveNextPage()}
       onEndReachedThreshold={1200}
-      //   dataSource={this.state.dataSource}
-      renderItem={({ item }) => <MediaListCard movie={item} />}
-      data={categories.items[0].movies}
+      data={mediaListByFormat}
+      renderItem={({ item }) => <MediaListCard key={item.slug} media={item} />}
+      keyExtractor={(item) => item.slug}
       ListFooterComponent={() => (
         <View style={{ height: 50 }}>
           <ProgressBar />

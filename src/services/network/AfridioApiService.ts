@@ -182,6 +182,15 @@ class AfridioApiService {
       })
     );
 
+  mediaListByFormat = (slug: string) =>
+    from(
+      this.api({
+        url: AfridioEndpoints.mediaListByFormat(slug),
+        verb: "GET",
+        withToken: true,
+      })
+    );
+
   resendOTP = (data: object) =>
     from(
       this.api({
