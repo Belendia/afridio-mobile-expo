@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { ofType } from "redux-observable";
 import { of, Observable } from "rxjs";
 import { catchError, map, switchMap } from "rxjs/operators";
+import { parse } from "expo-linking";
 
 import { Media } from "../../../types";
 import { Action } from "../rootReducer";
@@ -10,22 +11,22 @@ import { authLogout } from "./authSlice";
 
 type MediaReducerType = {
   media: Media | null;
-  mediaListByFormat: Media[] | null;
+  mediaListByFormat: Media[];
   error: object | null;
   mediaListByFormatError: object | null;
   loading: boolean;
-  next: number | null;
-  previous: number | null;
+  loadingList: boolean;
+  next: string | null;
 };
 
 const initialState: MediaReducerType = {
   media: null,
-  mediaListByFormat: null,
+  mediaListByFormat: [],
   error: null,
   mediaListByFormatError: null,
   loading: false,
+  loadingList: false,
   next: null,
-  previous: null,
 };
 
 const mediaSlice = createSlice({
@@ -36,13 +37,17 @@ const mediaSlice = createSlice({
       ...state,
       loading: true,
       media: null,
+      mediaListByFormat: [],
+      loadingList: false,
       error: null,
+      mediaListByFormatError: null,
     }),
     getMediaSuccess: (state, action) => ({
       ...state,
       media: action.payload,
       loading: false,
       error: null,
+      mediaListByFormatError: null,
     }),
     getMediaFailed: (state, action) => ({
       ...state,
@@ -56,16 +61,31 @@ const mediaSlice = createSlice({
     }),
     startToGetMediaListByFormat: (state, _) => ({
       ...state,
+      loadingList: true,
+      mediaListByFormatError: null,
     }),
+    // startToGetMediaListByFormatNextPage: (state, _) => ({
+    //   ...state,
+    // }),
     getMediaListByFormatSuccess: (state, action) => ({
       ...state,
-      mediaListByFormat: action.payload.results,
+      mediaListByFormat: [
+        ...state.mediaListByFormat,
+        ...action.payload.results,
+      ],
       next: action.payload.next,
-      previous: action.payload.previous,
+      loadingList: false,
+      mediaListByFormatError: null,
     }),
     getMediaListByFormatFailed: (state, action) => ({
       ...state,
       mediaListByFormatError: action.payload,
+      loadingList: false,
+    }),
+    clearMedia: (state) => ({
+      ...state,
+      media: null,
+      mediaListByFormat: [],
     }),
   },
 });
@@ -94,12 +114,24 @@ export const getMediaEpic = (action$: Observable<Action<any>>) =>
 export const getMediaListByFormatEpic = (action$: Observable<Action<any>>) =>
   action$.pipe(
     ofType(startToGetMediaListByFormat.type),
-    switchMap(({ payload: slug }) => {
-      return AfridioApiService.mediaListByFormat(slug).pipe(
+    switchMap(({ payload }) => {
+      const { slug, page } = payload;
+
+      return AfridioApiService.mediaListByFormat(slug, page).pipe(
         map((res) => {
+          if (res.next) {
+            const url = parse(res.next);
+            const r = {
+              results: res.results,
+              next: url.queryParams["page"],
+            };
+            return getMediaListByFormatSuccess(r);
+          }
+
           return getMediaListByFormatSuccess(res);
         }),
         catchError((err) => {
+          console.log(err);
           let message = "Something went wrong";
           if (err && err._status === "Offline") {
             message = err._message;
@@ -122,6 +154,7 @@ export const {
   startToGetMediaListByFormat,
   getMediaListByFormatSuccess,
   getMediaListByFormatFailed,
+  clearMedia,
 } = mediaSlice.actions;
 
 export default mediaSlice.reducer;

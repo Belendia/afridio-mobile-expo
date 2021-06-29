@@ -7,7 +7,12 @@ class AfridioEndpoints {
   verify = () => `${this.V1}/phone/verify/`;
   genre = () => `${this.V1}/genres/`;
   media = (slug: string) => `${this.V1}/medias/${slug}`;
-  mediaListByFormat = (slug: string) => `${this.V1}/medias/?category=${slug}`;
+  mediaListByFormat = (slug: string, page: string) => {
+    if (page) {
+      return `${this.V1}/medias/?category=${slug}&page=${page}`;
+    }
+    return `${this.V1}/medias/?category=${slug}`;
+  };
   home = () => `${this.V1}/home/`;
   resend = () => `${this.V1}/phone/resend/`;
 }

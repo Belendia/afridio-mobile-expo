@@ -182,10 +182,10 @@ class AfridioApiService {
       })
     );
 
-  mediaListByFormat = (slug: string) =>
+  mediaListByFormat = (slug: string, page: string) =>
     from(
       this.api({
-        url: AfridioEndpoints.mediaListByFormat(slug),
+        url: AfridioEndpoints.mediaListByFormat(slug, page),
         verb: "GET",
         withToken: true,
       })

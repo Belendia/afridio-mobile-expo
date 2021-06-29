@@ -1,5 +1,11 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { StyleSheet, Platform, FlatList, RefreshControl } from "react-native";
+import {
+  Dimensions,
+  StyleSheet,
+  Platform,
+  FlatList,
+  RefreshControl,
+} from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigation, useRoute } from "@react-navigation/native";
 
@@ -7,27 +13,46 @@ import { View } from "../components/Themed";
 import { ProgressBar, MediaListCard } from "../components";
 import { colors } from "../constants/Colors";
 import { RootStoreType } from "../redux/rootReducer";
-import { startToGetMediaListByFormat } from "../redux/slices/mediaSlice";
+import {
+  startToGetMediaListByFormat,
+  clearMedia,
+} from "../redux/slices/mediaSlice";
+
+const { height } = Dimensions.get("window");
 
 const MediaListScreen = () => {
   const dispatch = useDispatch();
-  const isLoading = false;
-  const [isRefreshing, setIsRefresing] = useState(false);
+  const [isRefreshingNextPage, setIsRefresingNextPage] = useState(false);
+
   const route = useRoute();
   const navigation = useNavigation();
 
-  const retrieveNextPage = () => {};
-
-  const { mediaListByFormat, mediaListByFormatError } = useSelector(
-    (state: RootStoreType) => ({
+  const { mediaListByFormat, mediaListByFormatError, next, loadingList } =
+    useSelector((state: RootStoreType) => ({
       mediaListByFormat: state.mediaReducer.mediaListByFormat,
       mediaListByFormatError: state.mediaReducer.mediaListByFormatError,
-    })
-  );
+      next: state.mediaReducer.next,
+      loadingList: state.mediaReducer.loadingList,
+    }));
+
+  const fetchNextPage = useCallback(() => {
+    console.log("NextPage");
+    setIsRefresingNextPage(true);
+    if (next !== null) {
+      dispatch(
+        startToGetMediaListByFormat({ slug: route.params?.slug, page: next })
+      );
+    } else {
+      setIsRefresingNextPage(false);
+    }
+  }, [dispatch, startToGetMediaListByFormat, next]);
 
   const fetchData = useCallback(() => {
+    console.log("Data");
     if (route.params?.slug) {
-      dispatch(startToGetMediaListByFormat(route.params?.slug));
+      dispatch(
+        startToGetMediaListByFormat({ slug: route.params?.slug, page: null })
+      );
     } else {
       navigation.goBack();
     }
@@ -35,37 +60,44 @@ const MediaListScreen = () => {
 
   useEffect(() => {
     fetchData();
+    return () => {
+      dispatch(clearMedia());
+    };
   }, []);
 
-  return isLoading ? (
-    <View style={styles.progressBar}>
-      <ProgressBar />
+  return (
+    <View style={{ flex: 1, height: height }}>
+      <FlatList
+        style={styles.container}
+        onEndReached={() => fetchNextPage()}
+        onEndReachedThreshold={0.5}
+        data={mediaListByFormat}
+        renderItem={({ item }) => (
+          <MediaListCard key={item.slug} media={item} />
+        )}
+        keyExtractor={(item) => item.slug}
+        ListFooterComponent={() =>
+          isRefreshingNextPage ? (
+            <View style={{ height: 50 }}>
+              <ProgressBar />
+            </View>
+          ) : (
+            <></>
+          )
+        }
+        refreshControl={
+          <RefreshControl
+            refreshing={loadingList}
+            // onRefresh={fetchData}
+            colors={[colors.white]}
+            tintColor={colors.red400}
+            title="loading..."
+            titleColor={colors.red400}
+            progressBackgroundColor={colors.red400}
+          />
+        }
+      />
     </View>
-  ) : (
-    <FlatList
-      style={styles.container}
-      onEndReached={() => retrieveNextPage()}
-      onEndReachedThreshold={1200}
-      data={mediaListByFormat}
-      renderItem={({ item }) => <MediaListCard key={item.slug} media={item} />}
-      keyExtractor={(item) => item.slug}
-      ListFooterComponent={() => (
-        <View style={{ height: 50 }}>
-          <ProgressBar />
-        </View>
-      )}
-      refreshControl={
-        <RefreshControl
-          refreshing={isRefreshing}
-          // onRefresh={this._onRefresh}
-          colors={[colors.red900]}
-          tintColor="white"
-          title="loading..."
-          titleColor="white"
-          progressBackgroundColor="white"
-        />
-      }
-    />
   );
 };
 
@@ -77,7 +109,8 @@ const styles = StyleSheet.create({
     backgroundColor: colors.black800,
     ...Platform.select({
       ios: {
-        paddingTop: 83,
+        paddingTop: 30,
+        paddingBottom: 300,
       },
     }),
   },
