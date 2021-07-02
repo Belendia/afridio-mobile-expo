@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigation, useRoute } from "@react-navigation/native";
 
 import { View } from "../components/Themed";
-import { ProgressBar, MediaListCard } from "../components";
+import { ProgressBar, MediaListCard, Error } from "../components";
 import { colors } from "../constants/Colors";
 import { RootStoreType } from "../redux/rootReducer";
 import {
@@ -68,6 +68,16 @@ const MediaListScreen = () => {
       }),
     [navigation]
   );
+
+  if (mediaListByFormatError && typeof mediaListByFormatError === "string") {
+    return (
+      <Error
+        title={"Error"}
+        message={mediaListByFormatError}
+        onRetry={fetchData}
+      />
+    );
+  }
 
   return (
     <View style={{ flex: 1, height: height }}>
