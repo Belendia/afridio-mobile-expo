@@ -37,7 +37,6 @@ const mediaSlice = createSlice({
       ...state,
       loading: true,
       media: null,
-      mediaListByFormat: [],
       loadingList: false,
       error: null,
       mediaListByFormatError: null,

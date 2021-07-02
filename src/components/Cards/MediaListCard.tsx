@@ -21,7 +21,12 @@ const MediaListCard = memo(
       <View style={styles.cardContainer}>
         <TouchableOpacity
           activeOpacity={0.9}
-          onPress={() => navigation.navigate("Home", { screen: "MediaScreen" })}
+          onPress={() =>
+            navigation.navigate("Home", {
+              screen: "MediaScreen",
+              params: { slug: media.slug },
+            })
+          }
         >
           <View style={styles.card}>
             <Cover images={media?.images} />

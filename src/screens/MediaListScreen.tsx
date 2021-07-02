@@ -36,7 +36,6 @@ const MediaListScreen = () => {
     }));
 
   const fetchNextPage = useCallback(() => {
-    console.log("NextPage");
     setIsRefresingNextPage(true);
     if (next !== null) {
       dispatch(
@@ -48,7 +47,6 @@ const MediaListScreen = () => {
   }, [dispatch, startToGetMediaListByFormat, next]);
 
   const fetchData = useCallback(() => {
-    console.log("Data");
     if (route.params?.slug) {
       dispatch(
         startToGetMediaListByFormat({ slug: route.params?.slug, page: null })
@@ -60,10 +58,16 @@ const MediaListScreen = () => {
 
   useEffect(() => {
     fetchData();
-    return () => {
-      dispatch(clearMedia());
-    };
+    // return () => {};
   }, []);
+
+  useEffect(
+    () =>
+      navigation.addListener("beforeRemove", (e) => {
+        dispatch(clearMedia());
+      }),
+    [navigation]
+  );
 
   return (
     <View style={{ flex: 1, height: height }}>
