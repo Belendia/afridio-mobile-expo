@@ -25,6 +25,7 @@ import {
   Error,
   NoData,
 } from "../../components";
+import { Size } from "../../constants/Options";
 
 const Tab = createMaterialTopTabNavigator();
 const WIDTH = Dimensions.get("window").width - 32;
@@ -79,9 +80,10 @@ const MediaScreen = () => {
             </TouchableWithoutFeedback>
           </View>
           <Backdrop images={media?.images} />
+          {/* <VideoPlayer images={media?.images} track={media.tracks[0]} /> */}
         </View>
         <View style={styles.cardContainer}>
-          <Cover images={media?.images} />
+          <Cover images={media?.images} size={Size.Small} />
 
           <View style={styles.cardDetails}>
             <Text style={styles.cardTitle}>{media?.title}</Text>
@@ -161,14 +163,14 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     flex: 1,
-    marginTop: 157,
+    marginTop: 10,
   },
   cardContainer: {
     flex: 1,
-    position: "absolute",
-    top: 200,
-    right: 16,
-    left: 16,
+    // position: "absolute",
+    // top: 200,
+    // right: 16,
+    // left: 16,
     flexDirection: "row",
   },
   cardDetails: {

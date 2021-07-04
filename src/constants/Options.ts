@@ -22,3 +22,8 @@ export const SettingsMoreOptions = [
     chevron: false,
   },
 ];
+
+export enum Size {
+  Large,
+  Small,
+}
