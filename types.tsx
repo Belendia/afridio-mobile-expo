@@ -12,7 +12,6 @@ export type BottomTabParamList = {
 
 export type HomeParamList = {
   HomeScreen: undefined;
-  MediaScreen: undefined;
   MediaListScreen: undefined;
 };
 

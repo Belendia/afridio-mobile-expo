@@ -8,19 +8,22 @@ import { Text } from "../Themed";
 import { colors } from "../../constants/Colors";
 import { RootStoreType } from "../../redux/rootReducer";
 import { setTrackIndex } from "../../redux/slices/mediaSlice";
-import { color } from "react-native-elements/dist/helpers";
+import { Track } from "../../../types";
 
-const Tracks = () => {
+type TracksProps = {
+  tracks: Track[] | undefined;
+};
+
+const Tracks = ({ tracks }: TracksProps) => {
   const dispatch = useDispatch();
 
-  const { media, selectedTrackIndex } = useSelector((state: RootStoreType) => ({
-    media: state.mediaReducer.media,
+  const { selectedTrackIndex } = useSelector((state: RootStoreType) => ({
     selectedTrackIndex: state.mediaReducer.selectedTrackIndex,
   }));
 
   const setTrack = useCallback((index) => dispatch(setTrackIndex(index)), []);
 
-  return media?.tracks.map((item, index) => (
+  return tracks?.map((item, index) => (
     <ListItem key={index} onPress={() => setTrack(index)}>
       <Avatar
         size="small"

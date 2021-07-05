@@ -1,17 +1,18 @@
 import React, { memo } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 import { useDispatch } from "react-redux";
 
 import { View, Text } from "../Themed";
 import { colors } from "../../constants/Colors";
 import { Media } from "../../../types";
-import { setMediaLoadingTrue } from "../../redux/slices/mediaSlice";
+import {
+  setMediaLoadingTrue,
+  setMediaSlug,
+} from "../../redux/slices/mediaSlice";
 import { Cover } from "../Media/Cover";
 
 const SimpleMediaCard = memo(({ slug, images, title }: Media) => {
   const dispatch = useDispatch();
-  const navigation = useNavigation();
 
   return (
     <TouchableOpacity
@@ -23,10 +24,7 @@ const SimpleMediaCard = memo(({ slug, images, title }: Media) => {
          * that before it gets the latest data.
          **/
         dispatch(setMediaLoadingTrue());
-        navigation.navigate("Home", {
-          screen: "MediaScreen",
-          params: { slug: slug },
-        });
+        dispatch(setMediaSlug(slug));
       }}
     >
       <View style={styles.cardContainer}>

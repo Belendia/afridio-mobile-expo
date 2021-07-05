@@ -1,6 +1,5 @@
 import React, { useEffect, useCallback } from "react";
 import { Dimensions, StyleSheet } from "react-native";
-import { useNavigation, useRoute } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
 import Animated, { Easing, useSharedValue } from "react-native-reanimated";
 import Constants from "expo-constants";
@@ -9,9 +8,11 @@ import { Video } from "expo-av";
 import { View } from "../../components/Themed";
 import { RootStoreType } from "../../redux/rootReducer";
 import { startToGetMedia } from "../../redux/slices/mediaSlice";
-import { ProgressBar, Error, NoData, Content } from "../../components";
 import { getPoster, getTrack } from "../../helpers/Utils";
-
+import { ProgressBar } from "../ProgressBar";
+import { Content } from "./Content";
+import { NoData } from "../NoData";
+import { Error } from "../Error";
 const {
   Extrapolate,
   Value,
@@ -40,32 +41,28 @@ const midBound = height - 64 * 3;
 const upperBound = midBound + minHeight;
 const AnimatedVideo = Animated.createAnimatedComponent(Video);
 
-const MediaScreen = () => {
+const MediaPlayer = () => {
   const dispatch = useDispatch();
-  const route = useRoute();
-  const navigation = useNavigation();
 
   const finished = useSharedValue(0);
   const velocity = useSharedValue(0);
   const position = useSharedValue(0);
   const time = useSharedValue(0);
 
-  const { loading, media, selectedTrackIndex, error } = useSelector(
-    (state: RootStoreType) => ({
+  const { loading, media, selectedTrackIndex, selectedMediaSlug, error } =
+    useSelector((state: RootStoreType) => ({
       loading: state.mediaReducer.loading,
       media: state.mediaReducer.media,
       selectedTrackIndex: state.mediaReducer.selectedTrackIndex,
+      selectedMediaSlug: state.mediaReducer.selectedMediaSlug,
       error: state.mediaReducer.error,
-    })
-  );
+    }));
 
   const fetchData = useCallback(() => {
-    if (route.params?.slug) {
-      dispatch(startToGetMedia(route.params?.slug));
-    } else {
-      navigation.goBack();
+    if (selectedMediaSlug) {
+      dispatch(startToGetMedia(selectedMediaSlug));
     }
-  }, [route.params?.slug, dispatch, startToGetMedia]);
+  }, [selectedMediaSlug, dispatch, startToGetMedia]);
 
   useEffect(() => {
     fetchData();
@@ -101,7 +98,7 @@ const MediaScreen = () => {
   );
 };
 
-export default MediaScreen;
+export { MediaPlayer };
 
 const styles = StyleSheet.create({
   bannerContainer: {

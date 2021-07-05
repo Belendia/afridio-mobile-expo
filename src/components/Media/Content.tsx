@@ -60,7 +60,8 @@ const Content = ({ media }: ContentProps) => {
             onPress={() => true}
           />
         </View>
-        <Tab.Navigator
+        <Tracks tracks={media?.tracks} />
+        {/* <Tab.Navigator
           initialRouteName="Chapter"
           tabBarOptions={{
             activeTintColor: "white",
@@ -81,7 +82,7 @@ const Content = ({ media }: ContentProps) => {
             component={Tracks}
             options={{ tabBarLabel: "Chapters" }}
           />
-        </Tab.Navigator>
+        </Tab.Navigator> */}
       </View>
     </ScrollView>
   );

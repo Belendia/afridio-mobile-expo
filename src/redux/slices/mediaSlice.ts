@@ -13,6 +13,7 @@ type MediaReducerType = {
   media: Media | null;
   mediaListByFormat: Media[];
   selectedTrackIndex: number;
+  selectedMediaSlug: string | null;
   error: object | null;
   mediaListByFormatError: object | null;
   loading: boolean;
@@ -24,6 +25,7 @@ const initialState: MediaReducerType = {
   media: null,
   mediaListByFormat: [],
   selectedTrackIndex: -1,
+  selectedMediaSlug: null,
   error: null,
   mediaListByFormatError: null,
   loading: false,
@@ -94,6 +96,10 @@ const mediaSlice = createSlice({
     setTrackIndex: (state, action) => ({
       ...state,
       selectedTrackIndex: action.payload,
+    }),
+    setMediaSlug: (state, action) => ({
+      ...state,
+      selectedMediaSlug: action.payload,
     }),
   },
 });
@@ -172,6 +178,7 @@ export const {
   getMediaListByFormatFailed,
   clearMedia,
   setTrackIndex,
+  setMediaSlug,
 } = mediaSlice.actions;
 
 export default mediaSlice.reducer;

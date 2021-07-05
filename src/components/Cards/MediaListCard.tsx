@@ -8,6 +8,8 @@ import { colors } from "../../constants/Colors";
 import { Chip } from "../Media/Chip";
 import { Media } from "../../../types";
 import { Cover } from "../Media/Cover";
+import { useDispatch } from "react-redux";
+import { setMediaSlug } from "../../redux/slices/mediaSlice";
 
 type MediaListCardProps = {
   media: Media;
@@ -15,18 +17,13 @@ type MediaListCardProps = {
 
 const MediaListCard = memo(
   ({ media }: MediaListCardProps) => {
-    const navigation = useNavigation();
-
+    // const navigation = useNavigation();
+    const dispatch = useDispatch();
     return (
       <View style={styles.cardContainer}>
         <TouchableOpacity
           activeOpacity={0.9}
-          onPress={() =>
-            navigation.navigate("Home", {
-              screen: "MediaScreen",
-              params: { slug: media.slug },
-            })
-          }
+          onPress={() => dispatch(setMediaSlug(media.slug))}
         >
           <View style={styles.card}>
             <Cover images={media?.images} />

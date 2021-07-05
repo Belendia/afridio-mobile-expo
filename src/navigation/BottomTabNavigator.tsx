@@ -1,5 +1,8 @@
 import { Ionicons } from "@expo/vector-icons";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import {
+  BottomTabBar,
+  createBottomTabNavigator,
+} from "@react-navigation/bottom-tabs";
 import * as React from "react";
 
 import Colors from "../constants/Colors";
@@ -10,6 +13,7 @@ import SearchNavigator from "./SearchNavigator";
 
 import { BottomTabParamList } from "../../types";
 import SettingsNavigator from "./SettingsNavigator";
+import { MediaPlayer } from "../components";
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -19,6 +23,12 @@ const BottomTabNavigator = () => {
   return (
     <BottomTab.Navigator
       initialRouteName="Home"
+      tabBar={(props) => (
+        <>
+          <MediaPlayer />
+          <BottomTabBar {...props} />
+        </>
+      )}
       tabBarOptions={{
         activeTintColor: Colors[colorScheme].tint,
       }}
