@@ -50,11 +50,14 @@ const MediaScreen = () => {
   const position = useSharedValue(0);
   const time = useSharedValue(0);
 
-  const { loading, media, error } = useSelector((state: RootStoreType) => ({
-    loading: state.mediaReducer.loading,
-    media: state.mediaReducer.media,
-    error: state.mediaReducer.error,
-  }));
+  const { loading, media, selectedTrackIndex, error } = useSelector(
+    (state: RootStoreType) => ({
+      loading: state.mediaReducer.loading,
+      media: state.mediaReducer.media,
+      selectedTrackIndex: state.mediaReducer.selectedTrackIndex,
+      error: state.mediaReducer.error,
+    })
+  );
 
   const fetchData = useCallback(() => {
     if (route.params?.slug) {
@@ -78,7 +81,7 @@ const MediaScreen = () => {
     <>
       <View style={styles.bannerContainer}>
         <AnimatedVideo
-          source={getTrack(media.tracks[0])}
+          source={getTrack(media.tracks, selectedTrackIndex)}
           posterSource={getPoster(media?.images)}
           usePoster={true}
           style={styles.player}
@@ -86,7 +89,7 @@ const MediaScreen = () => {
           resizeMode="contain"
           shouldPlay
           onPlaybackStatusUpdate={(status) => {
-            console.log(status);
+            // console.log(status);
             // setStatus(() => status);
           }}
         />

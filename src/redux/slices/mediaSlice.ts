@@ -12,6 +12,7 @@ import { authLogout } from "./authSlice";
 type MediaReducerType = {
   media: Media | null;
   mediaListByFormat: Media[];
+  selectedTrackIndex: number;
   error: object | null;
   mediaListByFormatError: object | null;
   loading: boolean;
@@ -22,6 +23,7 @@ type MediaReducerType = {
 const initialState: MediaReducerType = {
   media: null,
   mediaListByFormat: [],
+  selectedTrackIndex: -1,
   error: null,
   mediaListByFormatError: null,
   loading: false,
@@ -37,13 +39,15 @@ const mediaSlice = createSlice({
       ...state,
       loading: true,
       media: null,
+      selectedTrackIndex: -1,
       loadingList: false,
       error: null,
       mediaListByFormatError: null,
     }),
     getMediaSuccess: (state, action) => ({
       ...state,
-      media: action.payload,
+      media: action.payload.media,
+      selectedTrackIndex: action.payload.selectedTrackIndex,
       loading: false,
       error: null,
       mediaListByFormatError: null,
@@ -85,6 +89,11 @@ const mediaSlice = createSlice({
       ...state,
       media: null,
       mediaListByFormat: [],
+      selectedTrackIndex: -1,
+    }),
+    setTrackIndex: (state, action) => ({
+      ...state,
+      selectedTrackIndex: action.payload,
     }),
   },
 });
@@ -95,7 +104,15 @@ export const getMediaEpic = (action$: Observable<Action<any>>) =>
     switchMap(({ payload: slug }) => {
       return AfridioApiService.media(slug).pipe(
         map((res) => {
-          return getMediaSuccess(res);
+          let selectedIndex = -1;
+          if (res.tracks && res.tracks.length > 0) {
+            selectedIndex = 0;
+          }
+
+          return getMediaSuccess({
+            media: res,
+            selectedTrackIndex: selectedIndex,
+          });
         }),
         catchError((err) => {
           let message = "Something went wrong";
@@ -154,6 +171,7 @@ export const {
   getMediaListByFormatSuccess,
   getMediaListByFormatFailed,
   clearMedia,
+  setTrackIndex,
 } = mediaSlice.actions;
 
 export default mediaSlice.reducer;

@@ -8,9 +8,9 @@ export const getPoster = (images: Image[]) => {
   return require("../../assets/images/backdrop.png");
 };
 
-export const getTrack = (track: Track | undefined) => {
-  if (track && track.file_url) {
-    return { uri: track.file_url };
+export const getTrack = (track: Track[] | undefined, index: number) => {
+  if (track && track.length && index > -1 && track[index].file_url) {
+    return { uri: track[index].file_url };
   }
   return require("../../assets/videos/no-track.mp4");
 };

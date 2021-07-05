@@ -1,45 +1,72 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { StyleSheet, Platform } from "react-native";
 import { ListItem, Avatar } from "react-native-elements";
 import { AntDesign } from "@expo/vector-icons";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import { Text } from "../Themed";
 import { colors } from "../../constants/Colors";
 import { RootStoreType } from "../../redux/rootReducer";
+import { setTrackIndex } from "../../redux/slices/mediaSlice";
+import { color } from "react-native-elements/dist/helpers";
 
 const Tracks = () => {
-  const { media } = useSelector((state: RootStoreType) => ({
+  const dispatch = useDispatch();
+
+  const { media, selectedTrackIndex } = useSelector((state: RootStoreType) => ({
     media: state.mediaReducer.media,
+    selectedTrackIndex: state.mediaReducer.selectedTrackIndex,
   }));
 
+  const setTrack = useCallback((index) => dispatch(setTrackIndex(index)), []);
+
   return media?.tracks.map((item, index) => (
-    <ListItem key={index}>
+    <ListItem key={index} onPress={() => setTrack(index)}>
       <Avatar
         size="small"
         rounded
         title={(index + 1).toString()}
-        titleStyle={{ color: colors.red300 }}
-        avatarStyle={{
-          borderWidth: 1,
-          borderColor: colors.red300,
+        titleStyle={[
+          { color: colors.red300 },
+          index === selectedTrackIndex && { color: colors.red400 },
+        ]}
+        avatarStyle={[
+          {
+            borderWidth: 1,
+            borderColor: colors.red300,
 
-          ...Platform.select({
-            android: {
-              borderTopWidth: 0,
-              borderLeftWidth: 0,
-              borderRightWidth: 0,
-              borderBottomWidth: 0,
-            },
-          }),
-        }}
+            ...Platform.select({
+              android: {
+                borderTopWidth: 0,
+                borderLeftWidth: 0,
+                borderRightWidth: 0,
+                borderBottomWidth: 0,
+              },
+            }),
+          },
+          index === selectedTrackIndex && { borderColor: colors.red400 },
+        ]}
       />
       <ListItem.Content>
         <ListItem.Title>
-          <Text style={styles.title}>{item.name}</Text>
+          <Text
+            style={[
+              styles.title,
+              index === selectedTrackIndex && { color: colors.red400 },
+            ]}
+          >
+            {item.name}
+          </Text>
         </ListItem.Title>
         <ListItem.Subtitle>
-          <Text style={styles.duration}>{item.duration}</Text>
+          <Text
+            style={[
+              styles.duration,
+              index === selectedTrackIndex && { color: colors.red400 },
+            ]}
+          >
+            {item.duration}
+          </Text>
         </ListItem.Subtitle>
       </ListItem.Content>
       <AntDesign name="clouddownloado" size={24} color={"gray"} />
