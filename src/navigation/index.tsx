@@ -8,11 +8,11 @@ import * as React from "react";
 import { ColorSchemeName } from "react-native";
 
 import LinkingConfiguration from "./LinkingConfiguration";
-import RootNavigator from "./RootNavigator";
 import AuthNavigator from "./AuthNavigator";
 import useAutoLogin from "../hooks/useAutoLogin";
 import { useSelector } from "react-redux";
 import { RootStoreType } from "../redux/rootReducer";
+import BottomTabNavigator from "./BottomTabNavigator";
 
 const Navigation = ({ colorScheme }: { colorScheme: ColorSchemeName }) => {
   useAutoLogin();
@@ -26,7 +26,7 @@ const Navigation = ({ colorScheme }: { colorScheme: ColorSchemeName }) => {
       linking={LinkingConfiguration}
       theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}
     >
-      {token ? <RootNavigator /> : <AuthNavigator />}
+      {token ? <BottomTabNavigator /> : <AuthNavigator />}
     </NavigationContainer>
   );
 };
