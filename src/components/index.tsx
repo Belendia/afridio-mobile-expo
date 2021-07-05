@@ -14,7 +14,6 @@ export * from "./Media/Cover";
 export * from "./Media/Author";
 export * from "./Error";
 export * from "./NoData";
-export * from "./Media/VideoPlayer";
 export * from "./Media/MediaButton";
 export * from "./Player/PlayerControls";
 export * from "./Media/Content";

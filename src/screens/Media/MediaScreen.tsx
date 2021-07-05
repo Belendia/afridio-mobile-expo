@@ -1,23 +1,54 @@
 import React, { useEffect, useCallback } from "react";
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
+import Animated, { Easing, useSharedValue } from "react-native-reanimated";
+import Constants from "expo-constants";
+import { Video } from "expo-av";
 
 import { View } from "../../components/Themed";
 import { RootStoreType } from "../../redux/rootReducer";
 import { startToGetMedia } from "../../redux/slices/mediaSlice";
-import {
-  ProgressBar,
-  Error,
-  NoData,
-  Content,
-  VideoPlayer,
-} from "../../components";
+import { ProgressBar, Error, NoData, Content } from "../../components";
+import { getPoster, getTrack } from "../../helpers/Utils";
+
+const {
+  Extrapolate,
+  Value,
+  Clock,
+  cond,
+  eq,
+  set,
+  add,
+  sub,
+  multiply,
+  lessThan,
+  clockRunning,
+  startClock,
+  spring,
+  stopClock,
+  event,
+  interpolate,
+  timing,
+  neq,
+} = Animated;
+
+const { width, height } = Dimensions.get("window");
+const { statusBarHeight } = Constants;
+const minHeight = 64;
+const midBound = height - 64 * 3;
+const upperBound = midBound + minHeight;
+const AnimatedVideo = Animated.createAnimatedComponent(Video);
 
 const MediaScreen = () => {
   const dispatch = useDispatch();
   const route = useRoute();
   const navigation = useNavigation();
+
+  const finished = useSharedValue(0);
+  const velocity = useSharedValue(0);
+  const position = useSharedValue(0);
+  const time = useSharedValue(0);
 
   const { loading, media, error } = useSelector((state: RootStoreType) => ({
     loading: state.mediaReducer.loading,
@@ -46,7 +77,19 @@ const MediaScreen = () => {
   ) : media ? (
     <>
       <View style={styles.bannerContainer}>
-        <VideoPlayer images={media?.images} track={media.tracks[0]} />
+        <AnimatedVideo
+          source={getTrack(media.tracks[0])}
+          posterSource={getPoster(media?.images)}
+          usePoster={true}
+          style={styles.player}
+          useNativeControls
+          resizeMode="contain"
+          shouldPlay
+          onPlaybackStatusUpdate={(status) => {
+            console.log(status);
+            // setStatus(() => status);
+          }}
+        />
       </View>
       <Content media={media} />
     </>
@@ -70,5 +113,9 @@ const styles = StyleSheet.create({
   iconPlay: {
     opacity: 0.8,
     backgroundColor: "transparent",
+  },
+  player: {
+    height: 248,
+    width: "100%",
   },
 });
