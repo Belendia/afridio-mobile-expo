@@ -1,6 +1,5 @@
 import React, { memo } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 
 import { View, Text } from "../Themed";
 import { Ionicons } from "@expo/vector-icons";
@@ -17,7 +16,6 @@ type MediaListCardProps = {
 
 const MediaListCard = memo(
   ({ media }: MediaListCardProps) => {
-    // const navigation = useNavigation();
     const dispatch = useDispatch();
     return (
       <View style={styles.cardContainer}>
