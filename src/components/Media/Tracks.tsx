@@ -4,11 +4,11 @@ import { ListItem, Avatar } from "react-native-elements";
 import { AntDesign } from "@expo/vector-icons";
 import { useSelector } from "react-redux";
 
-import { Text } from "../../components/Themed";
+import { Text } from "../Themed";
 import { colors } from "../../constants/Colors";
 import { RootStoreType } from "../../redux/rootReducer";
 
-const TrackScreen = () => {
+const Tracks = () => {
   const { media } = useSelector((state: RootStoreType) => ({
     media: state.mediaReducer.media,
   }));
@@ -47,7 +47,7 @@ const TrackScreen = () => {
   ));
 };
 
-export default TrackScreen;
+export default Tracks;
 
 const styles = StyleSheet.create({
   container: {

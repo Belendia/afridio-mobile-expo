@@ -2,12 +2,13 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { useSelector } from "react-redux";
 
-import { View, Text } from "../../components/Themed";
+import { View, Text } from "../Themed";
 import { colors } from "../../constants/Colors";
 import { RootStoreType } from "../../redux/rootReducer";
-import { Author, Chip } from "../../components";
+import { Author } from "./Author";
+import { Chip } from "./Chip";
 
-const InfoScreen = () => {
+const Info = () => {
   const { media } = useSelector((state: RootStoreType) => ({
     media: state.mediaReducer.media,
   }));
@@ -40,7 +41,7 @@ const InfoScreen = () => {
   );
 };
 
-export default InfoScreen;
+export default Info;
 
 const styles = StyleSheet.create({
   container: {

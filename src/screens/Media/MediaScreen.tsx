@@ -1,34 +1,18 @@
 import React, { useEffect, useCallback } from "react";
-import {
-  StyleSheet,
-  ScrollView,
-  TouchableWithoutFeedback,
-  Dimensions,
-} from "react-native";
-import { Icon, Button } from "react-native-elements";
+import { StyleSheet } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
 
-import { View, Text } from "../../components/Themed";
-import { Ionicons } from "@expo/vector-icons";
-import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import TrackScreen from "./TrackScreen";
-import InfoScreen from "./InfoScreen";
-import { colors } from "../../constants/Colors";
+import { View } from "../../components/Themed";
 import { RootStoreType } from "../../redux/rootReducer";
 import { startToGetMedia } from "../../redux/slices/mediaSlice";
 import {
   ProgressBar,
-  Backdrop,
-  Cover,
-  Chip,
   Error,
   NoData,
+  Content,
+  VideoPlayer,
 } from "../../components";
-import { Size } from "../../constants/Options";
-
-const Tab = createMaterialTopTabNavigator();
-const WIDTH = Dimensions.get("window").width - 32;
 
 const MediaScreen = () => {
   const dispatch = useDispatch();
@@ -60,96 +44,12 @@ const MediaScreen = () => {
   return loading ? (
     <ProgressBar />
   ) : media ? (
-    <ScrollView
-      style={styles.mainContainer}
-      scrollEventThrottle={100}
-      bounces={false}
-      showsHorizontalScrollIndicator={false}
-      showsVerticalScrollIndicator={false}
-    >
-      <View>
-        <View style={styles.bannerContainer}>
-          <View style={styles.buttonPlay}>
-            <TouchableWithoutFeedback onPress={() => console.log("Play")}>
-              <Ionicons
-                style={styles.iconPlay}
-                name="play-circle-outline"
-                size={90}
-                color="white"
-              />
-            </TouchableWithoutFeedback>
-          </View>
-          <Backdrop images={media?.images} />
-          {/* <VideoPlayer images={media?.images} track={media.tracks[0]} /> */}
-        </View>
-        <View style={styles.cardContainer}>
-          <Cover images={media?.images} size={Size.Small} />
-
-          <View style={styles.cardDetails}>
-            <Text style={styles.cardTitle}>{media?.title}</Text>
-            <Text
-              style={styles.cardTagline}
-              numberOfLines={2}
-              ellipsizeMode={"tail"}
-            >
-              {media?.description}
-            </Text>
-            <Chip values={media?.genres} style={{ marginTop: 5 }} />
-            <View style={styles.cardNumbers}>
-              <View style={styles.ratingContainer}>
-                <Ionicons name="heart" size={20} color={colors.red800} />
-                <Text style={styles.ratingText}>1.2K</Text>
-              </View>
-            </View>
-          </View>
-        </View>
-
-        <View style={styles.contentContainer}>
-          <View
-            style={{
-              alignSelf: "center",
-              width: WIDTH,
-              marginBottom: 10,
-            }}
-          >
-            <Button
-              icon={
-                <Icon
-                  name="cart-plus"
-                  type="font-awesome-5"
-                  size={24}
-                  color="white"
-                />
-              }
-              buttonStyle={{ backgroundColor: colors.red800 }}
-              onPress={() => console.log("Add to cart")}
-            />
-          </View>
-          <Tab.Navigator
-            initialRouteName="Chapter"
-            tabBarOptions={{
-              activeTintColor: "white",
-              labelStyle: { fontSize: 12 },
-              style: { backgroundColor: colors.black600 },
-              indicatorStyle: {
-                backgroundColor: colors.red800,
-              },
-            }}
-          >
-            <Tab.Screen
-              name="Info"
-              component={InfoScreen}
-              options={{ tabBarLabel: "Info" }}
-            />
-            <Tab.Screen
-              name="Chapter"
-              component={TrackScreen}
-              options={{ tabBarLabel: "Chapters" }}
-            />
-          </Tab.Navigator>
-        </View>
+    <>
+      <View style={styles.bannerContainer}>
+        <VideoPlayer images={media?.images} track={media.tracks[0]} />
       </View>
-    </ScrollView>
+      <Content media={media} />
+    </>
   ) : (
     <NoData />
   );
@@ -158,50 +58,6 @@ const MediaScreen = () => {
 export default MediaScreen;
 
 const styles = StyleSheet.create({
-  mainContainer: {
-    backgroundColor: colors.black800,
-  },
-  contentContainer: {
-    flex: 1,
-    marginTop: 10,
-  },
-  cardContainer: {
-    flex: 1,
-    // position: "absolute",
-    // top: 200,
-    // right: 16,
-    // left: 16,
-    flexDirection: "row",
-  },
-  cardDetails: {
-    paddingLeft: 10,
-    flex: 1,
-    paddingTop: 2,
-  },
-  cardTitle: {
-    color: colors.red300,
-    fontSize: 20,
-    fontWeight: "500",
-    paddingTop: 10,
-  },
-  cardTagline: {
-    color: colors.red300,
-    fontSize: 15,
-  },
-  cardNumbers: {
-    flexDirection: "row",
-    marginTop: 5,
-  },
-  ratingContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  ratingText: {
-    marginLeft: 2,
-    fontSize: 12,
-    fontWeight: "bold",
-    color: colors.red300,
-  },
   bannerContainer: {
     justifyContent: "center",
     alignItems: "center",
