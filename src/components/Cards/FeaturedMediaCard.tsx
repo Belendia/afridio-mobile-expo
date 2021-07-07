@@ -86,8 +86,12 @@ const FeaturedMediaCard = memo(
                  * media data in the redux from the previous call. So the app will try to render
                  * that before it gets the latest data.
                  **/
+
                 dispatch(setMediaLoadingTrue());
                 dispatch(setMediaSlug(slug));
+                navigation.navigate("MediaScreen", {
+                  slug: slug,
+                });
               }}
             />
           </View>

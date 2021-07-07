@@ -1,5 +1,6 @@
 import React, { memo } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import { View, Text } from "../Themed";
 import { Ionicons } from "@expo/vector-icons";
@@ -17,11 +18,18 @@ type MediaListCardProps = {
 const MediaListCard = memo(
   ({ media }: MediaListCardProps) => {
     const dispatch = useDispatch();
+    const navigation = useNavigation();
+
     return (
       <View style={styles.cardContainer}>
         <TouchableOpacity
           activeOpacity={0.9}
-          onPress={() => dispatch(setMediaSlug(media.slug))}
+          onPress={() => {
+            dispatch(setMediaSlug(media.slug));
+            navigation.navigate("MediaScreen", {
+              slug: media.slug,
+            });
+          }}
         >
           <View style={styles.card}>
             <Cover images={media?.images} />

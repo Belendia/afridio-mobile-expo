@@ -12,7 +12,9 @@ import AuthNavigator from "./AuthNavigator";
 import useAutoLogin from "../hooks/useAutoLogin";
 import { useSelector } from "react-redux";
 import { RootStoreType } from "../redux/rootReducer";
-import BottomTabNavigator from "./BottomTabNavigator";
+
+import { BottomPlayer } from "../components";
+import RootNavigator from "./RootNavigator";
 
 const Navigation = ({ colorScheme }: { colorScheme: ColorSchemeName }) => {
   useAutoLogin();
@@ -26,7 +28,14 @@ const Navigation = ({ colorScheme }: { colorScheme: ColorSchemeName }) => {
       linking={LinkingConfiguration}
       theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}
     >
-      {token ? <BottomTabNavigator /> : <AuthNavigator />}
+      {token ? (
+        <>
+          <BottomPlayer />
+          <RootNavigator />
+        </>
+      ) : (
+        <AuthNavigator />
+      )}
     </NavigationContainer>
   );
 };

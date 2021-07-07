@@ -1,53 +1,25 @@
 import React, { useEffect, useCallback } from "react";
 import { Dimensions, StyleSheet } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import Animated, { Easing, useSharedValue } from "react-native-reanimated";
+
 import Constants from "expo-constants";
 import { Video } from "expo-av";
 
-import { View } from "../../components/Themed";
+import { View } from "../Themed";
 import { RootStoreType } from "../../redux/rootReducer";
 import { startToGetMedia } from "../../redux/slices/mediaSlice";
 import { getPoster, getTrack } from "../../helpers/Utils";
 import { ProgressBar } from "../ProgressBar";
-import { Content } from "./Content";
+import { Content } from "../Media/Content";
 import { NoData } from "../NoData";
 import { Error } from "../Error";
-const {
-  Extrapolate,
-  Value,
-  Clock,
-  cond,
-  eq,
-  set,
-  add,
-  sub,
-  multiply,
-  lessThan,
-  clockRunning,
-  startClock,
-  spring,
-  stopClock,
-  event,
-  interpolate,
-  timing,
-  neq,
-} = Animated;
 
-const { width, height } = Dimensions.get("window");
-const { statusBarHeight } = Constants;
-const minHeight = 64;
-const midBound = height - 64 * 3;
-const upperBound = midBound + minHeight;
-const AnimatedVideo = Animated.createAnimatedComponent(Video);
+type ContextType = {
+  translateY: number;
+};
 
 const MediaPlayer = () => {
   const dispatch = useDispatch();
-
-  const finished = useSharedValue(0);
-  const velocity = useSharedValue(0);
-  const position = useSharedValue(0);
-  const time = useSharedValue(0);
 
   const { loading, media, selectedTrackIndex, selectedMediaSlug, error } =
     useSelector((state: RootStoreType) => ({
@@ -75,9 +47,9 @@ const MediaPlayer = () => {
   return loading ? (
     <ProgressBar />
   ) : media ? (
-    <>
+    <View style={{ backgroundColor: "transparent" }}>
       <View style={styles.bannerContainer}>
-        <AnimatedVideo
+        <Video
           source={getTrack(media.tracks, selectedTrackIndex)}
           posterSource={getPoster(media?.images)}
           usePoster={true}
@@ -92,9 +64,9 @@ const MediaPlayer = () => {
         />
       </View>
       <Content media={media} />
-    </>
+    </View>
   ) : (
-    <NoData />
+    <></>
   );
 };
 
@@ -115,6 +87,7 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
   },
   player: {
+    marginTop: 40,
     height: 248,
     width: "100%",
   },

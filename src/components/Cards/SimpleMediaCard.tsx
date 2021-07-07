@@ -1,6 +1,7 @@
 import React, { memo } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { useDispatch } from "react-redux";
+import { useNavigation } from "@react-navigation/native";
 
 import { View, Text } from "../Themed";
 import { colors } from "../../constants/Colors";
@@ -13,6 +14,7 @@ import { Cover } from "../Media/Cover";
 
 const SimpleMediaCard = memo(({ slug, images, title }: Media) => {
   const dispatch = useDispatch();
+  const navigation = useNavigation();
 
   return (
     <TouchableOpacity
@@ -25,6 +27,9 @@ const SimpleMediaCard = memo(({ slug, images, title }: Media) => {
          **/
         dispatch(setMediaLoadingTrue());
         dispatch(setMediaSlug(slug));
+        navigation.navigate("MediaScreen", {
+          slug: slug,
+        });
       }}
     >
       <View style={styles.cardContainer}>

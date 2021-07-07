@@ -1,3 +1,94 @@
+// import React from "react";
+// import { ScrollView, StyleSheet } from "react-native";
+// import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+// import { Ionicons } from "@expo/vector-icons";
+
+// import { Chip } from "./Chip";
+// import { Cover } from "./Cover";
+// import { MediaButton } from "./MediaButton";
+// import { colors } from "../../constants/Colors";
+// import { View, Text } from "../Themed";
+// import Info from "./Info";
+// import Tracks from "./Tracks";
+// import { Media } from "../../../types";
+// import { Size } from "../../constants/Options";
+
+// const Tab = createMaterialTopTabNavigator();
+
+// type ContentProps = {
+//   media: Media | undefined;
+// };
+
+// const Content = ({ media }: ContentProps) => {
+//   return (
+//     <ScrollView
+//       style={styles.mainContainer}
+//       scrollEventThrottle={100}
+//       bounces={false}
+//       showsHorizontalScrollIndicator={false}
+//       showsVerticalScrollIndicator={false}
+//       contentContainerStyle={[{ paddingBottom: 300 }]}
+//     >
+//       <View style={styles.cardContainer}>
+//         <Cover images={media?.images} size={Size.Small} />
+
+//         <View style={styles.cardDetails}>
+//           <Text style={styles.cardTitle}>{media?.title}</Text>
+//           <Text
+//             style={styles.cardTagline}
+//             numberOfLines={2}
+//             ellipsizeMode={"tail"}
+//           >
+//             {media?.description}
+//           </Text>
+//           <Chip values={media?.genres} style={{ marginTop: 5 }} />
+//           <View style={styles.cardNumbers}>
+//             <View style={styles.ratingContainer}>
+//               <Ionicons name="heart" size={20} color={colors.red800} />
+//               <Text style={styles.ratingText}>1.2K</Text>
+//             </View>
+//           </View>
+//         </View>
+//       </View>
+
+//       <View style={styles.contentContainer}>
+//         <View style={styles.mediaButtons}>
+//           <MediaButton name="heart" label="like" onPress={() => true} />
+//           <MediaButton name="share" label="share" onPress={() => true} />
+//           <MediaButton
+//             name="arrow-down-circle"
+//             label="Download"
+//             onPress={() => true}
+//           />
+//         </View>
+//         <Tracks tracks={media?.tracks} />
+//         {/* <Tab.Navigator
+//           initialRouteName="Chapter"
+//           tabBarOptions={{
+//             activeTintColor: "white",
+//             labelStyle: { fontSize: 12 },
+//             style: { backgroundColor: colors.black600 },
+//             indicatorStyle: {
+//               backgroundColor: colors.red800,
+//             },
+//           }}
+//         >
+//           <Tab.Screen
+//             name="Info"
+//             component={Info}
+//             options={{ tabBarLabel: "Info" }}
+//           />
+//           <Tab.Screen
+//             name="Chapter"
+//             component={Tracks}
+//             options={{ tabBarLabel: "Chapters" }}
+//           />
+//         </Tab.Navigator> */}
+//       </View>
+//     </ScrollView>
+//   );
+// };
+
 import React from "react";
 import { StyleSheet, ScrollView } from "react-native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
@@ -60,8 +151,7 @@ const Content = ({ media }: ContentProps) => {
             onPress={() => true}
           />
         </View>
-        <Tracks tracks={media?.tracks} />
-        {/* <Tab.Navigator
+        <Tab.Navigator
           initialRouteName="Chapter"
           tabBarOptions={{
             activeTintColor: "white",
@@ -82,7 +172,7 @@ const Content = ({ media }: ContentProps) => {
             component={Tracks}
             options={{ tabBarLabel: "Chapters" }}
           />
-        </Tab.Navigator> */}
+        </Tab.Navigator>
       </View>
     </ScrollView>
   );
