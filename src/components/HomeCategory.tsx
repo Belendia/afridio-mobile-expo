@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, FlatList, TouchableOpacity, Platform } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { useDispatch } from "react-redux";
 
 import { View, Text } from "./Themed";
 import { SimpleMediaCard } from "./Cards/SimpleMediaCard";
@@ -15,6 +16,7 @@ type HomeCategoryProps = {
 
 const HomeCategory = ({ id, title, medias }: HomeCategoryProps) => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
   return (
     <View style={styles.container}>
@@ -23,12 +25,12 @@ const HomeCategory = ({ id, title, medias }: HomeCategoryProps) => {
         <TouchableOpacity>
           <Text
             style={styles.listHeadingRight}
-            onPress={() =>
+            onPress={() => {
               navigation.navigate("Home", {
                 screen: "MediaListScreen",
                 params: { slug: id },
-              })
-            }
+              });
+            }}
           >
             See all
           </Text>

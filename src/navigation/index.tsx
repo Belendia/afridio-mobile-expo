@@ -13,8 +13,9 @@ import useAutoLogin from "../hooks/useAutoLogin";
 import { useSelector } from "react-redux";
 import { RootStoreType } from "../redux/rootReducer";
 
-import { BottomPlayer } from "../components";
+import { MiniPlayer } from "../components";
 import RootNavigator from "./RootNavigator";
+import { navigationRef } from "../services/navigation/NavigationService";
 
 const Navigation = ({ colorScheme }: { colorScheme: ColorSchemeName }) => {
   useAutoLogin();
@@ -25,13 +26,14 @@ const Navigation = ({ colorScheme }: { colorScheme: ColorSchemeName }) => {
 
   return (
     <NavigationContainer
+      ref={navigationRef}
       linking={LinkingConfiguration}
       theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}
     >
       {token ? (
         <>
           <RootNavigator />
-          <BottomPlayer />
+          <MiniPlayer />
         </>
       ) : (
         <AuthNavigator />

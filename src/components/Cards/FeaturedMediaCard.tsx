@@ -13,7 +13,9 @@ import { Chip } from "../Media/Chip";
 import {
   setMediaLoadingTrue,
   setMediaSlug,
-} from "../../redux/slices/mediaSlice";
+  setResumePlayback,
+  setShowMiniPlayer,
+} from "../../redux/slices";
 
 const FeaturedMediaCard = memo(
   ({ slug, title, images, genres, description }: Media) => {
@@ -89,6 +91,8 @@ const FeaturedMediaCard = memo(
 
                 dispatch(setMediaLoadingTrue());
                 dispatch(setMediaSlug(slug));
+                dispatch(setResumePlayback(false));
+                dispatch(setShowMiniPlayer(false));
                 navigation.navigate("MediaScreen", {
                   slug: slug,
                 });

@@ -17,6 +17,5 @@ export * from "./NoData";
 export * from "./Media/MediaButton";
 export * from "./Player/PlayerControls";
 export * from "./Media/Content";
-export * from "./Player/MediaPlayer";
-export * from "./Player/BottomPlayer";
+export * from "./Player/MiniPlayer";
 export * from "./Layout/PlayerContainer";

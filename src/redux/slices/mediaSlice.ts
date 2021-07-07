@@ -3,6 +3,7 @@ import { ofType } from "redux-observable";
 import { of, Observable } from "rxjs";
 import { catchError, map, switchMap } from "rxjs/operators";
 import { parse } from "expo-linking";
+import { AVPlaybackStatus } from "expo-av";
 
 import { Media } from "../../../types";
 import { Action } from "../rootReducer";
@@ -19,6 +20,9 @@ type MediaReducerType = {
   loading: boolean;
   loadingList: boolean;
   next: string | null;
+  playerState: AVPlaybackStatus | null;
+  showMiniPlayer: boolean;
+  resumePlayback: boolean;
 };
 
 const initialState: MediaReducerType = {
@@ -31,6 +35,9 @@ const initialState: MediaReducerType = {
   loading: false,
   loadingList: false,
   next: null,
+  playerState: null,
+  showMiniPlayer: false,
+  resumePlayback: false,
 };
 
 const mediaSlice = createSlice({
@@ -100,6 +107,18 @@ const mediaSlice = createSlice({
     setMediaSlug: (state, action) => ({
       ...state,
       selectedMediaSlug: action.payload,
+    }),
+    setPlayerState: (state, action) => ({
+      ...state,
+      playerState: action.payload,
+    }),
+    setShowMiniPlayer: (state, action) => ({
+      ...state,
+      showMiniPlayer: action.payload,
+    }),
+    setResumePlayback: (state, action) => ({
+      ...state,
+      resumePlayback: action.payload,
     }),
   },
 });
@@ -179,6 +198,9 @@ export const {
   clearMedia,
   setTrackIndex,
   setMediaSlug,
+  setPlayerState,
+  setShowMiniPlayer,
+  setResumePlayback,
 } = mediaSlice.actions;
 
 export default mediaSlice.reducer;

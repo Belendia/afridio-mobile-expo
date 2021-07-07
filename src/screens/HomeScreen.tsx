@@ -38,7 +38,7 @@ const HomeScreen = () => {
   }, []);
 
   useEffect(() => {
-    // tabBarHeight is required by the BottomPlayer component to set its bottom
+    // tabBarHeight is required by the MiniPlayer component to set its bottom
     dispatch(setTabBarHeight(tabBarHeight));
   }, [tabBarHeight]);
 
