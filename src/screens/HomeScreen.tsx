@@ -3,6 +3,8 @@ import { StyleSheet, FlatList, RefreshControl } from "react-native";
 import { FeaturedMediaCard } from "../components/Cards/FeaturedMediaCard";
 import { useDispatch, useSelector } from "react-redux";
 import Carousel from "@r0b0t3d/react-native-carousel";
+import { useSharedValue } from "react-native-reanimated";
+import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 
 import { View } from "../components/Themed";
 import HomeCategory from "../components/HomeCategory";
@@ -10,11 +12,12 @@ import { colors } from "../constants/Colors";
 import { startToGetHomeScreenData } from "../redux/slices/homeSlice";
 import { RootStoreType } from "../redux/rootReducer";
 import { ProgressBar, Error } from "../components";
-import { useSharedValue } from "react-native-reanimated";
+import { setTabBarHeight } from "../redux/slices";
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
   const currentPage = useSharedValue(0);
+  const tabBarHeight = useBottomTabBarHeight();
 
   //redux
   const { loading, featuredMedias, nonFeaturedMedias, error } = useSelector(
@@ -33,6 +36,11 @@ const HomeScreen = () => {
   useEffect(() => {
     fetchData();
   }, []);
+
+  useEffect(() => {
+    // tabBarHeight is required by the BottomPlayer component to set its bottom
+    dispatch(setTabBarHeight(tabBarHeight));
+  }, [tabBarHeight]);
 
   if (error && typeof error === "string") {
     return <Error title={"Error"} message={error} onRetry={fetchData} />;
@@ -89,6 +97,9 @@ const HomeScreen = () => {
           ) : (
             <></>
           )
+        }
+        ListFooterComponent={
+          <View style={{ marginBottom: tabBarHeight }}></View>
         }
       />
     </View>

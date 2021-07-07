@@ -1,50 +1,49 @@
 import React, { useCallback } from "react";
 import { StyleSheet, Image, TouchableOpacity } from "react-native";
-import { FontAwesome, Ionicons } from "@expo/vector-icons";
+import { FontAwesome, EvilIcons } from "@expo/vector-icons";
 
 import { View, Text } from "../Themed";
 import { useSelector } from "react-redux";
 import { RootStoreType } from "../../redux/rootReducer";
+import { colors } from "../../constants/Colors";
 
 const BottomPlayer = () => {
   const onPlayPausePress = useCallback(() => true, []);
   const getProgress = useCallback(() => "100", []);
-  const { media, selectedTrackIndex } = useSelector((state: RootStoreType) => ({
-    media: state.mediaReducer.media,
-    selectedTrackIndex: state.mediaReducer.selectedTrackIndex,
-  }));
+  const { media, selectedTrackIndex, tabBarHeight } = useSelector(
+    (state: RootStoreType) => ({
+      media: state.mediaReducer.media,
+      selectedTrackIndex: state.mediaReducer.selectedTrackIndex,
+      tabBarHeight: state.layoutReducer.tabBarHeight,
+    })
+  );
 
-  if (!media) {
-    return <></>;
-  }
+  // if (!media) {
+  //   return <></>;
+  // }
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { bottom: tabBarHeight }]}>
       <View style={[styles.progress, { width: `${getProgress()}%` }]} />
       <View style={styles.row}>
         {/* <Image source={{ uri: song.imageUri }} style={styles.image} /> */}
         <View style={styles.rightContainer}>
           <View style={styles.nameContainer}>
-            <Text style={styles.title}>{media?.title}</Text>
-            <Text
-              style={styles.artist}
-              numberOfLines={1}
-              ellipsizeMode={"tail"}
-            >
-              {media?.description}
+            <Text style={styles.title} numberOfLines={1} ellipsizeMode={"tail"}>
+              {media?.title}
             </Text>
           </View>
 
           <View style={styles.iconsContainer}>
-            <Ionicons name="heart" size={30} color={"white"} />
             <TouchableOpacity onPress={onPlayPausePress}>
               <FontAwesome
                 // name={isPlaying ? "pause" : "play"}
                 name={"play"}
-                size={30}
+                size={24}
                 color={"white"}
               />
             </TouchableOpacity>
+            <EvilIcons name="close" size={30} color="white" />
           </View>
         </View>
       </View>
@@ -58,10 +57,10 @@ const styles = StyleSheet.create({
   container: {
     position: "absolute",
     bottom: 79,
-    backgroundColor: "#131313",
+    backgroundColor: colors.black800,
     width: "100%",
-    borderWidth: 2,
-    borderColor: "black",
+    borderBottomWidth: 1,
+    borderColor: colors.black600,
   },
   progress: {
     height: 3,
@@ -92,12 +91,8 @@ const styles = StyleSheet.create({
   },
   title: {
     color: "white",
-    fontSize: 18,
+    fontSize: 14,
     fontWeight: "bold",
     margin: 10,
-  },
-  artist: {
-    color: "lightgray",
-    fontSize: 18,
   },
 });

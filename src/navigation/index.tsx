@@ -30,8 +30,8 @@ const Navigation = ({ colorScheme }: { colorScheme: ColorSchemeName }) => {
     >
       {token ? (
         <>
-          <BottomPlayer />
           <RootNavigator />
+          <BottomPlayer />
         </>
       ) : (
         <AuthNavigator />
