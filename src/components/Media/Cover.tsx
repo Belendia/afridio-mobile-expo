@@ -5,34 +5,27 @@ import { Image } from "react-native-elements";
 import { Image as ImageType } from "../../../types";
 import { colors } from "../../constants/Colors";
 import { Size } from "../../constants/Options";
+import { getCover } from "../../helpers/Utils";
 
 type CoverProps = {
-  images: ImageType[] | undefined;
+  images: ImageType[];
   size?: Size | undefined;
 };
 
 const Cover = memo<CoverProps>(
   ({ images, size }: CoverProps) => {
-    let cover = null;
-    if (images && images?.length > 0) {
-      cover = images.find((img) => img.width === 300);
-    }
-    return cover ? (
+    return (
       <Image
-        source={{ uri: cover?.image }}
+        source={getCover(images)}
         style={[
           styles.cardImage,
-          size === Size.Small && { width: 100, height: 136 },
+          size === Size.Medium
+            ? { width: 100, height: 136 }
+            : size === Size.Small
+            ? { width: 40, height: 54 }
+            : {},
         ]}
         PlaceholderContent={<ActivityIndicator color={colors.red300} />}
-      />
-    ) : (
-      <Image
-        source={require("../../../assets/images/no-cover.png")}
-        style={[
-          styles.cardImage,
-          size === Size.Small && { width: 100, height: 136 },
-        ]}
       />
     );
   },

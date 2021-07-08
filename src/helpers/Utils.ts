@@ -14,3 +14,11 @@ export const getTrack = (track: Track[] | undefined, index: number) => {
   }
   return require("../../assets/videos/no-track.mp4");
 };
+
+export const getCover = (images: Image[]) => {
+  const cover = images?.filter((img) => img.width === 300);
+  if (cover && cover.length > 0 && cover[0].image) {
+    return { uri: cover[0].image };
+  }
+  return require("../../assets/images/no-cover.png");
+};

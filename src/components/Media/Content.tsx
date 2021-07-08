@@ -120,7 +120,7 @@ const Content = ({ media }: ContentProps) => {
       showsVerticalScrollIndicator={false}
     >
       <View style={styles.cardContainer}>
-        <Cover images={media?.images} size={Size.Small} />
+        <Cover images={media?.images} size={Size.Medium} />
 
         <View style={styles.cardDetails}>
           <Text style={styles.cardTitle}>{media?.title}</Text>

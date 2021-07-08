@@ -25,5 +25,6 @@ export const SettingsMoreOptions = [
 
 export enum Size {
   Large,
+  Medium,
   Small,
 }
