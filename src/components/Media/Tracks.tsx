@@ -20,58 +20,62 @@ const Tracks = () => {
 
   const setTrack = useCallback((index) => dispatch(setTrackIndex(index)), []);
 
-  return media?.tracks.map((item, index) => (
-    <ListItem key={index} onPress={() => setTrack(index)}>
-      <Avatar
-        size="small"
-        rounded
-        title={(index + 1).toString()}
-        titleStyle={[
-          { color: colors.red300 },
-          index === selectedTrackIndex && { color: colors.red400 },
-        ]}
-        avatarStyle={[
-          {
-            borderWidth: 1,
-            borderColor: colors.red300,
+  return (
+    <>
+      {media?.tracks.map((item, index) => (
+        <ListItem key={index} onPress={() => setTrack(index)}>
+          <Avatar
+            size="small"
+            rounded
+            title={(index + 1).toString()}
+            titleStyle={[
+              { color: colors.red300 },
+              index === selectedTrackIndex && { color: colors.red400 },
+            ]}
+            avatarStyle={[
+              {
+                borderWidth: 1,
+                borderColor: colors.red300,
 
-            ...Platform.select({
-              android: {
-                borderTopWidth: 0,
-                borderLeftWidth: 0,
-                borderRightWidth: 0,
-                borderBottomWidth: 0,
+                ...Platform.select({
+                  android: {
+                    borderTopWidth: 0,
+                    borderLeftWidth: 0,
+                    borderRightWidth: 0,
+                    borderBottomWidth: 0,
+                  },
+                }),
               },
-            }),
-          },
-          index === selectedTrackIndex && { borderColor: colors.red400 },
-        ]}
-      />
-      <ListItem.Content>
-        <ListItem.Title>
-          <Text
-            style={[
-              styles.title,
-              index === selectedTrackIndex && { color: colors.red400 },
+              index === selectedTrackIndex && { borderColor: colors.red400 },
             ]}
-          >
-            {item.name}
-          </Text>
-        </ListItem.Title>
-        <ListItem.Subtitle>
-          <Text
-            style={[
-              styles.duration,
-              index === selectedTrackIndex && { color: colors.red400 },
-            ]}
-          >
-            {item.duration}
-          </Text>
-        </ListItem.Subtitle>
-      </ListItem.Content>
-      <AntDesign name="clouddownloado" size={24} color={"gray"} />
-    </ListItem>
-  ));
+          />
+          <ListItem.Content>
+            <ListItem.Title>
+              <Text
+                style={[
+                  styles.title,
+                  index === selectedTrackIndex && { color: colors.red400 },
+                ]}
+              >
+                {item.name}
+              </Text>
+            </ListItem.Title>
+            <ListItem.Subtitle>
+              <Text
+                style={[
+                  styles.duration,
+                  index === selectedTrackIndex && { color: colors.red400 },
+                ]}
+              >
+                {item.duration}
+              </Text>
+            </ListItem.Subtitle>
+          </ListItem.Content>
+          <AntDesign name="clouddownloado" size={24} color={"gray"} />
+        </ListItem>
+      ))}
+    </>
+  );
 };
 
 export default Tracks;

@@ -22,7 +22,6 @@ type MediaReducerType = {
   next: string | null;
   playerState: AVPlaybackStatus | null;
   showMiniPlayer: boolean;
-  resumePlayback: boolean;
 };
 
 const initialState: MediaReducerType = {
@@ -37,7 +36,6 @@ const initialState: MediaReducerType = {
   next: null,
   playerState: null,
   showMiniPlayer: false,
-  resumePlayback: false,
 };
 
 const mediaSlice = createSlice({
@@ -115,10 +113,6 @@ const mediaSlice = createSlice({
     setShowMiniPlayer: (state, action) => ({
       ...state,
       showMiniPlayer: action.payload,
-    }),
-    setResumePlayback: (state, action) => ({
-      ...state,
-      resumePlayback: action.payload,
     }),
   },
 });
@@ -200,7 +194,6 @@ export const {
   setMediaSlug,
   setPlayerState,
   setShowMiniPlayer,
-  setResumePlayback,
 } = mediaSlice.actions;
 
 export default mediaSlice.reducer;
