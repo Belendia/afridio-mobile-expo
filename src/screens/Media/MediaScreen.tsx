@@ -14,21 +14,21 @@ import {
   PlayerContainer,
   Backdrop,
 } from "../../components";
+import Player from "../../helpers/PlayerHelper";
 
 const MediaScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const route = useRoute();
 
-  const { loading, media, selectedTrackIndex, error } = useSelector(
-    (state: RootStoreType) => ({
+  const { loading, media, selectedTrackIndex, playerState, error } =
+    useSelector((state: RootStoreType) => ({
       loading: state.mediaReducer.loading,
       media: state.mediaReducer.media,
       selectedTrackIndex: state.mediaReducer.selectedTrackIndex,
-      playerStatus: state.mediaReducer.playerState,
+      playerState: state.mediaReducer.playerState,
       error: state.mediaReducer.error,
-    })
-  );
+    }));
 
   const fetchData = useCallback(() => {
     if (route.params?.slug) {
@@ -49,6 +49,8 @@ const MediaScreen = () => {
     };
   }, []);
 
+  const onPausePlay = useCallback(() => Player.togglePlay(), []);
+
   if (error && typeof error === "string") {
     return <Error title={"Error"} message={error} onRetry={fetchData} />;
   }
@@ -62,7 +64,11 @@ const MediaScreen = () => {
       <View style={styles.bannerContainer}>
         <Backdrop images={media.images} />
       </View>
-      <Content media={media} />
+      <Content
+        media={media}
+        isPlaying={playerState?.isPlaying}
+        onPlayPress={onPausePlay}
+      />
     </PlayerContainer>
   ) : (
     <PlayerContainer>

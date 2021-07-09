@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, ScrollView, TouchableOpacity } from "react-native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import { AntDesign, Ionicons, MaterialIcons } from "@expo/vector-icons";
+import { AntDesign, Ionicons, FontAwesome5 } from "@expo/vector-icons";
 
 import { Chip } from "./Chip";
 import { Cover } from "./Cover";
@@ -17,9 +17,11 @@ const Tab = createMaterialTopTabNavigator();
 
 type ContentProps = {
   media: Media | undefined;
+  isPlaying: boolean | undefined;
+  onPlayPress: () => void;
 };
 
-const Content = ({ media }: ContentProps) => {
+const Content = ({ media, isPlaying, onPlayPress }: ContentProps) => {
   return (
     <ScrollView
       style={styles.mainContainer}
@@ -49,8 +51,14 @@ const Content = ({ media }: ContentProps) => {
           </View>
         </View>
         <View style={styles.playContainer}>
-          <TouchableOpacity onPress={() => true} style={styles.outerCircle}>
-            <AntDesign name="play" size={60} color={colors.red800} />
+          {/* <View style={styles.outerCircle}></View> */}
+          <TouchableOpacity onPress={onPlayPress} style={styles.outerCircle}>
+            <Ionicons
+              name={isPlaying ? "pause" : "play"}
+              size={40}
+              color={colors.red200}
+              style={styles.playIcon}
+            />
           </TouchableOpacity>
         </View>
       </View>
@@ -153,12 +161,17 @@ const styles = StyleSheet.create({
     flexDirection: "column-reverse",
     backgroundColor: "transparent",
     paddingRight: 10,
-    paddingBottom: 5,
+    paddingBottom: 4,
   },
   outerCircle: {
     borderRadius: 30,
     width: 60,
     height: 60,
-    backgroundColor: "white",
+    backgroundColor: colors.red800,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  playIcon: {
+    marginLeft: 3,
   },
 });
