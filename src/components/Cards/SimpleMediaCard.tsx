@@ -9,7 +9,6 @@ import { Media } from "../../../types";
 import {
   setMediaLoadingTrue,
   setMediaSlug,
-  setResumePlayback,
   setShowMiniPlayer,
 } from "../../redux/slices";
 import { Cover } from "../Media/Cover";
@@ -29,7 +28,6 @@ const SimpleMediaCard = memo(({ slug, images, title }: Media) => {
          **/
         dispatch(setMediaLoadingTrue());
         dispatch(setMediaSlug(slug));
-        dispatch(setResumePlayback(false));
         dispatch(setShowMiniPlayer(false));
         navigation.navigate("MediaScreen", {
           slug: slug,

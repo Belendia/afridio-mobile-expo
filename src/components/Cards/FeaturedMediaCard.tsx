@@ -13,7 +13,6 @@ import { Chip } from "../Media/Chip";
 import {
   setMediaLoadingTrue,
   setMediaSlug,
-  setResumePlayback,
   setShowMiniPlayer,
 } from "../../redux/slices";
 
@@ -91,7 +90,6 @@ const FeaturedMediaCard = memo(
 
                 dispatch(setMediaLoadingTrue());
                 dispatch(setMediaSlug(slug));
-                dispatch(setResumePlayback(false));
                 dispatch(setShowMiniPlayer(false));
                 navigation.navigate("MediaScreen", {
                   slug: slug,

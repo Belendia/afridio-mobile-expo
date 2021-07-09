@@ -9,11 +9,7 @@ import { Chip } from "../Media/Chip";
 import { Media } from "../../../types";
 import { Cover } from "../Media/Cover";
 import { useDispatch } from "react-redux";
-import {
-  setMediaSlug,
-  setResumePlayback,
-  setShowMiniPlayer,
-} from "../../redux/slices";
+import { setMediaSlug, setShowMiniPlayer } from "../../redux/slices";
 
 type MediaListCardProps = {
   media: Media;
@@ -30,7 +26,6 @@ const MediaListCard = memo(
           activeOpacity={0.9}
           onPress={() => {
             dispatch(setMediaSlug(media.slug));
-            dispatch(setResumePlayback(false));
             dispatch(setShowMiniPlayer(false));
             navigation.navigate("MediaScreen", {
               slug: media.slug,
