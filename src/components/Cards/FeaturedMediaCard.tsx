@@ -10,11 +10,7 @@ import { View, Text } from "../Themed";
 import { colors } from "../../constants/Colors";
 import { Media } from "../../../types";
 import { Chip } from "../Media/Chip";
-import {
-  setMediaLoadingTrue,
-  setMediaSlug,
-  setShowMiniPlayer,
-} from "../../redux/slices";
+import { setMediaLoadingTrue, setMediaSlug } from "../../redux/slices";
 
 const FeaturedMediaCard = memo(
   ({ slug, title, images, genres, description }: Media) => {
@@ -90,7 +86,6 @@ const FeaturedMediaCard = memo(
 
                 dispatch(setMediaLoadingTrue());
                 dispatch(setMediaSlug(slug));
-                dispatch(setShowMiniPlayer(false));
                 navigation.navigate("MediaScreen", {
                   slug: slug,
                 });

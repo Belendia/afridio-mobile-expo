@@ -6,11 +6,7 @@ import { useNavigation } from "@react-navigation/native";
 import { View, Text } from "../Themed";
 import { colors } from "../../constants/Colors";
 import { Media } from "../../../types";
-import {
-  setMediaLoadingTrue,
-  setMediaSlug,
-  setShowMiniPlayer,
-} from "../../redux/slices";
+import { setMediaLoadingTrue, setMediaSlug } from "../../redux/slices";
 import { Cover } from "../Media/Cover";
 
 const SimpleMediaCard = memo(({ slug, images, title }: Media) => {
@@ -28,7 +24,6 @@ const SimpleMediaCard = memo(({ slug, images, title }: Media) => {
          **/
         dispatch(setMediaLoadingTrue());
         dispatch(setMediaSlug(slug));
-        dispatch(setShowMiniPlayer(false));
         navigation.navigate("MediaScreen", {
           slug: slug,
         });
