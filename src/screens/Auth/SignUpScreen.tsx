@@ -21,28 +21,28 @@ import { RootStoreType } from "../../redux/rootReducer";
 import { startRegistration, resetRegError } from "../../redux/slices/authSlice";
 
 let SignUpSchema = Yup.object().shape({
-  name: Yup.string().min(3, "To short!").required("Required"),
+  name: Yup.string().min(3, "Too short!").required("Required"),
   phone_number: Yup.number()
     .positive("Phone must be a positive number")
     .typeError("Phone must be a number")
     .required("Required")
     .test(
       "len",
-      "To short!",
+      "Too short!",
       (value) =>
         value != undefined && value != null && value.toString().length >= 6
     )
     .test(
       "len",
-      "To long!",
+      "Too long!",
       (value) =>
         value != undefined && value != null && value.toString().length <= 15
     ),
   date_of_birth: Yup.string().required("Required"),
   sex: Yup.string().required("Required"),
   password: Yup.string()
-    .min(8, "To short!")
-    .max(30, "To long!")
+    .min(8, "Too short!")
+    .max(30, "Too long!")
     .required("Required"),
   password2: Yup.string()
     .equals([Yup.ref("password")], "Passwords don't match")

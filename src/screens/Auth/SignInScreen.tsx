@@ -25,19 +25,19 @@ let SignInSchema = Yup.object().shape({
     .required("Required")
     .test(
       "len",
-      "To short!",
+      "Too short!",
       (value) =>
         value != undefined && value != null && value.toString().length >= 6
     )
     .test(
       "len",
-      "To long!",
+      "Too long!",
       (value) =>
         value != undefined && value != null && value.toString().length <= 15
     ),
   password: Yup.string()
-    .min(8, "To short!")
-    .max(30, "To long!")
+    .min(8, "Too short!")
+    .max(30, "Too long!")
     .required("Required"),
 });
 
