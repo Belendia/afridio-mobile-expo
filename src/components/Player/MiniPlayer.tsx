@@ -125,32 +125,36 @@ const styles = StyleSheet.create({
   container: {
     position: "absolute",
     bottom: 79,
-    backgroundColor: colors.black800,
+    backgroundColor: colors.black600,
     width: "100%",
     borderBottomWidth: 1,
     borderColor: colors.black600,
   },
   progress: {
-    height: 3,
+    height: 2,
     backgroundColor: colors.red800,
   },
   row: {
     flexDirection: "row",
+    backgroundColor: colors.black500,
   },
   player: {
     width: 100,
     height: 65,
     marginRight: 10,
+    backgroundColor: "transparent",
   },
   rightContainer: {
     flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
+    backgroundColor: "transparent",
   },
   nameContainer: {
     flex: 2,
     flexDirection: "row",
     alignItems: "center",
+    backgroundColor: "transparent",
   },
   iconsContainer: {
     flex: 1,
@@ -158,11 +162,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: 100,
     justifyContent: "space-around",
+    backgroundColor: "transparent",
   },
   title: {
     color: "white",
     fontSize: 14,
     fontWeight: "bold",
     margin: 10,
+    backgroundColor: "transparent",
   },
 });
