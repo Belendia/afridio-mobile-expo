@@ -1,5 +1,5 @@
 import React, { ReactNode, useCallback } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import { Header } from "react-native-elements";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
@@ -22,12 +22,9 @@ const PlayerContainer = ({ children }: PlayerContainerProps) => {
     <>
       <Header
         leftComponent={
-          <Ionicons
-            onPress={goBack}
-            name="chevron-down"
-            size={24}
-            color="white"
-          />
+          <TouchableOpacity onPress={goBack}>
+            <Ionicons name="chevron-down" size={24} color="white" />
+          </TouchableOpacity>
         }
         containerStyle={styles.header}
       />
